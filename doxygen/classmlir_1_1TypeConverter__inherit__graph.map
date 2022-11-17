@@ -1,0 +1,10 @@
+<map id="mlir::TypeConverter" name="mlir::TypeConverter">
+<area shape="rect" id="node1" title="Type conversion class." alt="" coords="5,180,156,207"/>
+<area shape="rect" id="node2" href="$classmlir_1_1LLVMTypeConverter.html" title="Conversion from types to the LLVM IR dialect." alt="" coords="217,5,401,32"/>
+<area shape="rect" id="node3" href="$classmlir_1_1SPIRVTypeConverter.html" title="Type conversion from builtin types to SPIR&#45;V types for shader interface." alt="" coords="215,56,403,83"/>
+<area shape="rect" id="node4" href="$classmlir_1_1SparseTensorTypeToBufferConverter.html" title="Sparse tensor type converter into an actual buffer." alt="" coords="216,107,403,149"/>
+<area shape="rect" id="node5" href="$classmlir_1_1SparseTensorTypeToPtrConverter.html" title="Sparse tensor type converter into an opaque pointer." alt="" coords="216,173,403,214"/>
+<area shape="rect" id="node6" href="$classmlir_1_1arith_1_1WideIntEmulationConverter.html" title="Converts integer types that are too wide for the target by splitting them in two halves and thus turn..." alt="" coords="204,238,415,279"/>
+<area shape="rect" id="node7" href="$classmlir_1_1bufferization_1_1BufferizeTypeConverter.html" title="A helper type converter class that automatically populates the relevant materializations and type con..." alt="" coords="218,303,401,345"/>
+<area shape="rect" id="node8" href="$classmlir_1_1spirv_1_1MemorySpaceToStorageClassConverter.html" title="Type converter for converting numeric MemRef memory spaces into SPIR&#45;V symbolic ones." alt="" coords="215,369,403,410"/>
+</map>

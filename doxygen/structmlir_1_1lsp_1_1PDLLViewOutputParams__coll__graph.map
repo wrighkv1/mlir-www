@@ -1,0 +1,5 @@
+<map id="mlir::lsp::PDLLViewOutputParams" name="mlir::lsp::PDLLViewOutputParams">
+<area shape="rect" id="node1" title="Represents the parameters used when viewing the output of a PDLL file." alt="" coords="79,95,269,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,164,32"/>
+<area shape="rect" id="node3" href="$classmlir_1_1lsp_1_1URIForFile.html" title="URI in &quot;file&quot; scheme for a file." alt="" coords="189,5,338,32"/>
+</map>

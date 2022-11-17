@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,143,164,170"/>
+<area shape="rect" id="node2" href="$classConvertAliasResource.html" title=" " alt="" coords="212,5,416,47"/>
+<area shape="rect" id="node4" href="$classConvertAliasResource.html" title=" " alt="" coords="226,71,402,112"/>
+<area shape="rect" id="node6" href="$classConvertAliasResource.html" title=" " alt="" coords="219,136,409,177"/>
+<area shape="rect" id="node8" href="$classConvertAliasResource.html" title=" " alt="" coords="231,201,397,243"/>
+<area shape="rect" id="node10" href="$classConvertAliasResource.html" title=" " alt="" coords="231,267,397,308"/>
+<area shape="rect" id="node3" href="$structConvertVariable.html" title=" " alt="" coords="478,13,605,39"/>
+<area shape="rect" id="node5" href="$structConvertAddressOf.html" title=" " alt="" coords="471,78,611,105"/>
+<area shape="rect" id="node7" href="$structConvertAccessChain.html" title=" " alt="" coords="464,143,619,170"/>
+<area shape="rect" id="node9" href="$structConvertStore.html" title=" " alt="" coords="488,209,595,235"/>
+<area shape="rect" id="node11" href="$structConvertLoad.html" title=" " alt="" coords="489,274,593,301"/>
+</map>

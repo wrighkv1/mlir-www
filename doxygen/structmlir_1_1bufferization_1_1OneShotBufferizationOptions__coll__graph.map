@@ -1,0 +1,17 @@
+<map id="mlir::bufferization::OneShotBufferizationOptions" name="mlir::bufferization::OneShotBufferizationOptions">
+<area shape="rect" id="node1" title="Options for analysis&#45;enabled bufferization." alt="" coords="1208,625,1427,666"/>
+<area shape="rect" id="node2" href="$structmlir_1_1bufferization_1_1BufferizationOptions.html" title="Options for BufferizableOpInterface&#45;based bufferization." alt="" coords="880,302,1043,343"/>
+<area shape="rect" id="node3" href="$classllvm_1_1Optional.html" title=" " alt="" coords="387,143,589,169"/>
+<area shape="rect" id="node4" href="$classllvm_1_1Optional.html" title=" " alt="" coords="5,168,157,195"/>
+<area shape="rect" id="node7" href="$classllvm_1_1Optional.html" title=" " alt="" coords="379,193,597,220"/>
+<area shape="rect" id="node8" href="$classllvm_1_1Optional.html" title=" " alt="" coords="367,244,609,271"/>
+<area shape="rect" id="node9" href="$classllvm_1_1Optional.html" title=" " alt="" coords="375,92,601,119"/>
+<area shape="rect" id="node5" title=" " alt="" coords="385,295,591,351"/>
+<area shape="rect" id="node6" title=" " alt="" coords="419,375,557,401"/>
+<area shape="rect" id="node10" href="$classmlir_1_1bufferization_1_1OpFilter.html" title=" " alt="" coords="419,426,557,467"/>
+<area shape="rect" id="node11" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="405,491,571,533"/>
+<area shape="rect" id="node12" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="7,491,155,533"/>
+<area shape="rect" id="node13" title=" " alt="" coords="463,609,513,636"/>
+<area shape="rect" id="node14" title=" " alt="" coords="447,41,529,68"/>
+<area shape="rect" id="node15" title=" " alt="" coords="894,693,1029,720"/>
+</map>

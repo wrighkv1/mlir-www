@@ -1,0 +1,13 @@
+<map id="ConvertAddressOf" name="ConvertAddressOf">
+<area shape="rect" id="node1" title=" " alt="" coords="69,649,209,676"/>
+<area shape="rect" id="node2" href="$classConvertAliasResource.html" title=" " alt="" coords="51,559,227,600"/>
+<area shape="rect" id="node3" title=" " alt="" coords="29,455,205,496"/>
+<area shape="rect" id="node4" href="$classConvertAliasResource.html" title=" " alt="" coords="229,455,395,496"/>
+<area shape="rect" id="node5" href="$classmlir_1_1OpConversionPattern.html" title=" " alt="" coords="78,351,271,392"/>
+<area shape="rect" id="node6" href="$classmlir_1_1ConversionPattern.html" title="Base class for the conversion patterns." alt="" coords="82,171,257,197"/>
+<area shape="rect" id="node10" href="$classmlir_1_1OpConversionPattern.html" title="OpConversionPattern is a wrapper around ConversionPattern that allows for matching and rewriting agai..." alt="" coords="191,247,385,288"/>
+<area shape="rect" id="node7" href="$classmlir_1_1RewritePattern.html" title="RewritePattern is the common base class for all DAG to DAG replacements." alt="" coords="5,81,157,108"/>
+<area shape="rect" id="node8" href="$classmlir_1_1Pattern.html" title="This class contains all of the data related to a pattern, but does not contain any methods or logic f..." alt="" coords="30,5,133,32"/>
+<area shape="rect" id="node9" href="$classmlir_1_1TypeConverter.html" title="Type conversion class." alt="" coords="182,81,333,108"/>
+<area shape="rect" id="node11" title=" " alt="" coords="295,358,451,385"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="mlir::linalg::ForeachThreadTilingResult" name="mlir::linalg::ForeachThreadTilingResult">
+<area shape="rect" id="node1" title="Rewrite a TilingInterface op to a tiled scf.foreach_thread, applying tiling by numThreads." alt="" coords="501,45,697,87"/>
+<area shape="rect" id="node2" href="$classmlir_1_1Operation.html" title="Operation is a basic unit of execution within MLIR." alt="" coords="285,53,405,79"/>
+<area shape="rect" id="node3" title=" " alt="" coords="16,5,225,47"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,71,236,141"/>
+</map>

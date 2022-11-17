@@ -1,0 +1,50 @@
+<map id="llvm::Optional&lt; T &gt;" name="llvm::Optional&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,1496,157,1523"/>
+<area shape="rect" id="node2" href="$classmlir_1_1FailureOr.html" title="This class provides support for representing a failure result, or a valid value of type T." alt="" coords="518,29,670,56"/>
+<area shape="rect" id="node3" href="$classllvm_1_1Optional.html" title=" " alt="" coords="519,80,669,136"/>
+<area shape="rect" id="node4" href="$classllvm_1_1Optional.html" title=" " alt="" coords="515,161,673,202"/>
+<area shape="rect" id="node5" href="$classllvm_1_1Optional.html" title=" " alt="" coords="484,227,704,283"/>
+<area shape="rect" id="node6" href="$classllvm_1_1Optional.html" title=" " alt="" coords="510,307,678,349"/>
+<area shape="rect" id="node7" href="$classllvm_1_1Optional.html" title=" " alt="" coords="515,373,673,414"/>
+<area shape="rect" id="node8" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,438,671,479"/>
+<area shape="rect" id="node9" href="$classllvm_1_1Optional.html" title=" " alt="" coords="499,504,689,531"/>
+<area shape="rect" id="node10" href="$classllvm_1_1Optional.html" title=" " alt="" coords="467,555,721,611"/>
+<area shape="rect" id="node11" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,635,671,677"/>
+<area shape="rect" id="node12" href="$classllvm_1_1Optional.html" title=" " alt="" coords="499,701,689,742"/>
+<area shape="rect" id="node13" href="$classllvm_1_1Optional.html" title=" " alt="" coords="481,766,707,807"/>
+<area shape="rect" id="node14" href="$classllvm_1_1Optional.html" title=" " alt="" coords="519,831,669,873"/>
+<area shape="rect" id="node15" href="$classllvm_1_1Optional.html" title=" " alt="" coords="491,897,697,938"/>
+<area shape="rect" id="node16" href="$classllvm_1_1Optional.html" title=" " alt="" coords="492,963,696,989"/>
+<area shape="rect" id="node17" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,1014,671,1055"/>
+<area shape="rect" id="node18" href="$classllvm_1_1Optional.html" title=" " alt="" coords="484,1080,704,1107"/>
+<area shape="rect" id="node19" href="$classllvm_1_1Optional.html" title=" " alt="" coords="513,1131,675,1157"/>
+<area shape="rect" id="node20" href="$classllvm_1_1Optional.html" title=" " alt="" coords="515,1182,673,1223"/>
+<area shape="rect" id="node21" href="$classllvm_1_1Optional.html" title=" " alt="" coords="496,1247,692,1289"/>
+<area shape="rect" id="node22" href="$classllvm_1_1Optional.html" title=" " alt="" coords="486,1313,702,1354"/>
+<area shape="rect" id="node23" href="$classllvm_1_1Optional.html" title=" " alt="" coords="469,1379,719,1405"/>
+<area shape="rect" id="node24" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,1430,671,1471"/>
+<area shape="rect" id="node25" href="$classllvm_1_1Optional.html" title=" " alt="" coords="481,1496,707,1523"/>
+<area shape="rect" id="node26" href="$classllvm_1_1Optional.html" title=" " alt="" coords="473,1547,715,1573"/>
+<area shape="rect" id="node27" href="$classllvm_1_1Optional.html" title=" " alt="" coords="499,1598,689,1639"/>
+<area shape="rect" id="node28" href="$classllvm_1_1Optional.html" title=" " alt="" coords="507,1663,681,1705"/>
+<area shape="rect" id="node29" href="$classllvm_1_1Optional.html" title=" " alt="" coords="509,1729,679,1770"/>
+<area shape="rect" id="node30" href="$classllvm_1_1Optional.html" title=" " alt="" coords="510,1794,678,1835"/>
+<area shape="rect" id="node31" href="$classllvm_1_1Optional.html" title=" " alt="" coords="513,1859,675,1901"/>
+<area shape="rect" id="node32" href="$classllvm_1_1Optional.html" title=" " alt="" coords="495,1925,693,1952"/>
+<area shape="rect" id="node33" href="$classllvm_1_1Optional.html" title=" " alt="" coords="494,1977,694,2018"/>
+<area shape="rect" id="node34" href="$classllvm_1_1Optional.html" title=" " alt="" coords="493,2043,695,2069"/>
+<area shape="rect" id="node35" href="$classllvm_1_1Optional.html" title=" " alt="" coords="505,2094,683,2135"/>
+<area shape="rect" id="node36" href="$classllvm_1_1Optional.html" title=" " alt="" coords="485,2159,703,2201"/>
+<area shape="rect" id="node37" href="$classllvm_1_1Optional.html" title=" " alt="" coords="508,2225,680,2252"/>
+<area shape="rect" id="node38" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,2277,671,2318"/>
+<area shape="rect" id="node39" href="$classllvm_1_1Optional.html" title=" " alt="" coords="467,2343,721,2369"/>
+<area shape="rect" id="node40" href="$classllvm_1_1Optional.html" title=" " alt="" coords="513,2394,675,2435"/>
+<area shape="rect" id="node41" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,2459,671,2501"/>
+<area shape="rect" id="node42" href="$classllvm_1_1Optional.html" title=" " alt="" coords="515,2525,673,2566"/>
+<area shape="rect" id="node43" href="$classllvm_1_1Optional.html" title=" " alt="" coords="483,2590,705,2631"/>
+<area shape="rect" id="node44" href="$classllvm_1_1Optional.html" title=" " alt="" coords="487,2656,701,2683"/>
+<area shape="rect" id="node45" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,2707,671,2749"/>
+<area shape="rect" id="node46" href="$classllvm_1_1Optional.html" title=" " alt="" coords="517,2773,671,2814"/>
+<area shape="rect" id="node47" href="$classllvm_1_1Optional.html" title=" " alt="" coords="485,2839,703,2865"/>
+<area shape="rect" id="node48" href="$classllvm_1_1Optional.html" title=" " alt="" coords="509,2890,679,2931"/>
+</map>

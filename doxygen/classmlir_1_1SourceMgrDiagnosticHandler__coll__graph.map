@@ -1,0 +1,7 @@
+<map id="mlir::SourceMgrDiagnosticHandler" name="mlir::SourceMgrDiagnosticHandler">
+<area shape="rect" id="node1" title="This class is a utility diagnostic handler for use with llvm::SourceMgr." alt="" coords="397,78,592,119"/>
+<area shape="rect" id="node2" href="$classmlir_1_1ScopedDiagnosticHandler.html" title="This diagnostic handler is a simple RAII class that registers and erases a diagnostic handler on a gi..." alt="" coords="5,5,228,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="64,56,169,83"/>
+<area shape="rect" id="node4" title=" " alt="" coords="32,107,201,149"/>
+<area shape="rect" id="node5" title=" " alt="" coords="63,173,170,200"/>
+</map>

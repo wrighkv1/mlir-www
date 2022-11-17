@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,166,201,193"/>
+<area shape="rect" id="node2" href="$classmlir_1_1ValueUseIterator.html" title=" " alt="" coords="277,5,443,47"/>
+<area shape="rect" id="node3" href="$classmlir_1_1LLVM_1_1GEPIndicesAdaptor_1_1iterator.html" title=" " alt="" coords="249,71,471,112"/>
+<area shape="rect" id="node4" href="$classmlir_1_1Region_1_1OpIterator.html" title="This class provides iteration over the held operations of blocks directly within a region." alt="" coords="273,137,447,163"/>
+<area shape="rect" id="node5" href="$classmlir_1_1ResultRange_1_1UseIterator.html" title="This class implements a use iterator for a range of operation results." alt="" coords="287,188,433,229"/>
+<area shape="rect" id="node6" href="$classmlir_1_1ValueUseIterator.html" title="An iterator class that allows for iterating over the uses of an IR operand type." alt="" coords="277,253,443,295"/>
+<area shape="rect" id="node7" href="$classmlir_1_1detail_1_1ElementsAttrIterator.html" title="This class implements a generic iterator for ElementsAttr." alt="" coords="267,319,453,360"/>
+</map>

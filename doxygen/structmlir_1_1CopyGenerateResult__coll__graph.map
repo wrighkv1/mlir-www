@@ -1,0 +1,7 @@
+<map id="mlir::CopyGenerateResult" name="mlir::CopyGenerateResult">
+<area shape="rect" id="node1" title="Result for calling generateCopyForMemRegion." alt="" coords="533,36,724,63"/>
+<area shape="rect" id="node2" title=" " alt="" coords="308,5,383,32"/>
+<area shape="rect" id="node3" href="$classmlir_1_1Operation.html" title="Operation is a basic unit of execution within MLIR." alt="" coords="285,65,405,92"/>
+<area shape="rect" id="node4" title=" " alt="" coords="16,18,225,59"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,83,236,154"/>
+</map>

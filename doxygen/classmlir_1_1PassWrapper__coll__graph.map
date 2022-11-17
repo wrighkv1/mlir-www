@@ -1,0 +1,4 @@
+<map id="mlir::PassWrapper&lt; PassT, BaseT &gt;" name="mlir::PassWrapper&lt; PassT, BaseT &gt;">
+<area shape="rect" id="node1" title="This class provides a CRTP wrapper around a base pass class to define several necessary utility metho..." alt="" coords="5,80,156,121"/>
+<area shape="rect" id="node2" href="$classBaseT.html" title=" " alt="" coords="49,5,112,32"/>
+</map>

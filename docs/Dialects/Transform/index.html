@@ -1,0 +1,927 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Transform Dialect - MLIR</title><meta name=description content="Multi-Level IR Compiler Framework"><meta name=generator content="Hugo 0.80.0"><link href=https://mlir.llvm.org/index.xml rel=alternate type=application/rss+xml><link rel=canonical href=https://mlir.llvm.org/docs/Dialects/Transform/><link rel=stylesheet href=https://mlir.llvm.org/css/theme.css><script src=https://use.fontawesome.com/releases/v5.0.6/js/all.js></script><link rel=stylesheet href=https://mlir.llvm.org/css/chroma.min.css><script src=https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js></script><script src=https://mlir.llvm.org/js/bundle.js></script><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$', '$'] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    }
+  });
+</script><link rel=apple-touch-icon sizes=180x180 href="/apple-touch-icon.png?v=1"><link rel=icon type=image/png sizes=32x32 href="/favicon-32x32.png?v=1"><link rel=icon type=image/png sizes=16x16 href="/favicon-16x16.png?v=1"><link rel=manifest href="/site.webmanifest?v=1"><link rel=mask-icon href="/safari-pinned-tab.svg?v=1" color=#3775e0><link rel="shortcut icon" href="/favicon.ico?v=1"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#ffffff"><link rel=icon href=/favicon.svg type=image/svg+xml sizes=any><style>:root{}</style></head><body><div class=container><header><h1><div><img src=https://mlir.llvm.org//mlir-logo.png width=40px align=absmiddle>
+MLIR</div></h1><p class=description>Multi-Level IR Compiler Framework</p></header><div class=global-menu><nav><ul><li class=parent><a href>Community<i class="fas fa-angle-right"></i></a><ul class=sub-menu><li class=child><a href=https://llvm.discourse.group/c/mlir/31>Forums</a></li><li class=child><a href=https://discord.gg/xS7Z362>Chat</a></li></ul></li><li><a href=/getting_started/Debugging/>Debugging Tips</a></li><li><a href=/getting_started/Faq/>FAQ</a></li><li class=parent><a href=https://github.com/llvm/llvm-project/tree/main/mlir>Source<i class="fas fa-angle-right"></i></a><ul class=sub-menu><li class=child><a href=/doxygen/>Doxygen</a></li><li class=child><a href=https://github.com/llvm/llvm-project/tree/main/mlir>GitHub</a></li></ul></li><li><a href="https://bugs.llvm.org/buglist.cgi?bug_status=__open__&list_id=177877&order=changeddate%20DESC%2Cpriority%2Cbug_severity&product=MLIR&query_format=specific">Bugs</a></li><li><a href=https://github.com/llvm/mlir-www/tree/main/website/static/LogoAssets>Logo Assets</a></li><li><a href=https://www.youtube.com/MLIRCompiler>Youtube Channel</a></li></ul></nav></div><div class=content-container><main><h1>Transform Dialect</h1><p>Fine-grain transformation control dialect.</p><p><nav id=TableOfContents><ul><li><a href=#disclaimer>Disclaimer</a></li><li><a href=#overview>Overview</a></li><li><a href=#dialect-extension-mechanism>Dialect Extension Mechanism</a></li><li><a href=#side-effects>Side Effects</a></li><li><a href=#execution-model>Execution Model</a></li><li><a href=#handle-invalidation>Handle Invalidation</a></li><li><a href=#intended-use-and-integrations>Intended Use and Integrations</a></li><li><a href=#effects-on-the-infrastructure>Effects on the Infrastructure</a></li><li><a href=#type-definitions>Type Definitions</a><ul><li><a href=#anyoptype>AnyOpType</a></li><li><a href=#operationtype>OperationType</a></li></ul></li><li><a href=#core-operations>Core Operations</a><ul><li><a href=#transformalternatives-mlirtransformalternativesop><code>transform.alternatives</code> (::mlir::transform::AlternativesOp)</a></li><li><a href=#transformcast-mlirtransformcastop><code>transform.cast</code> (::mlir::transform::CastOp)</a></li><li><a href=#transformforeach-mlirtransformforeachop><code>transform.foreach</code> (::mlir::transform::ForeachOp)</a></li><li><a href=#transformget_closest_isolated_parent-mlirtransformgetclosestisolatedparentop><code>transform.get_closest_isolated_parent</code> (::mlir::transform::GetClosestIsolatedParentOp)</a></li><li><a href=#transformget_producer_of_operand-mlirtransformgetproducerofoperand><code>transform.get_producer_of_operand</code> (::mlir::transform::GetProducerOfOperand)</a></li><li><a href=#transformmerge_handles-mlirtransformmergehandlesop><code>transform.merge_handles</code> (::mlir::transform::MergeHandlesOp)</a></li><li><a href=#transformpdl_match-mlirtransformpdlmatchop><code>transform.pdl_match</code> (::mlir::transform::PDLMatchOp)</a></li><li><a href=#transformprint-mlirtransformprintop><code>transform.print</code> (::mlir::transform::PrintOp)</a></li><li><a href=#transformreplicate-mlirtransformreplicateop><code>transform.replicate</code> (::mlir::transform::ReplicateOp)</a></li><li><a href=#transformsequence-mlirtransformsequenceop><code>transform.sequence</code> (::mlir::transform::SequenceOp)</a></li><li><a href=#transformsplit_handles-mlirtransformsplithandlesop><code>transform.split_handles</code> (::mlir::transform::SplitHandlesOp)</a></li><li><a href=#transformwith_pdl_patterns-mlirtransformwithpdlpatternsop><code>transform.with_pdl_patterns</code> (::mlir::transform::WithPDLPatternsOp)</a></li><li><a href=#transformyield-mlirtransformyieldop><code>transform.yield</code> (::mlir::transform::YieldOp)</a></li></ul></li><li><a href=#bufferization-transform-operations>Bufferization Transform Operations</a><ul><li><a href=#transformbufferizationone_shot_bufferize-mlirtransformoneshotbufferizeop><code>transform.bufferization.one_shot_bufferize</code> (::mlir::transform::OneShotBufferizeOp)</a></li></ul></li><li><a href=#gpu-transform-operations>GPU Transform Operations</a><ul><li><a href=#transformgpumap_foreach_to_blocks-mlirtransformmapforeachtoblocks><code>transform.gpu.map_foreach_to_blocks</code> (::mlir::transform::MapForeachToBlocks)</a></li><li><a href=#transformgpumap_nested_foreach_to_threads-mlirtransformmapnestedforeachtothreads><code>transform.gpu.map_nested_foreach_to_threads</code> (::mlir::transform::MapNestedForeachToThreads)</a></li></ul></li><li><a href=#loop-scf-transform-operations>Loop (SCF) Transform Operations</a><ul><li><a href=#transformloopget_parent_for-mlirtransformgetparentforop><code>transform.loop.get_parent_for</code> (::mlir::transform::GetParentForOp)</a></li><li><a href=#transformloopoutline-mlirtransformloopoutlineop><code>transform.loop.outline</code> (::mlir::transform::LoopOutlineOp)</a></li><li><a href=#transformlooppeel-mlirtransformlooppeelop><code>transform.loop.peel</code> (::mlir::transform::LoopPeelOp)</a></li><li><a href=#transformlooppipeline-mlirtransformlooppipelineop><code>transform.loop.pipeline</code> (::mlir::transform::LoopPipelineOp)</a></li><li><a href=#transformloopunroll-mlirtransformloopunrollop><code>transform.loop.unroll</code> (::mlir::transform::LoopUnrollOp)</a></li></ul></li><li><a href=#structured-linalg-transform-operations>Structured (Linalg) Transform Operations</a><ul><li><a href=#transformstructureddecompose-mlirtransformdecomposeop><code>transform.structured.decompose</code> (::mlir::transform::DecomposeOp)</a></li><li><a href=#transformstructuredfuse_into_containing_op-mlirtransformfuseintocontainingop><code>transform.structured.fuse_into_containing_op</code> (::mlir::transform::FuseIntoContainingOp)</a></li><li><a href=#transformstructuredfuse-mlirtransformfuseop><code>transform.structured.fuse</code> (::mlir::transform::FuseOp)</a></li><li><a href=#transformstructuredgeneralize-mlirtransformgeneralizeop><code>transform.structured.generalize</code> (::mlir::transform::GeneralizeOp)</a></li><li><a href=#transformstructuredinterchange-mlirtransforminterchangeop><code>transform.structured.interchange</code> (::mlir::transform::InterchangeOp)</a></li><li><a href=#transformstructuredmatch-mlirtransformmatchop><code>transform.structured.match</code> (::mlir::transform::MatchOp)</a></li><li><a href=#transformstructuredmultitile_sizes-mlirtransformmultitilesizesop><code>transform.structured.multitile_sizes</code> (::mlir::transform::MultiTileSizesOp)</a></li><li><a href=#transformstructuredpad-mlirtransformpadop><code>transform.structured.pad</code> (::mlir::transform::PadOp)</a></li><li><a href=#transformstructuredpromote-mlirtransformpromoteop><code>transform.structured.promote</code> (::mlir::transform::PromoteOp)</a></li><li><a href=#transformstructuredscalarize-mlirtransformscalarizeop><code>transform.structured.scalarize</code> (::mlir::transform::ScalarizeOp)</a></li><li><a href=#transformstructuredsplit-mlirtransformsplitop><code>transform.structured.split</code> (::mlir::transform::SplitOp)</a></li><li><a href=#transformstructuredsplit_reduction-mlirtransformsplitreductionop><code>transform.structured.split_reduction</code> (::mlir::transform::SplitReductionOp)</a></li><li><a href=#transformstructuredtile-mlirtransformtileop><code>transform.structured.tile</code> (::mlir::transform::TileOp)</a></li><li><a href=#transformstructuredtile_reduction_using_foreach_thread-mlirtransformtilereductionusingforeachthreadop><code>transform.structured.tile_reduction_using_foreach_thread</code> (::mlir::transform::TileReductionUsingForeachThreadOp)</a></li><li><a href=#transformstructuredtile_reduction_using_scf-mlirtransformtilereductionusingscfop><code>transform.structured.tile_reduction_using_scf</code> (::mlir::transform::TileReductionUsingScfOp)</a></li><li><a href=#transformstructuredtile_to_foreach_thread_op-mlirtransformtiletoforeachthreadop><code>transform.structured.tile_to_foreach_thread_op</code> (::mlir::transform::TileToForeachThreadOp)</a></li><li><a href=#transformstructuredtile_to_scf_for-mlirtransformtiletoscfforop><code>transform.structured.tile_to_scf_for</code> (::mlir::transform::TileToScfForOp)</a></li><li><a href=#transformstructuredvectorize-mlirtransformvectorizeop><code>transform.structured.vectorize</code> (::mlir::transform::VectorizeOp)</a></li></ul></li><li><a href=#transformtypeinterface-transformtypeinterface>TransformTypeInterface (<code>TransformTypeInterface</code>)</a><ul><li><a href=#methods>Methods:</a></li></ul></li><li><a href=#transformopinterface-transformopinterface>TransformOpInterface (<code>TransformOpInterface</code>)</a><ul><li><a href=#methods-1>Methods:</a></li></ul></li></ul></nav><h2 id=disclaimer>Disclaimer&nbsp;<a class=headline-hash href=#disclaimer>¶</a></h2><p><strong>This dialect is actively developed and may change frequently.</strong></p><p>To decrease the maintenance burden and churn, please post a description of
+the intended use case on the MLIR forum. A few in-tree use cases are
+currently supported:</p><ul><li>high-level transformations on &ldquo;structured ops&rdquo; (i.e. ops that operate on
+chunks of data in a way that can be decomposed into operations on
+smaller chunks of data and control flow) in Linalg, Tensor and Vector
+dialects;</li><li>loop transformations in the SCF dialect.</li></ul><h2 id=overview>Overview&nbsp;<a class=headline-hash href=#overview>¶</a></h2><p>This dialect provides operations that can be used to control transformation
+of the IR using a different portion of the IR. It refers to the IR being
+transformed as payload IR, and to the IR guiding the transformation as
+transform IR.</p><p>The main use case for this dialect is orchestrating fine-grain
+transformations on individual operations or sets thereof. For example, it
+may involve finding loop-like operations with specific properties (e.g.,
+large size) in the payload IR, applying loop tiling to those and only those
+operations, and then applying loop unrolling to the inner loops produced
+by the previous transformations. As such, it is not intended as a
+replacement for the pass infrastructure, nor for the pattern rewriting
+infrastructure. In the most common case, the transform IR will be processed
+and applied to the payload IR by a pass. Transformations expressed by the
+transform dialect may be implemented using the pattern infrastructure or any
+other relevant MLIR component.</p><p>The following IR gives a rough idea of what the operations in this dialect
+may look like:</p><div class=highlight><pre class=chroma><code class=language-mlir data-lang=mlir><span class=nv>%0</span> <span class=p>=</span> transform<span class=p>.</span>loop<span class=p>.</span>find <span class=p>{</span> size <span class=p>&gt;</span> <span class=m>42</span> <span class=p>}</span> <span class=p>:</span> <span class=p>!</span>transform<span class=p>.</span>interface<span class=p>&lt;</span>tileable<span class=p>&gt;</span>
+<span class=nv>%1</span><span class=p>:</span><span class=nl>2 =</span> transform<span class=p>.</span>loop<span class=p>.</span>tile <span class=nv>%0</span> <span class=p>{</span> <span class=nl>tile_sizes =</span> <span class=p>[</span><span class=m>2</span><span class=p>,</span><span class=m>3</span><span class=p>,</span><span class=m>4</span><span class=p>]</span> <span class=p>}</span>
+      <span class=p>:</span> <span class=p>(!</span>transform<span class=p>.</span>interface<span class=p>&lt;</span>tileable<span class=p>&gt;)</span>
+    <span class=p>-&gt;</span> <span class=p>(!</span>transform<span class=p>.</span>op<span class=p>&lt;</span>loop<span class=p>&gt;,</span> <span class=p>!</span>transform<span class=p>.</span>op<span class=p>&lt;</span>loop<span class=p>&gt;)</span>
+transform<span class=p>.</span>loop<span class=p>.</span>unroll <span class=nv>%1#1</span> <span class=p>:</span> <span class=p>!</span>transform<span class=p>.</span>op<span class=p>&lt;</span>loop<span class=p>&gt;</span>
+</code></pre></div><p>The values used in the Transform dialect, also referred to as <em>handles</em>,
+correspond to (groups of) operations in the payload IR. In the example
+above, <code>%0</code> corresponds to the set of loops found in the payload IR that
+satisfy the condition, and <code>%1</code> correspond to groups of outer and inner
+loops, respectively, produced by the tiling transformation.</p><p>A transform handle such as <code>%0</code> may be associated with multiple payload
+operations. This is conceptually a set of operations and no assumptions
+should be made about the order of ops unless specified otherwise by the
+operation. Most Transform IR ops support operand values that are mapped to
+multiple operations. They usually apply the respective transformation for
+every mapped op (&ldquo;batched execution&rdquo;). Deviations from this convention are
+described in the documentation of Transform IR ops.</p><p>The handle values have transform IR types. These types describe properties
+of payload IR operations associated with the value that are known to the
+transform dialect, for example, all associated payload operations implement
+a &ldquo;TileableOp&rdquo; interface, or have a specific &ldquo;loop&rdquo; kind. These properties
+are used to statically indicate pre- and post-conditions of a
+transformation connected to a Transform dialect operation. The conditions
+are verified when payload IR operations are first associated with a
+transform handle. By convention, Transform dialect operations are expected
+to indicate narrow preconditions for their operands by enforcing operand
+type constraints in the their definitions and verifiers. On the contrary,
+operations are expected to have few constraints on their results. Specific
+instances of a transform operation can then be created with a more
+restricted result type than the constraint in the operation (e.g., the
+&ldquo;find&rdquo; operation only constrains the result type to be a transform IR type
+while its concrete instance can have a type with stricter constraints such
+as implementing the &ldquo;tilable&rdquo; interface). The verification will then happen
+at transform execution time. This approach allows one to capture payload IR
+operation properties in the transform IR without resorting to excessive
+use of type casts or coupling dialect extensions between themselves. It is
+a trade-off between verbosity/complexity and static hardening, which can
+be revised in the future.</p><p>Overall, Transform IR ops are expected to be contained in a single top-level
+op. Such top-level ops specify how to apply the transformations described
+by the operations they contain, e.g., <code>transform.sequence</code> executes
+transformations one by one and fails if any of them fails. Such ops are
+expected to have the <code>PossibleTopLevelTransformOpTrait</code> and may be used
+without arguments.</p><p>A program transformation expressed using the Transform dialect can be
+programmatically triggered by calling:</p><div class=highlight><pre class=chroma><code class=language-c++ data-lang=c++><span class=n>LogicalResult</span> <span class=n>transform</span><span class=o>::</span><span class=n>applyTransforms</span><span class=p>(</span><span class=n>Operation</span> <span class=o>*</span><span class=n>payloadRoot</span><span class=p>,</span>
+                                          <span class=n>TransformOpInterface</span> <span class=n>transform</span><span class=p>,</span>
+                                          <span class=k>const</span> <span class=n>TransformOptions</span> <span class=o>&amp;</span><span class=n>options</span><span class=p>);</span>
+</code></pre></div><p>that applies the transformations specified by the top-level <code>transform</code> to
+payload IR contained in <code>payloadRoot</code>.</p><h2 id=dialect-extension-mechanism>Dialect Extension Mechanism&nbsp;<a class=headline-hash href=#dialect-extension-mechanism>¶</a></h2><p>This dialect is designed to be extensible, that is, clients of this dialect
+are allowed to inject additional operations into this dialect using the
+<code>TransformDialectExtension</code> mechanism. This allows the dialect to avoid a
+dependency on the implementation of the transformation as well as to avoid
+introducing dialect-specific transform dialects. In the example above,
+the operations may have been injected by a notional <code>loop</code> dialect rather
+than defined in this dialect, hence the common prefix.</p><p>It is recommended to prefix injected operations with one or several
+dot-separated words that indicate which extension adds them. For
+dialect-specific transformations, the prefix is naturally the name of the
+dialect, e.g., <code>transform.affine.reschedule</code>. For dialect-agnostic
+transformations (typically implemented using interfaces), the prefix may
+be derived from the interface name or from a common concept, e.g.,
+<code>transform.loop.tile</code> may apply to any loop-like operation that implements
+<code>TileableOpInterface</code>. The C++ classes for the dialect extension should
+include the prefix in their name, e.g., <code>AffineTransformDialectExtension</code> or
+<code>LoopTransformDialectExtension</code> in the cases above. Unprefixed operation
+names are reserved for ops defined directly in the Transform dialect.</p><p>Operations injected into the dialect must:</p><ul><li><p>Implement the <code>TransformOpInterface</code> to execute the corresponding
+transformation on the payload IR.</p></li><li><p>Implement the <code>MemoryEffectsOpInterface</code> to annotate the effects of
+the transform IR operation on the payload IR as well as on the mapping
+between transform IR values and payload IR operations. See below for
+the description of available effects.</p></li></ul><p>The presence of interface implementations is checked at runtime when the
+dialect is loaded to allow for those implementations to be supplied by
+separate dialect extensions if desired.</p><h2 id=side-effects>Side Effects&nbsp;<a class=headline-hash href=#side-effects>¶</a></h2><p>The Transform dialect relies on MLIR side effect modelling to enable
+optimization of the transform IR. More specifically, it provides several
+side effect resource objects and expects operations to describe their
+effects on these resources.</p><ul><li><p><code>TransformMappingResource</code> - side effect resource corresponding to the
+mapping between transform IR values and payload IR operations.</p><ul><li><p>An <code>Allocate</code> effect from this resource means creating a new mapping
+entry, it is always accompanied by a <code>Write</code> effect.</p></li><li><p>A <code>Read</code> effect from this resource means accessing the mapping.</p></li><li><p>A <code>Free</code> effect on this resource indicates the removal of the mapping
+entry, typically after a transformation that modifies the payload IR
+operations associated with one of the transform IR operation&rsquo;s
+operands. It is always accompanied by a <code>Read</code> effect.</p></li></ul></li><li><p><code>PayloadIRResource</code> - side effect resource corresponding to the payload
+IR itself.</p><ul><li><p>A <code>Read</code> effect from this resource means accessing the payload IR.</p></li><li><p>A <code>Write</code> effect on this resource means mutating the payload IR. It is
+almost always accompanied by a <code>Read</code>.</p></li></ul></li></ul><p>The typical flow of values in the transform IR is as follows. Most
+operations produce new transform IR values and immediately associate them
+with a list of payload IR operations. This corresponds to <code>Allocate</code> and
+<code>Write</code> effects on the <code>TransformMappingResource</code>, and often requires at
+least a <code>Read</code> effect on the <code>PayloadIRResource</code>. Transform operations that
+only inspect the payload IR to produce new handles are usually limited to
+these effects on their operands. Transform operations that mutate the
+payload IR are thought to <em>consume</em> the handles provided as operands, that
+is have the <code>Read</code> and <code>Free</code> effects on them. As with the usual memory
+effects, using a value after it was freed is incorrect. In case of the
+transform IR, this value is likely associated with payload IR operations
+that were modified or even removed by the transformation, so it is
+meaningless to refer to them. When further transformations are desired, the
+transform operations can return <em>new</em> handles that can be read or consumed
+by subsequent operations.</p><h2 id=execution-model>Execution Model&nbsp;<a class=headline-hash href=#execution-model>¶</a></h2><p>The transformation starts at the user-specified top-level transform IR
+operation and applies to some user-specified payload IR scope, identified by
+the payload IR op that contains the IR to transform. It is the
+responsibility of the user to properly select the scope and/or to avoid the
+transformations to modify the IR outside of the given scope. The top-level
+transform IR operation may contain further transform operations and execute
+them in the desired order.</p><p>Transformation application functions produce a tri-state status:</p><ul><li>success;</li><li>recoverable (silenceable) failure;</li><li>irrecoverable failure.</li></ul><p>Transformation container operations may intercept recoverable failures and
+perform the required recovery steps thus succeeding themselves. On
+the other hand, they must propagate irrecoverable failures. For such
+failures, the diagnostics are emitted immediately whereas their emission is
+postponed for recoverable failures. Transformation container operations may
+also fail to recover from a theoretically recoverable failure, in which case
+they can either propagate it to their parent or emit the diagnostic and turn
+the failure into an irrecoverable one. A recoverable failure produced by
+applying the top-level transform IR operation is considered irrecoverable.</p><p>Transformation container operations are allowed to &ldquo;step over&rdquo; some nested
+operations if the application of some previous operation produced a failure.
+This can be conceptually thought of as having a global &ldquo;recoverable error
+register&rdquo; that is read/write accessed by each transform operation as a side
+effect. The transformation is skipped if the register already contains an
+error description, and the control flow proceeds to the following operation.</p><p>Note that a silenceable failure, if emitted, is a compiler <em>error</em> rather
+than a warning. Transformations are expected to produce silenceable failures
+if they haven&rsquo;t yet modified the payload IR, i.e. when reporting a
+precondition failure, and an irrecoverable failure when they modified the IR
+in a way that is contrary to the semantics of the transform operation or
+would fail a postcondition. Some &ldquo;navigation&rdquo; operations that identify
+payload IR targets for the following transformation may have a conceptual
+&ldquo;failure to match&rdquo; that is considered a successful execution in the
+execution model but results in handles associated with empty payload IR
+operation lists.</p><h2 id=handle-invalidation>Handle Invalidation&nbsp;<a class=headline-hash href=#handle-invalidation>¶</a></h2><p>The execution model of the transform dialect allows a payload IR operation
+to be associated with <em>multiple</em> handles as well as nested payload IR
+operations to be associated with different handles. A transform IR operation
+that consumes a handle automatically <em>invalidates</em> all the other handles
+associated with the same payload IR operations, or with any of their
+descendants, as the consumed handle. Note that the <em>entire</em> handle is
+invalidated, even if some of the payload IR operations associated with it
+or their ancestors were not associated with the consumed handle. Any use of
+the invalidated handle results in undefined behavior since the payload IR
+operations associated with it are likely to have been mutated or erased. The
+mere fact of the handle being invalidated does <em>not</em> trigger undefined
+behavior, only its appearance as an operand does.</p><p>The Transform dialect infrastructure has the capability of checking whether
+the transform IR op operand is invalidated before applying the
+transformation. However, such a check is computationally expensive and
+must be enabled explicitly through <code>TransformOptions</code>. Additionally, the
+<code>transform-dialect-check-uses</code> pass emits warnings when a handle may be used
+after it has been consumed, but does so abstractly, without processing the
+payload IR.</p><h2 id=intended-use-and-integrations>Intended Use and Integrations&nbsp;<a class=headline-hash href=#intended-use-and-integrations>¶</a></h2><p>The transformation control infrastructure provided by this dialect is
+positioned roughly between rewrite patterns and passes. A transformation
+that is executed by a transform operation is likely to be sufficiently
+complex to require at least a set of patterns to be implemented. It is also
+expected to be more focused than a pass: a pass typically applies identical
+transformations everywhere in the IR, a transform dialect-controlled
+transformation would apply to a small subset of operations selected, e.g.,
+by a pattern-matching operation or generated by a previous transformation.
+It is discouraged, although technically possible, to run a pass pipeline as
+part of the transform op implementation.</p><p>One of the main scenarios for using this dialect is fine-grain chaining of
+transformations. For example, a loop-like operation may see its iteration
+domain split into two parts, implemented as separate loops (transformation
+known as index-set splitting), each of which is then transformed differently
+(e.g., the first loop is tiled and the second unrolled) with the necessary
+enabling and cleanup patterns around the main transformation:</p><div class=highlight><pre class=chroma><code class=language-mlir data-lang=mlir><span class=c>// &lt;generate %loop, e.g., by pattern-matching&gt;
+</span><span class=c>// ...
+</span><span class=c></span><span class=nv>%parts</span><span class=p>:</span><span class=nl>2 =</span> transform<span class=p>.</span>loop<span class=p>.</span>split <span class=nv>%loop</span> <span class=p>{</span> <span class=nl>upper_bound_divisible_by =</span> <span class=m>8</span> <span class=p>}</span>
+transform<span class=p>.</span>loop<span class=p>.</span>tile <span class=nv>%parts#0</span> <span class=p>{</span> <span class=nl>tile_sizes =</span> <span class=p>[</span><span class=m>8</span><span class=p>]</span> <span class=p>}</span>
+transform<span class=p>.</span>loop<span class=p>.</span>unroll <span class=nv>%parts#1</span> <span class=p>{</span> full <span class=p>}</span>
+</code></pre></div><p>This composition would have been difficult to implement as separate passes
+since the hypothetical &ldquo;tiling&rdquo; and &ldquo;unrolling&rdquo; pass would need to somehow
+differentiate between the parts of the loop produced by the previous pass
+(both are the same operation, and it is likely undesirable to pollute the
+operation with pass-specific information). Implementing passes that run the
+combined transformation would have run into the combinatorial explosion
+issue due to multiple possible transform compositions or into the need for
+deep pass parameterization, the ultimate form of which is an ad-hoc dialect
+to specify which transformations the pass should run. The transform dialect
+provides a uniform, extensible mechanism for controlling transformations in
+such cases.</p><p>The transform dialect is supposed to be consumed by an &ldquo;interpreter&rdquo; pass
+that drives the application of transformations. To ensure extensibility and
+composability, this pass is not expected to actually perform the
+transformations specified by the ops. Instead, the transformations are
+implemented by the transform ops themselves via <code>TransformOpInterface</code>. The
+pass serves as the entry point, handles the flow of transform operations and
+takes care of bookkeeping. As such, the transform dialect does not provide
+the interpreter pass. Instead, it provides a set of utilities that can be
+used by clients to define their own interpreter passes or as part of a more
+complex pass. For example, the mapping between values in the transform IR
+and operations in the payload IR, or the function that applies the
+transformations specified by ops in the given block sequentially. Note that
+a transform op may have regions with further transform ops in them, with
+the op itself guiding how to dispatch the transformation control flow to
+those regions. This approach allows clients to decide on the relative
+location of the transform IR in their input (e.g., nested modules, separate
+modules, optional regions to certain operations, etc.), register additional
+transform operations and perform client-specific bookkeeping.</p><h2 id=effects-on-the-infrastructure>Effects on the Infrastructure&nbsp;<a class=headline-hash href=#effects-on-the-infrastructure>¶</a></h2><p>Although scoped to a single dialect, this functionality conceptually belongs
+to the MLIR infrastructure. It aims to be minimally intrusive and opt-in.</p><p>Some infrastructural components may grow extra functionality to support the
+transform dialect. In particular, the pattern infrastructure may add extra
+hooks to identify the &ldquo;main results&rdquo; of a transformation or to notify
+external observers about changes made to certain operations. These are not
+expected to affect the existing uses of the infrastructure.</p><p>For the sake of reusability, transformations should be implemented as
+utility functions that are called from the interface methods of transform
+ops rather than having the methods directly act on the payload IR.</p><h2 id=type-definitions>Type Definitions&nbsp;<a class=headline-hash href=#type-definitions>¶</a></h2><h3 id=anyoptype>AnyOpType&nbsp;<a class=headline-hash href=#anyoptype>¶</a></h3><p>Syntax: <code>!transform.any_op</code></p><p>Transform IR handle that can be associated with a list of arbitrary
+Payload IR operations.</p><h3 id=operationtype>OperationType&nbsp;<a class=headline-hash href=#operationtype>¶</a></h3><p>Syntax:</p><pre><code>!transform.op&lt;
+  ::llvm::StringRef   # operation_name
+&gt;
+</code></pre><p>Transform IR handle that can be associated with a list of Payload IR
+operations with the specified operation name.</p><h4 id=parameters>Parameters:&nbsp;<a class=headline-hash href=#parameters>¶</a></h4><table><thead><tr><th style=text-align:center>Parameter</th><th style=text-align:center>C++ type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center>operation_name</td><td style=text-align:center><code>::llvm::StringRef</code></td><td>Name of the allowed payload operation</td></tr></tbody></table><h2 id=core-operations>Core Operations&nbsp;<a class=headline-hash href=#core-operations>¶</a></h2><h3 id=transformalternatives-mlirtransformalternativesop><code>transform.alternatives</code> (::mlir::transform::AlternativesOp)&nbsp;<a class=headline-hash href=#transformalternatives-mlirtransformalternativesop>¶</a></h3><p>Attempts sequences of transforms until one succeeds</p><p>Syntax:</p><pre><code>operation ::= `transform.alternatives` ($scope^ `:` type($scope))? (`-&gt;` type($results)^)? attr-dict-with-keyword regions
+</code></pre><p>This op may have an arbitrary number of regions, each of which represents a
+sequence of transform operations to be applied to the same payload IR. The
+regions are visited in order of appearance, and transforms in them are
+applied in their respective order of appearance. If one of these transforms
+fails to apply, the remaining ops in the same region are skipped an the next
+region is attempted. If all transformations in a region succeed, the
+remaining regions are skipped and the entire &ldquo;alternatives&rdquo; transformation
+succeeds. If all regions contained a failing transformation, the entire
+&ldquo;alternatives&rdquo; transformation fails.</p><p>It is up to the nested operations to define which errors are &ldquo;recoverable&rdquo;
+(or &ldquo;silenceable&rdquo;) and allow another alternatives to be attempted, and which
+errors should be propagated without attempting the other alternatives.</p><p>The single operand of this operation is the scope in which the alternative
+transformation sequences are attempted, that is, an operation in the payload
+IR that contains all the other operations that may be modified by the
+transformations. The scope operation must be isolated from above. There is
+no check that the transforms are indeed scoped as their &ldquo;apply&rdquo; methods can
+be arbitrarily complex. Therefore it is the responsibility of the user to
+ensure that the transforms are scoped correctly, or to produce an
+irrecoverable error and thus abort the execution without attempting the
+remaining alternatives. Note that the payload IR outside of the given scope
+is not necessarily in the valid state, or even accessible to the
+transformation.</p><p>The changes to the IR within the scope performed by transforms in the failed
+alternative region are reverted before attempting the next region.
+Practically, this is achieved by cloning the scope. Therefore it is advised
+to limit the scope as much as possible and place the most likely
+alternatives early in the region list. The operation is also isolated from
+above and requires rediscovering the operations within the given scope to
+avoid additional handle invalidation. The latter restriction may be lifted
+in the future.</p><p>Each of the regions may yield transform IR handles. The handles of the first
+successful alternative region are returned as the results of the
+&ldquo;alternatives&rdquo; op. Therefore, each alternative region must yield the same
+number of results, which should also match the number and the types of the
+&ldquo;alternatives&rdquo; op results.</p><p>Remark: this op allows one to implement a simple &ldquo;try&rdquo; construct as follows:</p><div class=highlight><pre class=chroma><code class=language-mlir data-lang=mlir><span class=nv>%result</span> <span class=p>=</span> transform<span class=p>.</span>alternatives <span class=nv>%scope</span> <span class=p>{</span>
+<span class=nl>^bb0</span><span class=p>(</span><span class=nv>%arg0</span><span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation<span class=p>):</span>
+  <span class=c>// Try a fallible transformation.
+</span><span class=c></span>  <span class=nv>%0</span> <span class=p>=</span> transform<span class=p>.</span>fallible <span class=nv>%arg0</span> <span class=c>// ...
+</span><span class=c></span>  <span class=c>// If succeeded, yield the the result of the transformation.
+</span><span class=c></span>  transform<span class=p>.</span>yield <span class=nv>%0</span> <span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation
+<span class=p>},</span> <span class=p>{</span>
+<span class=nl>^bb0</span><span class=p>(</span><span class=nv>%arg0</span><span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation<span class=p>):</span>
+  <span class=c>// Otherwise, the second alternative is tried and it always succeeds by
+</span><span class=c></span>  <span class=c>// returning the original handle.
+</span><span class=c></span>  transform<span class=p>.</span>yield <span class=nv>%arg0</span> <span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation
+<span class=p>}</span>
+</code></pre></div><p>Traits: FunctionalStyleTransformOpTrait, IsolatedFromAbove, PossibleTopLevelTransformOpTrait, SingleBlockImplicitTerminator&lt;::mlir::transform::YieldOp></p><p>Interfaces: MemoryEffectsOpInterface, RegionBranchOpInterface, TransformOpInterface</p><h4 id=operands>Operands:&nbsp;<a class=headline-hash href=#operands>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>scope</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results>Results:&nbsp;<a class=headline-hash href=#results>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>results</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformcast-mlirtransformcastop><code>transform.cast</code> (::mlir::transform::CastOp)&nbsp;<a class=headline-hash href=#transformcast-mlirtransformcastop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.cast` $input attr-dict `:` type($input) `to` type($output)
+</code></pre><p>Traits: TransformEachOpTrait</p><p>Interfaces: CastOpInterface, MemoryEffectOpInterface, TransformOpInterface</p><h4 id=operands-1>Operands:&nbsp;<a class=headline-hash href=#operands-1>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>input</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-1>Results:&nbsp;<a class=headline-hash href=#results-1>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>output</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformforeach-mlirtransformforeachop><code>transform.foreach</code> (::mlir::transform::ForeachOp)&nbsp;<a class=headline-hash href=#transformforeach-mlirtransformforeachop>¶</a></h3><p>Executes the body for each payload op</p><p>Syntax:</p><pre><code>operation ::= `transform.foreach` $target `:` type($target) (`-&gt;` type($results)^)? $body attr-dict
+</code></pre><p>This op has exactly one region with exactly one block (&ldquo;body&rdquo;). The body is
+executed for each payload op that is associated to the target operand in an
+unbatched fashion. I.e., the block argument (&ldquo;iteration variable&rdquo;) is always
+mapped to exactly one payload op.</p><p>This op always reads the target handle. Furthermore, it consumes the handle
+if there is a transform op in the body that consumes the iteration variable.
+This op does not return anything.</p><p>The transformations inside the body are applied in order of their
+appearance. During application, if any transformation in the sequence fails,
+the entire sequence fails immediately leaving the payload IR in potentially
+invalid state, i.e., this operation offers no transformation rollback
+capabilities.</p><p>This op generates as many handles as the terminating YieldOp has operands.
+For each result, the payload ops of the corresponding YieldOp operand are
+merged and mapped to the same resulting handle.</p><p>Traits: SingleBlockImplicitTerminator&lt;::mlir::transform::YieldOp></p><p>Interfaces: MemoryEffectOpInterface, RegionBranchOpInterface, TransformOpInterface</p><h4 id=operands-2>Operands:&nbsp;<a class=headline-hash href=#operands-2>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-2>Results:&nbsp;<a class=headline-hash href=#results-2>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>results</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformget_closest_isolated_parent-mlirtransformgetclosestisolatedparentop><code>transform.get_closest_isolated_parent</code> (::mlir::transform::GetClosestIsolatedParentOp)&nbsp;<a class=headline-hash href=#transformget_closest_isolated_parent-mlirtransformgetclosestisolatedparentop>¶</a></h3><p>Gets handles to the closest isolated-from-above parents</p><p>Syntax:</p><pre><code>operation ::= `transform.get_closest_isolated_parent` $target attr-dict `:` functional-type(operands, results)
+</code></pre><p>The handles defined by this Transform op correspond to the closest isolated
+from above ancestor of the Payload IR operations associated with its
+operand. If any of the given Payload IR ops has no such parent (unlikely as
+there usually is a top-level ModuleOp), the transformation is considered to
+have failed.</p><p>Ancestor ops follow the same order as the ops associated with the
+operand, except for potential duplicates (multiple Payload IR ops associated
+with the operand have the same parent) for which the ancestor will only be
+listed once for the first time it occurs. For example, given the list
+&ldquo;(childof(A), childof(B), childof(B), childof(A), childof(B))&rdquo;, the
+resulting list will be just &ldquo;(A, B)&rdquo;. Note that no other semantic ordering
+is applied, e.g., &ldquo;B&rdquo; may itself be a parent of &ldquo;A&rdquo;. This may have an impact
+on the further transformation applied to the handle produced here.</p><p>Traits: NavigationTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=operands-3>Operands:&nbsp;<a class=headline-hash href=#operands-3>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-3>Results:&nbsp;<a class=headline-hash href=#results-3>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>parent</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformget_producer_of_operand-mlirtransformgetproducerofoperand><code>transform.get_producer_of_operand</code> (::mlir::transform::GetProducerOfOperand)&nbsp;<a class=headline-hash href=#transformget_producer_of_operand-mlirtransformgetproducerofoperand>¶</a></h3><p>Get handle to the producer of this operation&rsquo;s operand number</p><p>Syntax:</p><pre><code>operation ::= `transform.get_producer_of_operand` $target `[` $operand_number `]` attr-dict `:` functional-type(operands, results)
+</code></pre><p>The handle defined by this Transform op corresponds to operation that
+produces the SSA value defined by the <code>target</code> and <code>operand_number</code>
+arguments. If the origin of the SSA value is not an operations (i.e. it is
+a block argument), the transform silently fails.
+The return handle points to only the subset of successfully produced
+computational operations, which can be empty.</p><p>Traits: NavigationTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes>Attributes:&nbsp;<a class=headline-hash href=#attributes>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>operand_number</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-4>Operands:&nbsp;<a class=headline-hash href=#operands-4>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-4>Results:&nbsp;<a class=headline-hash href=#results-4>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>parent</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformmerge_handles-mlirtransformmergehandlesop><code>transform.merge_handles</code> (::mlir::transform::MergeHandlesOp)&nbsp;<a class=headline-hash href=#transformmerge_handles-mlirtransformmergehandlesop>¶</a></h3><p>Merges handles into one pointing to the union of payload ops</p><p>Syntax:</p><pre><code>operation ::= `transform.merge_handles` ($deduplicate^)? $handles attr-dict `:` type($result)
+</code></pre><p>Creates a new Transform IR handle value that points to the same Payload IR
+operations as the operand handles. The Payload IR operations are listed
+in the same order as they are in the operand handles, grouped by operand
+handle, e.g., all Payload IR operations associated with the first handle
+come first, then all Payload IR operations associated with the second handle
+and so on. If <code>deduplicate</code> is set, do not add the given Payload IR
+operation more than once to the final list regardless of it coming from the
+same or different handles. Consumes the operands and produces a new handle.</p><p>Traits: SameOperandsAndResultType</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-1>Attributes:&nbsp;<a class=headline-hash href=#attributes-1>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>deduplicate</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr></tbody></table><h4 id=operands-5>Operands:&nbsp;<a class=headline-hash href=#operands-5>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>handles</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-5>Results:&nbsp;<a class=headline-hash href=#results-5>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>result</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformpdl_match-mlirtransformpdlmatchop><code>transform.pdl_match</code> (::mlir::transform::PDLMatchOp)&nbsp;<a class=headline-hash href=#transformpdl_match-mlirtransformpdlmatchop>¶</a></h3><p>Finds ops that match the named PDL pattern</p><p>Syntax:</p><pre><code>operation ::= `transform.pdl_match` $pattern_name `in` $root attr-dict `:` functional-type(operands, results)
+</code></pre><p>Find Payload IR ops nested within the Payload IR op associated with the
+operand that match the PDL pattern identified by its name. The pattern is
+expected to be defined in the closest surrounding <code>WithPDLPatternsOp</code>.</p><p>Produces a Transform IR value associated with the list of Payload IR ops
+that matched the pattern. The order of results in the list is that of the
+Operation::walk, clients are advised not to rely on a specific order though.
+If the operand is associated with multiple Payload IR ops, finds matching
+ops nested within each of those and produces a single list containing all
+of the matched ops.</p><p>The transformation is considered successful regardless of whether some
+Payload IR ops actually matched the pattern and only fails if the pattern
+could not be looked up or compiled.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-2>Attributes:&nbsp;<a class=headline-hash href=#attributes-2>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>pattern_name</code></td><td style=text-align:center>::mlir::SymbolRefAttr</td><td>symbol reference attribute</td></tr></tbody></table><h4 id=operands-6>Operands:&nbsp;<a class=headline-hash href=#operands-6>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>root</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-6>Results:&nbsp;<a class=headline-hash href=#results-6>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>matched</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformprint-mlirtransformprintop><code>transform.print</code> (::mlir::transform::PrintOp)&nbsp;<a class=headline-hash href=#transformprint-mlirtransformprintop>¶</a></h3><p>Dump each payload op</p><p>Syntax:</p><pre><code>operation ::= `transform.print` $target attr-dict (`:` type($target)^)?
+</code></pre><p>This op dumps each payload op that is associated with the <code>target</code> operand
+to stderr. It also prints the <code>name</code> string attribute. If no target is
+specified, the top-level op is dumped.</p><p>This op is useful for printf-style debugging.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-3>Attributes:&nbsp;<a class=headline-hash href=#attributes-3>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>name</code></td><td style=text-align:center>::mlir::StringAttr</td><td>string attribute</td></tr></tbody></table><h4 id=operands-7>Operands:&nbsp;<a class=headline-hash href=#operands-7>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformreplicate-mlirtransformreplicateop><code>transform.replicate</code> (::mlir::transform::ReplicateOp)&nbsp;<a class=headline-hash href=#transformreplicate-mlirtransformreplicateop>¶</a></h3><p>Lists payload ops multiple times in the new handle</p><p>Syntax:</p><pre><code>operation ::= `transform.replicate` `num` `(` $pattern `)` $handles attr-dict `:` type($pattern) `,` type($handles)
+</code></pre><p>Produces a new handle associated with a list of payload IR ops that is
+computed by repeating the list of payload IR ops associated with the
+operand handle as many times as the &ldquo;pattern&rdquo; handle has associated
+operations. For example, if pattern is associated with [op1, op2] and the
+operand handle is associated with [op3, op4, op5], the resulting handle
+will be associated with [op3, op4, op5, op3, op4, op5].</p><p>This transformation is useful to &ldquo;align&rdquo; the sizes of payload IR lists
+before a transformation that expects, e.g., identically-sized lists. For
+example, a transformation may be parameterized by same notional per-target
+size computed at runtime and supplied as another handle, the replication
+allows this size to be computed only once and used for every target instead
+of replicating the computation itself.</p><p>Note that it is undesirable to pass a handle with duplicate operations to
+an operation that consumes the handle. Handle consumption often indicates
+that the associated payload IR ops are destroyed, so having the same op
+listed more than once will lead to double-free. Single-operand
+MergeHandlesOp may be used to deduplicate the associated list of payload IR
+ops when necessary. Furthermore, a combination of ReplicateOp and
+MergeHandlesOp can be used to construct arbitrary lists with repetitions.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=operands-8>Operands:&nbsp;<a class=headline-hash href=#operands-8>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>pattern</code></td><td>TransformTypeInterface instance</td></tr><tr><td style=text-align:center><code>handles</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-7>Results:&nbsp;<a class=headline-hash href=#results-7>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>replicated</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformsequence-mlirtransformsequenceop><code>transform.sequence</code> (::mlir::transform::SequenceOp)&nbsp;<a class=headline-hash href=#transformsequence-mlirtransformsequenceop>¶</a></h3><p>Contains a sequence of other transform ops to apply</p><p>Syntax:</p><pre><code>operation ::= `transform.sequence` ($root^ `:` type($root))? (`-&gt;` type($results)^)? `failures` `(` $failure_propagation_mode `)` attr-dict-with-keyword regions
+</code></pre><p>The transformations indicated by the sequence are applied in order of their
+appearance. Each value produced by a transformation within the sequence
+corresponds to an operation or a group of operations in the payload IR.
+The behavior of the operation when a nested transformation produces a
+silenceable error is controlled by the <code>failure_propagation_mode</code> attribute.
+When set to <code>propagate</code>, the failure of any nested transformation in the
+sequence implies immediate failure of the entire sequence with a silenceable
+error, and no further transformation is attempted. When set to <code>suppress</code>,
+silenceable errors in nested operations are ignored and further
+transformations are applied. Beware that even silenceable errors may leave
+the payload IR in a state unsuitable for further transformations. It is
+the responsibility of the caller to ensure the following transformations
+are robust enough when errors are suppressed. Definite errors reported by
+nested transformations abort the sequence regardless of the propagation
+mode. The set of modes may be extended in the future, e.g., to collect
+silenceable errors and report them after attempting all transformations in
+the sequence.</p><p>The entry block of this operation has a single argument that maps to either
+the operand if provided or the top-level container operation of the payload
+IR, typically the root operation of the pass interpreting the transform
+dialect. Operand omission is only allowed for sequences not contained in
+another sequence.</p><p>The body of the sequence terminates with an implicit or explicit
+<code>transform.yield</code> op. The operands of the terminator are returned as the
+results of the sequence op.</p><p>Traits: PossibleTopLevelTransformOpTrait, SingleBlockImplicitTerminator&lt;::mlir::transform::YieldOp></p><p>Interfaces: MemoryEffectOpInterface, OpAsmOpInterface, RegionBranchOpInterface, TransformOpInterface</p><h4 id=attributes-4>Attributes:&nbsp;<a class=headline-hash href=#attributes-4>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>failure_propagation_mode</code></td><td style=text-align:center>::mlir::transform::FailurePropagationModeAttr</td><td>Silenceable error propagation policy</td></tr></tbody></table><h4 id=operands-9>Operands:&nbsp;<a class=headline-hash href=#operands-9>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>root</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-8>Results:&nbsp;<a class=headline-hash href=#results-8>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>results</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformsplit_handles-mlirtransformsplithandlesop><code>transform.split_handles</code> (::mlir::transform::SplitHandlesOp)&nbsp;<a class=headline-hash href=#transformsplit_handles-mlirtransformsplithandlesop>¶</a></h3><p>Splits handles from a union of payload ops to a list</p><p>Syntax:</p><pre><code>operation ::= `transform.split_handles` $handle `in` `[` $num_result_handles `]`
+              attr-dict `:` functional-type(operands, results)
+</code></pre><p>Creates <code>num_result_handles</code> transform IR handles extracted from the
+<code>handle</code> operand. The resulting Payload IR operation handles are listed
+in the same order as the operations appear in the source <code>handle</code>.
+This is useful for ensuring a statically known number of operations are
+tracked by the source <code>handle</code> and to extract them into individual handles
+that can be further manipulated in isolation.</p><p>This operation succeeds and returns <code>num_result_handles</code> if the statically
+specified <code>num_result_handles</code> corresponds to the dynamic number of
+operations contained in the source <code>handle</code>. Otherwise it silently fails.</p><p>Traits: FunctionalStyleTransformOpTrait</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-5>Attributes:&nbsp;<a class=headline-hash href=#attributes-5>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>num_result_handles</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-10>Operands:&nbsp;<a class=headline-hash href=#operands-10>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>handle</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-9>Results:&nbsp;<a class=headline-hash href=#results-9>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>results</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformwith_pdl_patterns-mlirtransformwithpdlpatternsop><code>transform.with_pdl_patterns</code> (::mlir::transform::WithPDLPatternsOp)&nbsp;<a class=headline-hash href=#transformwith_pdl_patterns-mlirtransformwithpdlpatternsop>¶</a></h3><p>Contains PDL patterns available for use in transforms</p><p>Syntax:</p><pre><code>operation ::= `transform.with_pdl_patterns` ($root^ `:` type($root))? attr-dict-with-keyword regions
+</code></pre><p>This op contains a set of named PDL patterns that are available for the
+Transform dialect operations to be used for pattern matching. For example,
+PDLMatchOp can be used to produce a Transform IR value associated with all
+Payload IR operations that match the pattern as follows:</p><div class=highlight><pre class=chroma><code class=language-mlir data-lang=mlir>transform<span class=p>.</span>with_pdl_patterns <span class=p>{</span>
+<span class=nl>^bb0</span><span class=p>(</span><span class=nv>%arg0</span><span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation<span class=p>):</span>
+  pdl<span class=p>.</span>pattern <span class=nf>@my_pattern</span> <span class=p>:</span> benefit<span class=p>(</span><span class=m>1</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nv>%0</span> <span class=p>=</span> pdl<span class=p>.</span>operation <span class=c>//...
+</span><span class=c></span>    <span class=c>// Regular PDL goes here.
+</span><span class=c></span>    pdl<span class=p>.</span>rewrite <span class=nv>%0</span> with <span class=s>&#34;transform.dialect&#34;</span>
+  <span class=p>}</span>
+
+  sequence <span class=nv>%arg0</span> failures<span class=p>(</span>propagate<span class=p>)</span> <span class=p>{</span>
+  <span class=nl>^bb0</span><span class=p>(</span><span class=nv>%arg1</span><span class=p>:</span> <span class=p>!</span>pdl<span class=p>.</span>operation<span class=p>):</span>
+    <span class=nv>%1</span> <span class=p>=</span> pdl_match <span class=nf>@my_pattern</span> in <span class=nv>%arg1</span>
+    <span class=c>// Use %1 as handle
+</span><span class=c></span>  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>Note that the pattern is expected to finish with a <code>pdl.rewrite</code> terminator
+that points to the custom rewriter named &ldquo;transform.dialect&rdquo;. The rewriter
+actually does nothing, but the transform application will keep track of the
+operations that matched the pattern.</p><p>This op is expected to contain <code>pdl.pattern</code> operations and exactly one
+another Transform dialect operation that gets executed with all patterns
+available. This op is a possible top-level Transform IR op, the argument of
+its entry block corresponds to either the root op of the payload IR or the
+ops associated with its operand when provided.</p><p>Traits: NoTerminator, PossibleTopLevelTransformOpTrait, RecursiveMemoryEffects, SymbolTable</p><p>Interfaces: OpAsmOpInterface, TransformOpInterface</p><h4 id=operands-11>Operands:&nbsp;<a class=headline-hash href=#operands-11>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>root</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformyield-mlirtransformyieldop><code>transform.yield</code> (::mlir::transform::YieldOp)&nbsp;<a class=headline-hash href=#transformyield-mlirtransformyieldop>¶</a></h3><p>Yields operation handles from a transform IR region</p><p>Syntax:</p><pre><code>operation ::= `transform.yield` operands attr-dict (`:` type($operands)^)?
+</code></pre><p>This terminator operation yields operation handles from regions of the
+transform IR ops back to the containing op. It is not itself associated with
+any transformation on the payload IR and is used for flow purposes only.</p><p>Traits: Terminator</p><h4 id=operands-12>Operands:&nbsp;<a class=headline-hash href=#operands-12>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>operands</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h2 id=bufferization-transform-operations>Bufferization Transform Operations&nbsp;<a class=headline-hash href=#bufferization-transform-operations>¶</a></h2><h3 id=transformbufferizationone_shot_bufferize-mlirtransformoneshotbufferizeop><code>transform.bufferization.one_shot_bufferize</code> (::mlir::transform::OneShotBufferizeOp)&nbsp;<a class=headline-hash href=#transformbufferizationone_shot_bufferize-mlirtransformoneshotbufferizeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.bufferization.one_shot_bufferize` (`layout` `{` $function_boundary_type_conversion^ `}`)?
+              $target attr-dict
+</code></pre><p>Indicates that the given <code>target</code> op should be bufferized with One-Shot
+Bufferize. The bufferization can be configured with various attributes that
+corresponding to options in <code>BufferizationOptions</code> and the
+<code>one-shot-bufferize</code> pass. More information can be found in the pass
+documentation.</p><p>If <code>target_is_module</code> is set, <code>target</code> must be a module. In that case the
+<code>target</code> handle can be reused by other transform ops. When bufferizing other
+ops, the <code>target</code> handled is freed after bufferization and can no longer be
+used.</p><p>Note: Only ops that implement <code>BufferizableOpInterface</code> are bufferized. All
+other ops are ignored if <code>allow_unknown_ops</code>. If <code>allow_unknown_ops</code> is
+unset, this transform fails when an unknown/non-bufferizable op is found.
+Many ops implement <code>BufferizableOpInterface</code> via an external model. These
+external models must be registered when applying this transform op;
+otherwise, said ops would be considered non-bufferizable.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-6>Attributes:&nbsp;<a class=headline-hash href=#attributes-6>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>function_boundary_type_conversion</code></td><td style=text-align:center>::mlir::bufferization::LayoutMapOptionAttr</td><td>option for map layout</td></tr><tr><td style=text-align:center><code>allow_return_allocs</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>allow_unknown_ops</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>bufferize_function_boundaries</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>create_deallocs</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>target_is_module</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>test_analysis_only</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr><tr><td style=text-align:center><code>print_conflicts</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr></tbody></table><h4 id=operands-13>Operands:&nbsp;<a class=headline-hash href=#operands-13>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h2 id=gpu-transform-operations>GPU Transform Operations&nbsp;<a class=headline-hash href=#gpu-transform-operations>¶</a></h2><h3 id=transformgpumap_foreach_to_blocks-mlirtransformmapforeachtoblocks><code>transform.gpu.map_foreach_to_blocks</code> (::mlir::transform::MapForeachToBlocks)&nbsp;<a class=headline-hash href=#transformgpumap_foreach_to_blocks-mlirtransformmapforeachtoblocks>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.gpu.map_foreach_to_blocks` $target attr-dict
+</code></pre><p>Target the gpu_launch op and rewrite the top level <code>scf.foreach_thread</code>
+to distributed gpu.block_id attribute. If <code>generate_gpu_launch</code> attribute
+is set, then first generates <code>gpu_launch</code> and moves the top level
+<code>scf.foreach_thread</code> inside.</p><p>The operation searches top level <code>scf.foreach_thread</code> ops under
+<code>gpu_launch</code> and maps each such op to GPU blocks. Mapping is
+one-to-one and the induction variables of <code>scf.foreach_thread</code> are
+rewritten to gpu.block_id according to the <code>thread_dim_apping</code> attribute.</p><p>Dynamic, <code>scf.foreach_thread</code> trip counts are currently not supported.
+Dynamic block dim sizes are currently not supported.</p><p>Only <strong>bufferized</strong> scf.foreach_thread are currently supported.
+Only scf.foreach_thread distributed to <strong>at most 3 dimensions</strong> are
+currently supported.</p><p>The operation alters the block size of the given gpu_launch using
+gridDim argument.</p><h4 id=return-modes>Return modes:&nbsp;<a class=headline-hash href=#return-modes>¶</a></h4><p>This operation ignores non-gpu_launch ops and drops them in the return.</p><p>If any scf.foreach_thread with tensors is found, the transform definitely
+fails.</p><p>If all the scf.foreach_thread operations contained within the LaunchOp
+referred to by the <code>target</code> PDLOperation lower to GPU properly, the
+transform succeeds. Otherwise the transform definitely fails.</p><p>The returned handle points to the same LaunchOp operand, consuming it and
+producing a new SSA value to satisfy chaining and linearity of the IR
+properties.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-7>Attributes:&nbsp;<a class=headline-hash href=#attributes-7>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>gridDim</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>generate_gpu_launch</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr></tbody></table><h4 id=operands-14>Operands:&nbsp;<a class=headline-hash href=#operands-14>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-10>Results:&nbsp;<a class=headline-hash href=#results-10>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>result</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformgpumap_nested_foreach_to_threads-mlirtransformmapnestedforeachtothreads><code>transform.gpu.map_nested_foreach_to_threads</code> (::mlir::transform::MapNestedForeachToThreads)&nbsp;<a class=headline-hash href=#transformgpumap_nested_foreach_to_threads-mlirtransformmapnestedforeachtothreads>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.gpu.map_nested_foreach_to_threads` $target attr-dict
+</code></pre><p>Target the <code>gpu.launch op</code> and rewrite all <code>scf.foreach_thread</code>
+nested in it to distributed <code>gpu.thread_id</code> attribute.</p><p>The operation searches for <code>scf.foreach_thread</code> ops nested under <code>target</code>
+and maps each such op to GPU threads. Mapping is one-to-one and the
+induction variables of <code>scf.foreach_thread</code> are rewritten to
+<code>gpu.thread_id</code> according to the <code>mapping</code> attribute.</p><p>Sibling <code>scf.foreach_thread</code> are supported in which case, the union of
+the number of threads is computed and may result in predication.</p><p>Multiple scf.foreach_thread are supported per <code>gpu.launch</code> in which case,
+the max of all the threads is computed and taken for the global
+<code>gpu.thread_id</code>. If necessary, <code>scf.foreach_thread</code> that do not use the
+whole thread range result in predicated computations.</p><p>Dynamic <code>scf.foreach_thread</code> trip counts are currently not supported.
+Dynamic block dim sizes are currently not supported.</p><p>Only <strong>bufferized</strong> <code>scf.foreach_thread</code> are currently supported.
+Only <code>scf.foreach_thread</code> distributed to <strong>at most 3 dimensions</strong> are
+currently supported.</p><p>Barriers are inserted after each scf.foreach_thread op for now.</p><p>The operation alters the block size of the given gpu_launch using
+blockDim argument.</p><h4 id=return-modes-1>Return modes:&nbsp;<a class=headline-hash href=#return-modes-1>¶</a></h4><p>This operation ignores non-gpu_launch ops and drops them in the return.</p><p>If any scf.foreach_thread with tensors is found, the transform definitely
+fails.</p><p>If all the scf.foreach_thread operations contained within the LaunchOp
+referred to by the <code>target</code> PDLOperation lower to GPU properly, the
+transform succeeds. Otherwise the transform definitely fails.</p><p>The returned handle points to the same LaunchOp operand, consuming it and
+producing a new SSA value to satisfy chaining and linearity of the IR
+properties.</p><h4 id=example>Example:&nbsp;<a class=headline-hash href=#example>¶</a></h4><pre><code>gpu.launch blocks(%bx, %by, %bz) in (%x = %0, %y = %1, %z = %2)
+           threads(%tx, %ty, %tz) in (%tx = %3, %ty = %4, %tz = %5) {
+  scf.foreach_thread (%i, %j) in (7, 9) {
+    ... // body 1
+  } {mapping = [#gpu.thread&lt;x&gt;, #gpu.thread&lt;y&gt;, #gpu.thread&lt;z&gt;]}
+  scf.foreach_thread (%i) in (12) {
+    ... // body 2
+  } {mapping = [#gpu.thread&lt;x&gt;]}
+  gpu.terminator
+}
+</code></pre><p>is translated to:</p><pre><code>%bdimX = arith.constant 12 : index
+%bdimY = arith.constant 9 : index
+gpu.launch blocks(%bx, %by, %bz) in (%x = %0, %y = %1, %z = %2)
+       threads(%tx, %ty, %tz) in (%tx = %bdimX, %ty = %bdimY, %tz = %5) {
+  if (threadIdx.x &lt; 9 &amp;&amp; threadIdx.y &lt; 7) {
+    ... // body 1
+  }
+  gpu.barrier
+  if (threadIdx.y &lt; 1) {
+    ... // body 2
+  }
+  gpu.barrier
+  gpu.terminator
+}      
+</code></pre><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-8>Attributes:&nbsp;<a class=headline-hash href=#attributes-8>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>blockDim</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>syncAfterDistribute</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr></tbody></table><h4 id=operands-15>Operands:&nbsp;<a class=headline-hash href=#operands-15>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-11>Results:&nbsp;<a class=headline-hash href=#results-11>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>result</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h2 id=loop-scf-transform-operations>Loop (SCF) Transform Operations&nbsp;<a class=headline-hash href=#loop-scf-transform-operations>¶</a></h2><h3 id=transformloopget_parent_for-mlirtransformgetparentforop><code>transform.loop.get_parent_for</code> (::mlir::transform::GetParentForOp)&nbsp;<a class=headline-hash href=#transformloopget_parent_for-mlirtransformgetparentforop>¶</a></h3><p>Gets a handle to the parent &lsquo;for&rsquo; loop of the given operation</p><p>Syntax:</p><pre><code>operation ::= `transform.loop.get_parent_for` $target attr-dict `:` functional-type(operands, results)
+</code></pre><p>Produces a handle to the n-th (default 1) parent <code>scf.for</code> loop for each
+Payload IR operation associated with the operand. Fails if such a loop
+cannot be found. The list of operations associated with the handle contains
+parent operations in the same order as the list associated with the operand,
+except for operations that are parents to more than one input which are only
+present once.</p><p>Traits: NavigationTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-9>Attributes:&nbsp;<a class=headline-hash href=#attributes-9>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>num_loops</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute whose value is positive</td></tr></tbody></table><h4 id=operands-16>Operands:&nbsp;<a class=headline-hash href=#operands-16>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-12>Results:&nbsp;<a class=headline-hash href=#results-12>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>parent</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformloopoutline-mlirtransformloopoutlineop><code>transform.loop.outline</code> (::mlir::transform::LoopOutlineOp)&nbsp;<a class=headline-hash href=#transformloopoutline-mlirtransformloopoutlineop>¶</a></h3><p>Outlines a loop into a named function</p><p>Syntax:</p><pre><code>operation ::= `transform.loop.outline` $target attr-dict `:` functional-type(operands, results)
+</code></pre><p>Moves the loop into a separate function with the specified name and
+replaces the loop in the Payload IR with a call to that function. Takes
+care of forwarding values that are used in the loop as function arguments.
+If the operand is associated with more than one loop, each loop will be
+outlined into a separate function. The provided name is used as a <em>base</em>
+for forming actual function names following SymbolTable auto-renaming
+scheme to avoid duplicate symbols. Expects that all ops in the Payload IR
+have a SymbolTable ancestor (typically true because of the top-level
+module). Returns the handle to the list of outlined functions in the same
+order as the operand handle.</p><p>Traits: FunctionalStyleTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-10>Attributes:&nbsp;<a class=headline-hash href=#attributes-10>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>func_name</code></td><td style=text-align:center>::mlir::StringAttr</td><td>string attribute</td></tr></tbody></table><h4 id=operands-17>Operands:&nbsp;<a class=headline-hash href=#operands-17>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h4 id=results-13>Results:&nbsp;<a class=headline-hash href=#results-13>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformlooppeel-mlirtransformlooppeelop><code>transform.loop.peel</code> (::mlir::transform::LoopPeelOp)&nbsp;<a class=headline-hash href=#transformlooppeel-mlirtransformlooppeelop>¶</a></h3><p>Peels the last iteration of the loop</p><p>Syntax:</p><pre><code>operation ::= `transform.loop.peel` $target attr-dict `:` functional-type(operands, results)
+</code></pre><p>Updates the given loop so that its step evenly divides its range and puts
+the remaining iteration into a separate loop or a conditional.</p><p>In the absence of sufficient static information, this op may peel a loop,
+even if the step always divides the range evenly at runtime.</p><h4 id=return-modes-2>Return modes&nbsp;<a class=headline-hash href=#return-modes-2>¶</a></h4><p>This operation ignores non-scf::ForOp ops and drops them in the return.</p><p>This operation always succeeds and returns the scf::ForOp with the
+postcondition: &ldquo;the loop trip count is divisible by the step&rdquo;.
+This operation may return the same unmodified loop handle when peeling did
+not modify the IR (i.e. the loop trip count was already divisible).</p><p>Note that even though the Payload IR modification may be performed
+in-place, this operation consumes the operand handle and produces a new
+one.</p><p>TODO: Return both the peeled loop and the remainder loop.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-11>Attributes:&nbsp;<a class=headline-hash href=#attributes-11>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>fail_if_already_divisible</code></td><td style=text-align:center>::mlir::BoolAttr</td><td>bool attribute</td></tr></tbody></table><h4 id=operands-18>Operands:&nbsp;<a class=headline-hash href=#operands-18>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>Transform IR handle to scf.for operations</td></tr></tbody></table><h4 id=results-14>Results:&nbsp;<a class=headline-hash href=#results-14>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformlooppipeline-mlirtransformlooppipelineop><code>transform.loop.pipeline</code> (::mlir::transform::LoopPipelineOp)&nbsp;<a class=headline-hash href=#transformlooppipeline-mlirtransformlooppipelineop>¶</a></h3><p>Applies software pipelining to the loop</p><p>Syntax:</p><pre><code>operation ::= `transform.loop.pipeline` $target attr-dict `:` functional-type(operands, results)
+</code></pre><p>Transforms the given loops one by one to achieve software pipelining for
+each of them. That is, performs some amount of reads from memory before the
+loop rather than inside the loop, the same amount of writes into memory
+after the loop, and updates each iteration to read the data for a following
+iteration rather than the current one.</p><p>The amount is specified by the attributes.</p><p>The values read and about to be stored are transferred as loop iteration
+arguments. Currently supports memref and vector transfer operations as
+memory reads/writes.</p><h4 id=return-modes-3>Return modes&nbsp;<a class=headline-hash href=#return-modes-3>¶</a></h4><p>This operation ignores non-scf::For ops and drops them in the return.
+If all the operations referred to by the <code>target</code> PDLOperation pipeline
+properly, the transform succeeds. Otherwise the transform silently fails.
+The return handle points to only the subset of successfully produced
+pipelined loops, which can be empty.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-12>Attributes:&nbsp;<a class=headline-hash href=#attributes-12>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>iteration_interval</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>read_latency</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-19>Operands:&nbsp;<a class=headline-hash href=#operands-19>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>Transform IR handle to scf.for operations</td></tr></tbody></table><h4 id=results-15>Results:&nbsp;<a class=headline-hash href=#results-15>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>TransformTypeInterface instance</td></tr></tbody></table><h3 id=transformloopunroll-mlirtransformloopunrollop><code>transform.loop.unroll</code> (::mlir::transform::LoopUnrollOp)&nbsp;<a class=headline-hash href=#transformloopunroll-mlirtransformloopunrollop>¶</a></h3><p>Unrolls the given loop with the given unroll factor</p><p>Syntax:</p><pre><code>operation ::= `transform.loop.unroll` $target attr-dict `:` type($target)
+</code></pre><p>Unrolls each loop associated with the given handle to have up to the given
+number of loop body copies per iteration. If the unroll factor is larger
+than the loop trip count, the latter is used as the unroll factor instead.</p><h4 id=return-modes-4>Return modes&nbsp;<a class=headline-hash href=#return-modes-4>¶</a></h4><p>This operation ignores non-scf::For ops and drops them in the return.
+If all the operations referred to by the <code>target</code> PDLOperation unroll
+properly, the transform succeeds. Otherwise the transform silently fails.</p><p>Does not return handles as the operation may result in the loop being
+removed after a full unrolling.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-13>Attributes:&nbsp;<a class=headline-hash href=#attributes-13>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>factor</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute whose value is positive</td></tr></tbody></table><h4 id=operands-20>Operands:&nbsp;<a class=headline-hash href=#operands-20>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>Transform IR handle to scf.for operations</td></tr></tbody></table><h2 id=structured-linalg-transform-operations>Structured (Linalg) Transform Operations&nbsp;<a class=headline-hash href=#structured-linalg-transform-operations>¶</a></h2><h3 id=transformstructureddecompose-mlirtransformdecomposeop><code>transform.structured.decompose</code> (::mlir::transform::DecomposeOp)&nbsp;<a class=headline-hash href=#transformstructureddecompose-mlirtransformdecomposeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.decompose` $target attr-dict
+</code></pre><p>Decomposes named complex operations, such as higher-dimensional
+(depthwise) convolutions, into combinations of lower-dimensional equivalents
+when possible.</p><h4 id=return-modes-5>Return modes&nbsp;<a class=headline-hash href=#return-modes-5>¶</a></h4><p>This operation ignores non-Linalg ops and drops them in the return.
+If all the operations referred to by the <code>target</code> PDLOperation decompose
+properly, the transform succeeds. Otherwise the transform silently fails.
+The return handle points to only the subset of successfully produced
+computational operations, which can be empty.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=operands-21>Operands:&nbsp;<a class=headline-hash href=#operands-21>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-16>Results:&nbsp;<a class=headline-hash href=#results-16>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredfuse_into_containing_op-mlirtransformfuseintocontainingop><code>transform.structured.fuse_into_containing_op</code> (::mlir::transform::FuseIntoContainingOp)&nbsp;<a class=headline-hash href=#transformstructuredfuse_into_containing_op-mlirtransformfuseintocontainingop>¶</a></h3><pre><code>Fuses the `producer_op` into the `containing_op`.
+Returns a handle to the fused ops.
+
+The producer is typically a slice of a tileable op (i.e., implements
+TilingInterface). In that case, this transform computes the accessed
+producer slice inside of the containing op (&quot;tile and fuse&quot;). Otherwise,
+the entire producer is cloned inside the containing op (&quot;clone and fuse&quot;).
+
+The containing op handle must be associated with exactly one payload op. The
+producer op handle may be associated with multiple payload ops. This
+transform fuses producers one-by-one, always picking an unspecified producer
+that has at least one use inside the containing op among the 
+producers.
+
+Note: If a producer has multiple uses inside the containing op, it is
+currently tiled and/or cloned multiple times into the containing op.
+TODO: Reuse already fused OpResults instead of tiling/cloning a second time
+when possible. Fuse producers according to a topological sorting to achieve
+the largest amount of reuse.
+
+#### Return modes
+
+If at least one producer could not be fused, this operation fails silently.
+This is the case when tiling fails or when no producer op could be found
+among the remaining producers that has at least one use within the
+containing op. I.e., &quot;producers&quot; that are not consumed within the containing
+op are rejected by this operation.
+
+This operation reads and frees the producer handle.
+This operation reads the containing op handle.
+</code></pre><p>Syntax:</p><pre><code>operation ::= `transform.structured.fuse_into_containing_op` $producer_op `into` $containing_op attr-dict
+</code></pre><p>Fuse a producer into a containing operation.
+Interfaces: TransformOpInterface</p><h4 id=operands-22>Operands:&nbsp;<a class=headline-hash href=#operands-22>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>producer_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>containing_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-17>Results:&nbsp;<a class=headline-hash href=#results-17>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>fused_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredfuse-mlirtransformfuseop><code>transform.structured.fuse</code> (::mlir::transform::FuseOp)&nbsp;<a class=headline-hash href=#transformstructuredfuse-mlirtransformfuseop>¶</a></h3><p>Tiles the operations pointed to by the target handle and fuses their
+producers greedily using the options provided as attributes.</p><p>Traits: FunctionalStyleTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-14>Attributes:&nbsp;<a class=headline-hash href=#attributes-14>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>tile_sizes</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>tile_interchange</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-23>Operands:&nbsp;<a class=headline-hash href=#operands-23>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-18>Results:&nbsp;<a class=headline-hash href=#results-18>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>loops</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredgeneralize-mlirtransformgeneralizeop><code>transform.structured.generalize</code> (::mlir::transform::GeneralizeOp)&nbsp;<a class=headline-hash href=#transformstructuredgeneralize-mlirtransformgeneralizeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.generalize` $target attr-dict
+</code></pre><p>Transforms a named structured operation into the generic form with the
+explicit attached region.</p><h4 id=return-modes-6>Return modes&nbsp;<a class=headline-hash href=#return-modes-6>¶</a></h4><p>This operation ignores non-Linalg ops and drops them in the return.
+If all the operations referred to by the <code>target</code> PDLOperation generalize
+properly, the transform succeeds. Otherwise the transform silently fails.
+The return handle points to only the subset of successfully produced
+equivalent generic operations, which can be empty or contain the original
+ops if they were already in generic form.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=operands-24>Operands:&nbsp;<a class=headline-hash href=#operands-24>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-19>Results:&nbsp;<a class=headline-hash href=#results-19>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredinterchange-mlirtransforminterchangeop><code>transform.structured.interchange</code> (::mlir::transform::InterchangeOp)&nbsp;<a class=headline-hash href=#transformstructuredinterchange-mlirtransforminterchangeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.interchange` $target attr-dict
+</code></pre><p>Interchanges the iterators of the operations pointed to by the target handle
+using the iterator interchange attribute.</p><h4 id=return-modes-7>Return modes&nbsp;<a class=headline-hash href=#return-modes-7>¶</a></h4><p>This operation ignores non-linalg::Generic ops and drops them in the return.
+This operation fails if the interchange attribute is invalid.
+If all the operations referred to by the <code>target</code> PDLOperation interchange
+properly, the transform succeeds.
+If any interchange fails, the transform definitely fails.
+The return handle points to only the subset of successfully produced
+interchanged operations, which can be empty.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-15>Attributes:&nbsp;<a class=headline-hash href=#attributes-15>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>iterator_interchange</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-25>Operands:&nbsp;<a class=headline-hash href=#operands-25>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-20>Results:&nbsp;<a class=headline-hash href=#results-20>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredmatch-mlirtransformmatchop><code>transform.structured.match</code> (::mlir::transform::MatchOp)&nbsp;<a class=headline-hash href=#transformstructuredmatch-mlirtransformmatchop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.match` (`ops` `{` $ops^ `}`)?
+              (`interface` `{` $interface^ `}`)?
+              (`attributes` $op_attrs^)?
+              (`filter_result_type` `=` $filter_result_type^)?
+              `in` $target attr-dict
+</code></pre><p>Match op with the specified constraints, within the target op.</p><p>The following constraints are supported:</p><ul><li>interface: an optional MatchInterfaceEnum specifying an enum
+representation for an interface to target.</li><li>ops: an optional StrArrayAttr specifying the concrete name of an op.
+Multiple names can be specified. Matched ops must have one of specified
+names.</li><li>attribute: the matched op must have all specified attributes (with their
+specified values).</li><li>filter_result_type: the matched op must return exactly this one type.</li></ul><p>Note: Only ops that satisfy all specified constraints are matched.</p><p>TODO: Extend with regions to allow a limited form of constraints.</p><h4 id=return-modes-8>Return modes&nbsp;<a class=headline-hash href=#return-modes-8>¶</a></h4><p>This op traverses the ops nested under <code>target</code> and returns the handles to
+all the operations that match the requirements.</p><p>This op fails if the target is not a handle to exactly one operation.
+Otherwise it succeeds.</p><p>This operation does not consume the target handle and produces new handles:
+it is a navigation op.</p><p>Traits: NavigationTransformOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-16>Attributes:&nbsp;<a class=headline-hash href=#attributes-16>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>ops</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>string array attribute</td></tr><tr><td style=text-align:center><code>interface</code></td><td style=text-align:center>mlir::transform::MatchInterfaceEnumAttr</td><td>An interface to match</td></tr><tr><td style=text-align:center><code>op_attrs</code></td><td style=text-align:center>::mlir::DictionaryAttr</td><td>dictionary of named attribute values</td></tr><tr><td style=text-align:center><code>filter_result_type</code></td><td style=text-align:center>::mlir::TypeAttr</td><td>any type attribute</td></tr></tbody></table><h4 id=operands-26>Operands:&nbsp;<a class=headline-hash href=#operands-26>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-21>Results:&nbsp;<a class=headline-hash href=#results-21>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>results</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredmultitile_sizes-mlirtransformmultitilesizesop><code>transform.structured.multitile_sizes</code> (::mlir::transform::MultiTileSizesOp)&nbsp;<a class=headline-hash href=#transformstructuredmultitile_sizes-mlirtransformmultitilesizesop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.multitile_sizes` $target attr-dict
+</code></pre><p>Emits the IR computing the tile sizes <code>s1</code> and <code>s2</code> such that:</p><ul><li>there exists a combination of <code>n</code> tiles of size <code>s1</code> and <code>m</code> tiles of
+size <code>s2</code> that covers the entirety of the iteration space <code>dimension</code> of
+the target structured op;</li><li><code>s1</code>, <code>s2</code> is less than or equal to <code>target_size</code>;</li><li><code>s1</code> and <code>s2</code> are divisible by `divisor.</li></ul><p>For example, for a dimension of size 54 with target size 12 and divisor 2,
+this can emit the IR computing the tile size 10, used for 3 tiles, and 12,
+used for 2 tiles, totally 10<em>3 + 12</em>2 = 54. Note that when the divisor does
+not divide the original dimension size, it is impossible to compute such
+tile sizes. An assertion is emitted to guard against this in the dynamic
+case.</p><p>Expects the target size and the divisor to be strictly positive. Folds the
+IR as much as possible, normally obtaining constant sizes and numbers of
+tiles for a statically known dimension.</p><p>This does <em>not</em> consume the target handle and produces three handles each
+pointing to single-result index-typed operations (which may be arithmetic
+constant operations) defining the two respective tile sizes and the product
+of the first tile size with the number of tiles of that size (useful for
+splitting the iteration space).</p><p>This operation composes with the regular tiling when applied per-dimension:</p><div class=highlight><pre class=chroma><code class=language-mlir data-lang=mlir><span class=nv>%sz1</span><span class=p>,</span> <span class=nv>%sz2</span><span class=p>,</span> <span class=nv>%split</span> <span class=p>=</span> structured<span class=p>.</span>multitile_sizes <span class=nv>%target</span>
+                     <span class=p>{</span> <span class=nl>target_size =</span> <span class=m>10</span><span class=p>,</span> <span class=nl>dimension =</span> <span class=m>1</span> <span class=p>}</span>
+<span class=nv>%low</span><span class=p>,</span> <span class=nv>%high</span> <span class=p>=</span> structured<span class=p>.</span>split <span class=nv>%target</span> after <span class=nv>%split</span> <span class=p>{</span> <span class=nl>dimension =</span> <span class=m>1</span> <span class=p>}</span>
+<span class=nv>%tiled_low</span> <span class=p>=</span> structured<span class=p>.</span>tile <span class=nv>%low</span> <span class=p>[</span><span class=m>0</span><span class=p>,</span> <span class=nv>%sz1</span><span class=p>]</span>
+<span class=nv>%tiled_high</span> <span class=p>=</span> structured<span class=p>.</span>tile <span class=nv>%high</span> <span class=p>[</span><span class=m>0</span><span class=p>,</span> <span class=nv>%sz2</span><span class=p>]</span>
+<span class=nv>%common</span> <span class=p>=</span> merge_handles <span class=nv>%tiled_low</span><span class=p>,</span> <span class=nv>%tiled_high</span>
+
+<span class=nv>%sz3</span><span class=p>,</span> <span class=nv>%sz4</span><span class=p>,</span> <span class=nv>%split</span> <span class=p>=</span> structured<span class=p>.</span>multitile_size <span class=nv>%target</span>
+                     <span class=p>{</span> <span class=nl>target_size =</span> <span class=m>42</span><span class=p>,</span> <span class=nl>dimension =</span> <span class=m>0</span> <span class=p>}</span>
+<span class=nv>%sz3r</span><span class=p>,</span> <span class=nv>%sz4r</span><span class=p>,</span> <span class=nv>%splitr</span> <span class=p>=</span> replicate num<span class=p>(</span><span class=nv>%common</span><span class=p>)</span> <span class=nv>%sz3</span><span class=p>,</span> <span class=nv>%sz4</span><span class=p>,</span> <span class=nv>%splitr</span>
+structured<span class=p>.</span>split <span class=nv>%common</span> after <span class=nv>%splitr</span> <span class=p>{</span> <span class=nl>dimension =</span> <span class=m>0</span> <span class=p>}</span>
+<span class=c>// ...
+</span></code></pre></div><p>Traits: TransformEachOpTrait</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-17>Attributes:&nbsp;<a class=headline-hash href=#attributes-17>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>dimension</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>target_size</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>divisor</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-27>Operands:&nbsp;<a class=headline-hash href=#operands-27>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-22>Results:&nbsp;<a class=headline-hash href=#results-22>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>low_size</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>high_size</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>split_point</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredpad-mlirtransformpadop><code>transform.structured.pad</code> (::mlir::transform::PadOp)&nbsp;<a class=headline-hash href=#transformstructuredpad-mlirtransformpadop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.pad` $target attr-dict
+</code></pre><p>Pads the operations pointed to by the target handle using the options
+provides as operation attributes.</p><h4 id=return-modes-9>Return modes&nbsp;<a class=headline-hash href=#return-modes-9>¶</a></h4><p>This operation ignores non-Linalg ops and drops them in the return.
+This operation may produce a definiteFailure if the padding fails for any
+reason.
+If all the operations referred to by the <code>target</code> PDLOperation pad
+properly, the transform succeeds. Otherwise the transform silently fails.
+The return handle points to only the subset of successfully produced
+padded operations, which can be empty.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-18>Attributes:&nbsp;<a class=headline-hash href=#attributes-18>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>padding_values</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>array attribute</td></tr><tr><td style=text-align:center><code>padding_dimensions</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>pack_paddings</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>hoist_paddings</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>transpose_paddings</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>array of arrays of i64</td></tr></tbody></table><h4 id=operands-28>Operands:&nbsp;<a class=headline-hash href=#operands-28>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-23>Results:&nbsp;<a class=headline-hash href=#results-23>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredpromote-mlirtransformpromoteop><code>transform.structured.promote</code> (::mlir::transform::PromoteOp)&nbsp;<a class=headline-hash href=#transformstructuredpromote-mlirtransformpromoteop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.promote` $target attr-dict
+</code></pre><p>Promotes the specified operands of the target into a separate memory buffer.</p><p>At this point, this transform does not allow customizing alloc/dealloc
+functions nor the behavior on copy in/out operations.</p><h4 id=return-modes-10>Return modes&nbsp;<a class=headline-hash href=#return-modes-10>¶</a></h4><p>This operation applies to a single Linalg op that satisfies the
+<code>promoteSubviewsPrecondition</code>, otherwise it fails.</p><p>If the operations referred to by the <code>target</code> PDLOperation promote
+properly, the transform succeeds.</p><p>When successful, the return handle points to the $target operation that
+was modified inplace.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-19>Attributes:&nbsp;<a class=headline-hash href=#attributes-19>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>operands_to_promote</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>use_full_tile_buffers</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>1-bit boolean array attribute</td></tr><tr><td style=text-align:center><code>use_full_tiles_by_default</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>use_alloca</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>alignment</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-29>Operands:&nbsp;<a class=headline-hash href=#operands-29>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-24>Results:&nbsp;<a class=headline-hash href=#results-24>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredscalarize-mlirtransformscalarizeop><code>transform.structured.scalarize</code> (::mlir::transform::ScalarizeOp)&nbsp;<a class=headline-hash href=#transformstructuredscalarize-mlirtransformscalarizeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.scalarize` $target attr-dict
+</code></pre><p>Indicates that ops of a specific kind in the given function should be
+scalarized (i.e. their dynamic dimensions tiled by 1).</p><h4 id=return-modes-11>Return modes:&nbsp;<a class=headline-hash href=#return-modes-11>¶</a></h4><p>This operation ignores non-Linalg ops and drops them in the return.
+This operation produces <code>definiteFailure</code> if the scalarization fails for any
+reason.
+If all the operations referred to by the <code>target</code> PDLOperation scalarize
+properly, the transform succeeds. Otherwise the transform silently fails.</p><p>The return handle points to only the subset of successfully produced
+tiled-by-1 operations, which can be empty.</p><p>This operation does not return handles to the tiled loop.
+We make this design choice because it is hard to know ahead of time the
+number of loops that will be produced (it depends on the number of dynamic
+dimensions after multiple transformations have been applied).
+Loops can always be recovered by navigating from the tiled operations if
+needed.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=operands-30>Operands:&nbsp;<a class=headline-hash href=#operands-30>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-25>Results:&nbsp;<a class=headline-hash href=#results-25>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>result</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredsplit-mlirtransformsplitop><code>transform.structured.split</code> (::mlir::transform::SplitOp)&nbsp;<a class=headline-hash href=#transformstructuredsplit-mlirtransformsplitop>¶</a></h3><p>Indicates that the given <code>target</code> op should be split into two complementary
+parts, which combined cover the entire iteration domain of the original op.
+The split is performed along the iteration space dimension provided as
+attribute. In case of dimension overflow, the transformation fails. The
+split is performed at the dimension iterator value specified as either the
+static split point attribute when it is known at transform IR construction
+time or as the handle to an operation producing a single index-typed value
+when it is computed by payload IR. In the latter case, the static split
+point must be set to <code>ShapedType::kDynamicSize</code> and the dynamic size handle
+must point to as many value-producing operations as there are structured
+operations pointed to by the target handle.</p><p>The operation consumes the target handle, but preserves the split point
+handle if provided. It produces two new handles pointing to the two parts
+of the structured op after splitting, in the same order as the target
+operand, with the first handle corresponding to the part with lower
+iteration space indices.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-20>Attributes:&nbsp;<a class=headline-hash href=#attributes-20>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>dimension</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>static_split_point</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr></tbody></table><h4 id=operands-31>Operands:&nbsp;<a class=headline-hash href=#operands-31>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>dynamic_split_point</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-26>Results:&nbsp;<a class=headline-hash href=#results-26>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>first</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>second</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredsplit_reduction-mlirtransformsplitreductionop><code>transform.structured.split_reduction</code> (::mlir::transform::SplitReductionOp)&nbsp;<a class=headline-hash href=#transformstructuredsplit_reduction-mlirtransformsplitreductionop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.split_reduction` $target attr-dict
+</code></pre><p>Indicates that the given <code>target</code> op should be transformed with the
+<code>splitReduction</code> transformation and split factor provided as attribute.</p><p>The <code>splitReduction</code> transformation splits the first single linalg op
+reduction into a parallel and reduction dimension.
+A new <code>linalg.generic</code> op is created to perform the rest of the reduction.</p><p>The transformation supports different configurations attributes:</p><ul><li>split_factor: the factor by which to split (i.e. the size of the
+remaining reduction after splitting).</li><li>insert_split_dimension: the dimension in the temporary tensor into
+which the new parallel dimension is inserted.</li><li>inner_parallel: specifies whether the parallel dimension is before or
+after the reduction dimension in the splitting op.</li><li>use_scaling_algorithm: whether to use a scaling based formulation that
+does not create an ExpandShapeOp (default: do not use scaling)</li><li>use_alloc: whether to use an alloc op to allocate the temporary
+tensor (default: do not use alloc op)</li></ul><h4 id=return-modes-12>Return modes&nbsp;<a class=headline-hash href=#return-modes-12>¶</a></h4><p>This operation ignores non-Linalg ops and drops them in the return.
+This operation produces <code>definiteFailure</code> if the splitting fails for any
+reason.</p><p>If all the operations referred to by the <code>target</code> PDLOperation split
+properly, the transform succeeds. Otherwise the transform silently fails.
+The 4 returned handles points to only the subset of successfully produced
+computational operations, which can all be empty.
+This 4 returned handles point to:</p><ul><li>the init op (or tensor_alloc op if use_alloc = true),</li><li>the fill op used to initialize the neutral element,</li><li>the split op and</li><li>the result-combining op.</li></ul><h4 id=example-default-use_scaling_algorithm--false-use_alloc--false>Example (default: <code>use_scaling_algorithm = false, use_alloc = false</code>):&nbsp;<a class=headline-hash href=#example-default-use_scaling_algorithm--false-use_alloc--false>¶</a></h4><pre><code>  %r = linalg.generic {indexing_maps = [affine_map&lt;(d0) -&gt; (d0)&gt;,
+                                        affine_map&lt;(d0) -&gt; ()&gt;],
+        iterator_types = [&quot;reduction&quot;]}
+  ins(%in : tensor&lt;32xf32&gt;)
+  outs(%out : tensor&lt;f32&gt;) {
+  ^bb0(%arg1: f32, %arg2: f32):
+    %y = arith.addf %arg1, %arg2 : f32
+    linalg.yield %y : f32
+  } -&gt; tensor&lt;f32&gt;
+</code></pre><p>is split into:</p><pre><code>  %cst = arith.constant 0.000000e+00 : f32
+  %0 = tensor.expand_shape %in [[0, 1]] : tensor&lt;32xf32&gt; into tensor&lt;4x8xf32&gt;
+  %1 = tensor.empty() : tensor&lt;4xf32&gt;
+  %2 = linalg.fill ins(%cst : f32) outs(%1 : tensor&lt;4xf32&gt;) -&gt; tensor&lt;4xf32&gt;
+  %3 = linalg.generic {indexing_maps = [affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;,
+                                        affine_map&lt;(d0, d1) -&gt; (d0)&gt;],
+    iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]}
+    ins(%0 : tensor&lt;4x8xf32&gt;) outs(%2 : tensor&lt;4xf32&gt;) {
+    ^bb0(%arg3: f32, %arg5: f32):
+    %5 = arith.addf %arg3, %arg4 : f32
+    linalg.yield %5 : f32
+  } -&gt; tensor&lt;4xf32&gt;
+  %r = linalg.generic {indexing_maps = [affine_map&lt;(d0) -&gt; (d0)&gt;,
+                                        affine_map&lt;(d0) -&gt; ()&gt;],
+    iterator_types = [&quot;reduction&quot;]}
+    ins(%3 : tensor&lt;4xf32&gt;) outs(%out : tensor&lt;f32&gt;) {
+    ^bb0(%arg3: f32, %arg4: f32):
+    %5 = arith.addf %arg3, %arg4 : f32
+    linalg.yield %5 : f32
+  } -&gt; tensor&lt;f32&gt;
+</code></pre><h4 id=example-use_scaling_algorithm--true-use_alloc--true>Example (<code>use_scaling_algorithm = true, use_alloc = true</code>):&nbsp;<a class=headline-hash href=#example-use_scaling_algorithm--true-use_alloc--true>¶</a></h4><p>Instead of introducing an ExpandShapeOp, this scaling-based implementation
+rewrites a reduction dimension <code>k</code> into <code>k * split_factor + kk</code>.
+The dimension <code>kk</code> is added as an extra parallel dimension to the
+intermediate output tensor at position <code>insert_split_dimension</code>.</p><p>Consider a minimal example where <code>k</code> is reduced:
+O(i, j) += I(i, j, k)
+Assume i=3, j=5, k=128, split_factor=16 and insert_split_dimension=0.
+The compute is rewritten as:
+a. O_i(kk, i, j) += I(i, j, 16 * k + kk)
+b. O(i, j) += O_i(kk, i, j)
+The intermediate tensor O_i is of shape (128/16)x3x5 == 8x3x5.</p><h4 id=example-1>Example:&nbsp;<a class=headline-hash href=#example-1>¶</a></h4><pre><code> %0 = linalg.matmul ins(%A, %B: tensor&lt;16x256xf32&gt;, tensor&lt;256x32xf32&gt;)
+   outs(%C: tensor&lt;16x32xf32&gt;) -&gt; tensor&lt;16x32xf32&gt;
+</code></pre><p>Is transformed to:</p><pre><code> #map0 = affine_map&lt;(d0, d1, d2, d3) -&gt; (d0, d2 * 4 + d3)&gt;
+ #map1 = affine_map&lt;(d0, d1, d2, d3) -&gt; (d2 * 4 + d3, d1)&gt;
+ #map2 = affine_map&lt;(d0, d1, d2, d3) -&gt; (d2, d3)&gt;
+ #map3 = affine_map&lt;(d0, d1, d2, d3) -&gt; (d0, d1, d2)&gt;
+ #map4 = affine_map&lt;(d0, d1, d2) -&gt; (d0, d1, d2)&gt;
+ #map5 = affine_map&lt;(d0, d1, d2) -&gt; (d0, d1)&gt;
+ %0 = tensor.empty() : tensor&lt;16x32x64xf32&gt;
+ %cst = arith.constant 0.000000e+00 : f32
+ %1 = linalg.fill ins(%cst : f32) outs(%0 : tensor&lt;16x32x64xf32&gt;) -&gt;
+    tensor&lt;16x32x64xf32&gt;
+ %2 = tensor.empty() : tensor&lt;64x4xi1&gt;
+
+ %3 = linalg.generic {indexing_maps = [#map0, #map1, #map2, #map3],
+   iterator_types = [&quot;parallel&quot;, &quot;parallel&quot;, &quot;parallel&quot;, &quot;reduction&quot;]}
+   ins(%A, %B, %2 : tensor&lt;16x256xf32&gt;, tensor&lt;256x32xf32&gt;, tensor&lt;64x4xi1&gt;)
+   outs(%1 : tensor&lt;16x32x64xf32&gt;) {
+     ^bb0(%arg3: f32, %arg4: f32, %arg5: i1, %arg6: f32):
+       %5 = arith.mulf %arg3, %arg4 : f32
+       %6 = arith.addf %arg6, %5 : f32
+       linalg.yield %6 : f32
+ } -&gt; tensor&lt;16x32x64xf32&gt;
+
+ %4 = linalg.generic {indexing_maps = [#map4, #map5],
+   iterator_types = [&quot;parallel&quot;, &quot;parallel&quot;, &quot;reduction&quot;]}
+   ins(%3 : tensor&lt;16x32x64xf32&gt;)
+   outs(%C : tensor&lt;16x32xf32&gt;) {
+     ^bb0(%arg3: f32, %arg4: f32):
+       %5 = arith.addf %arg3, %arg4 : f32
+       linalg.yield %5 : f32
+ } -&gt; tensor&lt;16x32xf32&gt;
+
+ return %4 : tensor&lt;16x32xf32&gt;
+</code></pre><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-21>Attributes:&nbsp;<a class=headline-hash href=#attributes-21>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>split_factor</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>insert_split_dimension</code></td><td style=text-align:center>::mlir::IntegerAttr</td><td>64-bit signless integer attribute</td></tr><tr><td style=text-align:center><code>inner_parallel</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>use_scaling_algorithm</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>use_alloc</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr></tbody></table><h4 id=operands-32>Operands:&nbsp;<a class=headline-hash href=#operands-32>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-27>Results:&nbsp;<a class=headline-hash href=#results-27>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>init_or_alloc_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>fill_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>split_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>combining_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredtile-mlirtransformtileop><code>transform.structured.tile</code> (::mlir::transform::TileOp)&nbsp;<a class=headline-hash href=#transformstructuredtile-mlirtransformtileop>¶</a></h3><p>Indicates that the given <code>target</code> op should be tiled with the given sizes.
+This transform generates a loop nest with a smaller (&ldquo;tiled&rdquo;) target
+operation in its body. Currently limited to LinalgOps.</p><p>Tile sizes may be known at transformation time, in which case they are
+expected to be provided in the <code>static_size</code> attribute, or not, in which
+case the tile value must be computed by the payload IR and the handle to the
+operation computing it must be provided through <code>dynamic_sizes</code>. When the
+sizes are not known statically, the corresponding entry in the
+<code>static_sizes</code> attribute must be set to <code>ShapedType::kDynamicSize</code>. Only
+the dynamic sizes must be provided in <code>dynamic_sizes</code>, i.e., there should
+be as many handles as <code>ShapedType::kDynamicSize</code> values in the
+<code>static_sizes</code> attribute. A static size of <code>0</code> indicates that the dimension
+should not be tiled. No loop will be generated for such dimensions. If all
+tile sizes are <code>0</code>, this transform is effectively a no-op.</p><p>This op returns handles to the tiled op (in the generated loop nest) and the
+generated loops. The number of loops is the number of tile sizes that are
+statically known to be non-zero.</p><h4 id=return-modes-13>Return modes&nbsp;<a class=headline-hash href=#return-modes-13>¶</a></h4><p>On success, the resulting handles are associated with co-indexed lists of
+tiled operations and loops around them.</p><p>This operation only supports Linalg ops and produces a silenceable failure
+if the input contains any non-Linalg ops. The ops preceding it in the list
+associated with the <code>target</code> handle will have been tiled.</p><p>This operation produces a silenceable failure if the <code>dynamic_sizes</code> handles
+are associated with lists of payload operations of a size different than
+that of the list associated with the <code>target</code> handle.</p><p>If the internal implementation of tiling for any of the operations fails,
+produces a definite failure.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-22>Attributes:&nbsp;<a class=headline-hash href=#attributes-22>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>static_sizes</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>interchange</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-33>Operands:&nbsp;<a class=headline-hash href=#operands-33>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>dynamic_sizes</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-28>Results:&nbsp;<a class=headline-hash href=#results-28>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>tiled_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>loops</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredtile_reduction_using_foreach_thread-mlirtransformtilereductionusingforeachthreadop><code>transform.structured.tile_reduction_using_foreach_thread</code> (::mlir::transform::TileReductionUsingForeachThreadOp)&nbsp;<a class=headline-hash href=#transformstructuredtile_reduction_using_foreach_thread-mlirtransformtilereductionusingforeachthreadop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.tile_reduction_using_foreach_thread` $target attr-dict
+</code></pre><p>Tile a PartialReductionOpInterface op to a tiled <code>scf.foreach_thread</code> doing
+partial reduction.</p><p>This transformation tiles the <code>target</code> along the reduction dimensions. It
+creates a tensor initialized with the identity value. Then it creates a
+<code>scf.foreach_thread</code> loops with the number threads given by <code>num_threads</code>.
+The op is tiled op with a size equal to <code>floordiv(size, num_threads)</code>.
+All the partial reduction value is are parallel inserted to create a new
+tensor. After the loop a merge operation is created to do a final reduction
+with the partial reductions tensor.</p><h4 id=return-modes-14>Return modes&nbsp;<a class=headline-hash href=#return-modes-14>¶</a></h4><p>This 3 returned handles point to:</p><ul><li>the fill op used to initialize the neutral element,</li><li>the parallel tiled op and</li><li>the result-combining op.</li></ul><h4 id=example-2>Example:&nbsp;<a class=headline-hash href=#example-2>¶</a></h4><pre><code>  %red = linalg.generic {indexing_maps = [affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;,
+                                          affine_map&lt;(d0, d1) -&gt; (d0)&gt;],
+  iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]}
+  ins(%arg0 : tensor&lt;?x?xf32&gt;)
+  outs(%out : tensor&lt;?xf32&gt;) {
+    ^bb0(%arg7: f32, %arg9: f32):
+    %1 = arith.addf %arg7, %arg9 : f32
+    linalg.yield %1 : f32
+  } -&gt; tensor&lt;?xf32&gt;
+  return %red : tensor&lt;?xf32&gt;
+</code></pre><p>is transformed into:</p><pre><code>  %0 = tensor.empty(%dim_1) : tensor&lt;?x5xf32&gt;
+  %1 = linalg.fill ins(%cst : f32) outs(%0 : tensor&lt;?x5xf32&gt;) -&gt; tensor&lt;?x5xf32&gt;
+  %2 = scf.foreach_thread (%arg2) in (%c5) shared_outs(%arg3 = %1) -&gt; (tensor&lt;?x5xf32&gt;) {
+    %4 = affine.min #map(%arg2)[%dim_0]
+    %5 = affine.max #map1(%4)
+    %extracted_slice = tensor.extract_slice %arg3[0, %arg2] [%dim, 1] [1, 1] : tensor&lt;?x5xf32&gt; to tensor&lt;?xf32&gt;
+    %6 = affine.apply #map2(%arg2)[%dim_0]
+    %extracted_slice_2 = tensor.extract_slice %arg0[0, %6] [%dim, %5] [1, 1] : tensor&lt;?x?xf32&gt; to tensor&lt;?x?xf32&gt;
+    %extracted_slice_3 = tensor.extract_slice %extracted_slice[0] [%dim] [1] : tensor&lt;?xf32&gt; to tensor&lt;?xf32&gt;
+    %7 = linalg.generic {indexing_maps = [#map3, #map4], iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]} ins(%extracted_slice_2 : tensor&lt;?x?xf32&gt;) outs(%extracted_slice_3 : tensor&lt;?xf32&gt;) {
+    ^bb0(%in: f32, %out: f32):
+      %9 = arith.addf %in, %out : f32
+      linalg.yield %9 : f32
+    } -&gt; tensor&lt;?xf32&gt;
+    scf.foreach_thread.perform_concurrently {
+      tensor.parallel_insert_slice %7 into %arg3[0, %arg2] [%dim, 1] [1, 1] : tensor&lt;?xf32&gt; into tensor&lt;?x5xf32&gt;
+    }
+  } {thread_dim_mapping = []}
+  %3 = linalg.generic {indexing_maps = [#map3, #map4], iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]} ins(%2 : tensor&lt;?x5xf32&gt;) outs(%arg1 : tensor&lt;?xf32&gt;) {
+  ^bb0(%in: f32, %out: f32):
+    %4 = arith.addf %in, %out : f32
+    linalg.yield %4 : f32
+  } -&gt; tensor&lt;?xf32&gt;
+</code></pre><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-23>Attributes:&nbsp;<a class=headline-hash href=#attributes-23>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>num_threads</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-34>Operands:&nbsp;<a class=headline-hash href=#operands-34>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-29>Results:&nbsp;<a class=headline-hash href=#results-29>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>fill_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>split_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>combining_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredtile_reduction_using_scf-mlirtransformtilereductionusingscfop><code>transform.structured.tile_reduction_using_scf</code> (::mlir::transform::TileReductionUsingScfOp)&nbsp;<a class=headline-hash href=#transformstructuredtile_reduction_using_scf-mlirtransformtilereductionusingscfop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.tile_reduction_using_scf` $target attr-dict
+</code></pre><p>Indicates that the given <code>target</code> op should be transformed with the
+<code>tileReduction</code> transformation with the tile size provided as attribute.</p><p>This transformation tiles the <code>target</code> along the reduction dimensions. It
+creates a tensor initialized with the identity value. Then it creates nested
+loops with a parallel version of <code>target</code> op inside. The parallel op
+dimensions are less or equal to the tile size passed by user.
+After the loop a merge operation is created to do a final reduction with the
+partial reductions.
+The initial tensor always uses the tile size dimension. This may overallocate
+if the tile size is greater than the reduction dimension.</p><h4 id=return-modes-15>Return modes&nbsp;<a class=headline-hash href=#return-modes-15>¶</a></h4><p>This 3 returned handles point to:</p><ul><li>the fill op used to initialize the neutral element,</li><li>the parallel tiled op and</li><li>the result-combining op.</li></ul><h4 id=example-3>Example:&nbsp;<a class=headline-hash href=#example-3>¶</a></h4><pre><code>  %red = linalg.generic {indexing_maps = [affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;,
+                                          affine_map&lt;(d0, d1) -&gt; (d0)&gt;],
+  iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]}
+  ins(%arg0 : tensor&lt;?x?xf32&gt;)
+  outs(%out : tensor&lt;?xf32&gt;) {
+    ^bb0(%arg7: f32, %arg9: f32):
+    %1 = arith.addf %arg7, %arg9 : f32
+    linalg.yield %1 : f32
+  } -&gt; tensor&lt;?xf32&gt;
+  return %red : tensor&lt;?xf32&gt;
+</code></pre><p>is transformed into:</p><pre><code>  %0 = tensor.empty(%dim_1) : tensor&lt;?x5xf32&gt;
+  %1 = linalg.fill ins(%cst : f32) outs(%0 : tensor&lt;?x5xf32&gt;) -&gt; tensor&lt;?x5xf32&gt;
+  %2 = scf.for %arg2 = %c0 to %dim_0 step %c5 iter_args(%arg3 = %1) -&gt; (tensor&lt;?x5xf32&gt;) {
+    %extracted_slice = tensor.extract_slice %1[0, 0] [%dim, 5] [1, 1] : tensor&lt;?x5xf32&gt; to tensor&lt;?x5xf32&gt;
+    %extracted_slice_2 = tensor.extract_slice %arg0[0, %arg2] [%dim, 5] [1, 1] : tensor&lt;?x?xf32&gt; to tensor&lt;?x5xf32&gt;
+    %4 = linalg.generic {indexing_maps = [affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;, 
+                                          affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;],
+    iterator_types = [&quot;parallel&quot;, &quot;parallel&quot;]}
+    ins(%extracted_slice_2 : tensor&lt;?x5xf32&gt;)
+    outs(%extracted_slice : tensor&lt;?x5xf32&gt;) {
+    ^bb0(%in: f32, %out: f32):
+      %5 = arith.addf %in, %out : f32
+      linalg.yield %5 : f32
+    } -&gt; tensor&lt;?x5xf32&gt;
+    %dim_3 = tensor.dim %1, %c0 : tensor&lt;?x5xf32&gt;
+    %inserted_slice = tensor.insert_slice %4 into %arg3[0, 0] [%dim_3, 5] [1, 1] : tensor&lt;?x5xf32&gt; into tensor&lt;?x5xf32&gt;
+    scf.yield %inserted_slice : tensor&lt;?x5xf32&gt;
+  }
+  %3 = linalg.generic {indexing_maps = [affine_map&lt;(d0, d1) -&gt; (d0, d1)&gt;,
+                                        affine_map&lt;(d0, d1) -&gt; (d0)&gt;],
+  iterator_types = [&quot;parallel&quot;, &quot;reduction&quot;]}
+  ins(%2 : tensor&lt;?x5xf32&gt;)
+  outs(%arg1 : tensor&lt;?xf32&gt;) {
+  ^bb0(%in: f32, %out: f32):
+    %4 = arith.addf %in, %out : f32
+    linalg.yield %4 : f32
+  } -&gt; tensor&lt;?xf32&gt;
+</code></pre><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-24>Attributes:&nbsp;<a class=headline-hash href=#attributes-24>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>tile_sizes</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-35>Operands:&nbsp;<a class=headline-hash href=#operands-35>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-30>Results:&nbsp;<a class=headline-hash href=#results-30>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>fill_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>split_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>combining_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredtile_to_foreach_thread_op-mlirtransformtiletoforeachthreadop><code>transform.structured.tile_to_foreach_thread_op</code> (::mlir::transform::TileToForeachThreadOp)&nbsp;<a class=headline-hash href=#transformstructuredtile_to_foreach_thread_op-mlirtransformtiletoforeachthreadop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.tile_to_foreach_thread_op` $target oilist(
+              `num_threads` custom&lt;DynamicIndexList&gt;($num_threads,
+              $static_num_threads,
+              &quot;ShapedType::kDynamicSize&quot;) |
+              `tile_sizes` custom&lt;DynamicIndexList&gt;($tile_sizes,
+              $static_tile_sizes,
+              &quot;ShapedType::kDynamicSize&quot;))
+              (`(` `mapping` `=` $mapping^ `)`)? attr-dict
+</code></pre><p>Tile a TilingInterface op to a tiled <code>scf.foreach_thread</code>.</p><p>Tiling is applied by either specifying <code>num_threads</code> or <code>tile_size</code>. If
+<code>num_threads</code> is specified, then the tile size for each dimension <code>i</code> is
+calculated dynamically via <code>ceilDiv(dimSize[i], num_threads[i])</code>.
+<code>num_threads</code> and <code>tile_size</code> can be either static index attributes or SSA
+values of PDL operation handle type (or a mix thereof). Operation handles
+must be mapped to exactly one op that has exactly one result of index type.</p><p>Static zero tile sizes indicate that the dimension is not tiled and can be
+thought of as tiling by the full size of data.</p><p>It is the user&rsquo;s responsibility to ensure that <code>num_threads/tile_sizes</code> is
+a valid tiling specification (i.e. that only tiles parallel dimensions,
+e.g. in the Linalg case).</p><p>If non-empty, the <code>mapping</code> is added as an attribute to the
+resulting <code>scf.foreach_thread</code>.</p><p>Note: <code>tile_sizes</code> and <code>num_threads</code> are variadic. Each tile size/number of
+threads can be an index attribute or a transform handle that is mapped to
+exactly one payload op with exactly one index result.</p><h4 id=return-modes-16>Return modes&nbsp;<a class=headline-hash href=#return-modes-16>¶</a></h4><p>This operation ignores ops that do not implement the TilingInterface and
+drops them in the return.</p><p>If all the operations referred to by the <code>target</code> PDLOperation tile
+successfully, the transform succeeds.
+Otherwise the transform silently fails.</p><p>The two returned handles point to only the subset of successfully produced
+tiled operations, which can all be empty.</p><p>These two returned handles point to:</p><ul><li>the new scf.foreach_thread op,</li><li>the tiled op that implements TilingInterface.</li></ul><h4 id=example-using-num_threads>Example using <code>num_threads</code>&nbsp;<a class=headline-hash href=#example-using-num_threads>¶</a></h4><pre><code>%0 = pdl_match @match_matmul in %arg1
+%3:2 = transform.structured.tile_to_foreach_thread_op %0 num_threads [10, 20]
+</code></pre><h4 id=example-using-tile_sizes>Example using <code>tile_sizes</code>&nbsp;<a class=headline-hash href=#example-using-tile_sizes>¶</a></h4><pre><code>%0 = pdl_match @match_matmul in %arg1
+%sz = pdl_match @match_size_op in %arg1
+%3:2 = transform.structured.tile_to_foreach_thread_op %0 tile_sizes [0, %sz, 20]
+</code></pre><p>Traits: AttrSizedOperandSegments</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-25>Attributes:&nbsp;<a class=headline-hash href=#attributes-25>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>static_num_threads</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>static_tile_sizes</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>mapping</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>Device Mapping array attribute</td></tr></tbody></table><h4 id=operands-36>Operands:&nbsp;<a class=headline-hash href=#operands-36>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>num_threads</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>tile_sizes</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-31>Results:&nbsp;<a class=headline-hash href=#results-31>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>foreach_thread_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>tiled_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredtile_to_scf_for-mlirtransformtiletoscfforop><code>transform.structured.tile_to_scf_for</code> (::mlir::transform::TileToScfForOp)&nbsp;<a class=headline-hash href=#transformstructuredtile_to_scf_for-mlirtransformtiletoscfforop>¶</a></h3><p>Indicates that the given <code>target</code> op should be tiled with the given sizes.
+This transform generates a loop nest with a smaller (&ldquo;tiled&rdquo;) target
+operation in its body. The target must implement TilingInterface.</p><p>Tile sizes may be known at transformation time, in which case they are
+expected to be provided in the <code>static_size</code> attribute, or not, in which
+case the tile value must be computed by the payload IR and the handle to the
+operation computing it must be provided through <code>dynamic_sizes</code>. When the
+sizes are not known statically, the corresponding entry in the
+<code>static_sizes</code> attribute must be set to <code>ShapedType::kDynamicSize</code>. Only
+the dynamic sizes must be provided in <code>dynamic_sizes</code>, i.e., there should
+be as many handles as <code>ShapedType::kDynamicSize</code> values in the
+<code>static_sizes</code> attribute. A static size of <code>0</code> indicates that the dimension
+should not be tiled. No loop will be generated for such dimensions. If all
+tile sizes are <code>0</code>, this transform is effectively a no-op.</p><p>This op returns handles to the tiled op (in the generated loop nest) and the
+generated loops. The number of loops is the number of tile sizes that are
+statically known to be non-zero.</p><h4 id=return-modes-17>Return modes&nbsp;<a class=headline-hash href=#return-modes-17>¶</a></h4><p>On success, the resulting handles are associated with co-indexed lists of
+tiled operations and loops around them.</p><p>This operation only supports TilingInterface ops and produces a silenceable
+failure if the input contains any non-TilingInterface ops. The ops preceding
+it in the list associated with the <code>target</code> handle will have been tiled.</p><p>This operation produces a silenceable failure if the <code>dynamic_sizes</code> handles
+are associated with lists of payload operations of a size different than
+that of the list associated with the <code>target</code> handle.</p><p>If the internal implementation of tiling for any of the operations fails,
+produces a definite failure.</p><p>Interfaces: MemoryEffectOpInterface, TransformOpInterface</p><h4 id=attributes-26>Attributes:&nbsp;<a class=headline-hash href=#attributes-26>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>static_sizes</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr><tr><td style=text-align:center><code>interchange</code></td><td style=text-align:center>::mlir::ArrayAttr</td><td>64-bit integer array attribute</td></tr></tbody></table><h4 id=operands-37>Operands:&nbsp;<a class=headline-hash href=#operands-37>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>dynamic_sizes</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-32>Results:&nbsp;<a class=headline-hash href=#results-32>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>tiled_linalg_op</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr><tr><td style=text-align:center><code>loops</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h3 id=transformstructuredvectorize-mlirtransformvectorizeop><code>transform.structured.vectorize</code> (::mlir::transform::VectorizeOp)&nbsp;<a class=headline-hash href=#transformstructuredvectorize-mlirtransformvectorizeop>¶</a></h3><p>Syntax:</p><pre><code>operation ::= `transform.structured.vectorize` $target attr-dict
+</code></pre><p>Indicates that the given <code>target</code> op all the ops it contains should be
+vectorized with the configuration specified by the attributes of this op.
+This vectorization only handles structured ops that operate on shaped types
+and does not vectorize loops or straight-line. Internally, it applies a
+set of rewrite patterns, some of which enable vectorization and some of
+which clean up the results. Therefore, it can only be applied to an op with
+the &ldquo;isolated from above property&rdquo;. If finer granularity is required, it can
+be achieved by outlining the target part of the payload IR into, e.g., a
+function, performing the transformation, and inlining it back. This
+transformation only fails if the entire pattern rewriting failed, i.e., it
+does <strong>not</strong> fail when no ops were vectorized.</p><p>Note that this transformation is invalidating the handles to any payload IR
+operation that is contained inside the vectorization target.</p><p>This transformation supports the following attributes:</p><ul><li><code>vectorize_padding</code>: a UnitAttr to activate the vectorization of
+<code>tensor.pad</code> ops. Different pipelines may prefer to lower such ops to
+loops.</li><li><code>disable_multi_reduction_to_contract_patterns</code>: a UnitAttr to deactivate
+the rewrite of <code>vector.multi_reduction</code> to <code>vector.contract</code>. This is
+intended to be used in tests only.</li><li><code>disable_transfer_permutation_map_lowering_patterns</code>: a UnitAttr to
+deactivate the rewrite of <code>vector.transfer</code> with permutation maps into
+explicit <code>vector.transpose</code> operations. This is intended to be used in
+tests only but may be promotoed to a first class attribute in the future.</li></ul><h4 id=return-modes-18>Return modes:&nbsp;<a class=headline-hash href=#return-modes-18>¶</a></h4><p>This operation produces <code>definiteFailure</code> if vectorization fails for any
+reason.
+The operation always returns the handle to the target op that is expected
+to be isolated from above.</p><p>Traits: FunctionalStyleTransformOpTrait, TransformEachOpTrait</p><p>Interfaces: MemoryEffectsOpInterface, TransformOpInterface</p><h4 id=attributes-27>Attributes:&nbsp;<a class=headline-hash href=#attributes-27>¶</a></h4><table><thead><tr><th style=text-align:center>Attribute</th><th style=text-align:center>MLIR Type</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>vectorize_padding</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>disable_multi_reduction_to_contract_patterns</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr><tr><td style=text-align:center><code>disable_transfer_permutation_map_lowering_patterns</code></td><td style=text-align:center>::mlir::UnitAttr</td><td>unit attribute</td></tr></tbody></table><h4 id=operands-38>Operands:&nbsp;<a class=headline-hash href=#operands-38>¶</a></h4><table><thead><tr><th style=text-align:center>Operand</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>target</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h4 id=results-33>Results:&nbsp;<a class=headline-hash href=#results-33>¶</a></h4><table><thead><tr><th style=text-align:center>Result</th><th>Description</th></tr></thead><tbody><tr><td style=text-align:center><code>transformed</code></td><td>PDL handle to an <code>mlir::Operation *</code></td></tr></tbody></table><h2 id=transformtypeinterface-transformtypeinterface>TransformTypeInterface (<code>TransformTypeInterface</code>)&nbsp;<a class=headline-hash href=#transformtypeinterface-transformtypeinterface>¶</a></h2><p>Types that can be used for Transform dialect handle values. Such types
+define the properties of Payload IR operations associated with the handle.
+A user of such a handle can assume that these properties have been verified
+for any Payload IR operation associated with it.</p><h3 id=methods>Methods:&nbsp;<a class=headline-hash href=#methods>¶</a></h3><h4 id=checkpayload><code>checkPayload</code>&nbsp;<a class=headline-hash href=#checkpayload>¶</a></h4><div class=highlight><pre class=chroma><code class=language-c++ data-lang=c++><span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>DiagnosedSilenceableFailure</span> <span class=n>checkPayload</span><span class=p>(</span><span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>Location</span> <span class=n>loc</span><span class=p>,</span> <span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>ArrayRef</span><span class=o>&lt;::</span><span class=n>mlir</span><span class=o>::</span><span class=n>Operation</span> <span class=o>*&gt;</span> <span class=n>payload</span><span class=p>);</span>
+</code></pre></div><p>Checks if the given list of associated Payload IR operations satisfy
+the conditions defined by this type. If not, produces a silenceable
+error at the specified location.</p><p>NOTE: This method <em>must</em> be implemented by the user.</p><h2 id=transformopinterface-transformopinterface>TransformOpInterface (<code>TransformOpInterface</code>)&nbsp;<a class=headline-hash href=#transformopinterface-transformopinterface>¶</a></h2><p>This interface is to be implemented by operations that identify
+transformations to be performed on other operations. The former are referred
+to as transform IR operations. The latter are referred to as payload IR
+operations. Such transform IR operations provide a fine-grain control
+mechanism over how transformations are applied by using and defining
+transform IR values, referred to as handles, that correspond to sets of
+operations in the payload IR. Transformations are applied starting from the
+operations identified by handles, but may affect other operations as well.
+Further restrictions may be imposed by flows that rely on transform IR
+operations to control transformations.</p><h3 id=methods-1>Methods:&nbsp;<a class=headline-hash href=#methods-1>¶</a></h3><h4 id=apply><code>apply</code>&nbsp;<a class=headline-hash href=#apply>¶</a></h4><div class=highlight><pre class=chroma><code class=language-c++ data-lang=c++><span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>DiagnosedSilenceableFailure</span> <span class=n>apply</span><span class=p>(</span><span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>transform</span><span class=o>::</span><span class=n>TransformResults</span> <span class=o>&amp;</span><span class=n>transformResults</span><span class=p>,</span> <span class=o>::</span><span class=n>mlir</span><span class=o>::</span><span class=n>transform</span><span class=o>::</span><span class=n>TransformState</span> <span class=o>&amp;</span><span class=n>state</span><span class=p>);</span>
+</code></pre></div><p>Applies the transformation represented by the current operation. This
+accepts as arguments the object that must be populated with results of
+the current transformation and a transformation state object that can be
+used for queries, e.g., to obtain the list of operations on which the
+transformation represented by the current op is targeted. Returns a
+special status object indicating whether the transformation succeeded
+or failed, and, if it failed, whether the failure is recoverable or not.</p><p>NOTE: This method <em>must</em> be implemented by the user.</p><div class=edit-meta><br></div><nav class=pagination><a class="nav nav-prev" href=/docs/Dialects/TOSA/ title="Tensor Operator Set Architecture (TOSA) Dialect"><i class="fas fa-arrow-left" aria-hidden=true></i>Prev - Tensor Operator Set Architecture (TOSA) Dialect</a>
+<a class="nav nav-next" href=/docs/Interfaces/ title=Interfaces>Next - Interfaces <i class="fas fa-arrow-right" aria-hidden=true></i></a></nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p></footer></main><div class=sidebar><nav class=slide-menu><ul><li><a href=https://mlir.llvm.org/>Home</a></li><li><a href=/pubs/>MLIR Related Publications</a></li><li><a href=/talks/>Talks</a></li><li><a href=/users/>Users of MLIR</a></li><li class=has-sub-menu><a href=/getting_started/>Getting Started<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/getting_started/ReportingIssues/>Reporting Issues</a></li><li><a href=/getting_started/Debugging/>Debugging Tips</a></li><li><a href=/getting_started/Faq/>FAQ</a></li><li><a href=/getting_started/Contributing/>How to Contribute</a></li><li><a href=/getting_started/DeveloperGuide/>Developer Guide</a></li><li><a href=/getting_started/openprojects/>Open Projects</a></li><li><a href=/getting_started/Glossary/>Glossary</a></li><li><a href=/getting_started/TestingGuide/>Testing Guide</a></li></ul></li><li class="parent has-sub-menu"><a href=/docs/>Code Documentation<span class="mark opened">-</span></a><ul class=sub-menu><li class=has-sub-menu><a href=/docs/Bindings/>Bindings<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Bindings/Python/>MLIR Python Bindings</a></li></ul></li><li class=has-sub-menu><a href=/docs/Tools/>Tools<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Tools/MLIRLSP/>MLIR : Language Server Protocol</a></li><li><a href=/docs/Tools/mlir-reduce/>MLIR Reduce</a></li></ul></li><li><a href=/docs/NVGPUPasses/></a></li><li><a href=/docs/BufferDeallocationInternals/>Buffer Deallocation - Internals</a></li><li><a href=/docs/Bufferization/>Bufferization</a></li><li><a href=/docs/DataLayout/>Data Layout Modeling</a></li><li><a href=/docs/DebugActions/>Debug Actions</a></li><li><a href=/docs/AttributesAndTypes/>Defining Dialect Attributes and Types</a></li><li><a href=/docs/DefiningDialects/>Defining Dialects</a></li><li><a href=/docs/Diagnostics/>Diagnostic Infrastructure</a></li><li><a href=/docs/DialectConversion/>Dialect Conversion</a></li><li class="parent has-sub-menu"><a href=/docs/Dialects/>Dialects<span class="mark opened">-</span></a><ul class=sub-menu><li><a href=/docs/Dialects/MemRefTransformOps/></a></li><li><a href=/docs/Dialects/OpenACCDialect/>'acc' Dialect</a></li><li><a href=/docs/Dialects/Affine/>'affine' Dialect</a></li><li><a href=/docs/Dialects/AMDGPU/>'amdgpu' Dialect</a></li><li><a href=/docs/Dialects/AMX/>'amx' Dialect</a></li><li><a href=/docs/Dialects/ArithOps/>'arith' Dialect</a></li><li><a href=/docs/Dialects/ArmNeon/>'arm_neon' Dialect</a></li><li><a href=/docs/Dialects/ArmSVE/>'arm_sve' Dialect</a></li><li><a href=/docs/Dialects/AsyncDialect/>'async' Dialect</a></li><li><a href=/docs/Dialects/BufferizationOps/>'bufferization' Dialect</a></li><li><a href=/docs/Dialects/ControlFlowDialect/>'cf' Dialect</a></li><li><a href=/docs/Dialects/ComplexOps/>'complex' Dialect</a></li><li><a href=/docs/Dialects/DLTIDialect/>'dlti' Dialect</a></li><li><a href=/docs/Dialects/EmitC/>'emitc' Dialect</a></li><li><a href=/docs/Dialects/Func/>'func' Dialect</a></li><li><a href=/docs/Dialects/GPU/>'gpu' Dialect</a></li><li><a href=/docs/Dialects/IndexOps/>'index' Dialect</a></li><li class=has-sub-menu><a href=/docs/Dialects/Linalg/>'linalg' Dialect<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Dialects/Linalg/OpDSL/>Linalg OpDSL</a></li></ul></li><li><a href=/docs/Dialects/LLVM/>'llvm' Dialect</a></li><li><a href=/docs/Dialects/MathOps/>'math' Dialect</a></li><li><a href=/docs/Dialects/MemRef/>'memref' Dialect</a></li><li><a href=/docs/Dialects/MLProgramOps/>'ml_program' Dialect</a></li><li><a href=/docs/Dialects/NVGPU/>'nvgpu' Dialect</a></li><li><a href=/docs/Dialects/NVVMDialect/>'nvvm' Dialect</a></li><li><a href=/docs/Dialects/OpenMPDialect/>'omp' Dialect</a></li><li><a href=/docs/Dialects/PDLOps/>'pdl' Dialect</a></li><li><a href=/docs/Dialects/PDLInterpOps/>'pdl_interp' Dialect</a></li><li><a href=/docs/Dialects/QuantDialect/>'quant' Dialect</a></li><li><a href=/docs/Dialects/ROCDLDialect/>'rocdl' Dialect</a></li><li><a href=/docs/Dialects/SCFDialect/>'scf' Dialect</a></li><li><a href=/docs/Dialects/ShapeDialect/>'shape' Dialect</a></li><li><a href=/docs/Dialects/SparseTensorOps/>'sparse_tensor' Dialect</a></li><li><a href=/docs/Dialects/TensorOps/>'tensor' Dialect</a></li><li><a href=/docs/Dialects/Vector/>'vector' Dialect</a></li><li><a href=/docs/Dialects/X86Vector/>'x86vector' Dialect</a></li><li><a href=/docs/Dialects/Builtin/>Builtin Dialect</a></li><li><a href=/docs/Dialects/SPIR-V/>SPIR-V Dialect</a></li><li><a href=/docs/Dialects/TOSA/>Tensor Operator Set Architecture (TOSA) Dialect</a></li><li class=active><a href=/docs/Dialects/Transform/>Transform Dialect</a></li></ul></li><li><a href=/docs/Interfaces/>Interfaces</a></li><li><a href=/docs/TargetLLVMIR/>LLVM IR Target</a></li><li><a href=/docs/BytecodeFormat/>MLIR Bytecode Format</a></li><li><a href=/docs/CAPI/>MLIR C API</a></li><li><a href=/docs/LangRef/>MLIR Language Reference</a></li><li><a href=/docs/Canonicalization/>Operation Canonicalization</a></li><li><a href=/docs/OpDefinitions/>Operation Definition Specification (ODS)</a></li><li><a href=/docs/PassManagement/>Pass Infrastructure</a></li><li><a href=/docs/Passes/>Passes</a></li><li><a href=/docs/PatternRewriter/>Pattern Rewriting : Generic DAG-to-DAG Rewriting</a></li><li><a href=/docs/PDLL/>PDLL - PDL Language</a></li><li><a href=/docs/Quantization/>Quantization</a></li><li class=has-sub-menu><a href=/docs/Rationale/>Rationale<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Rationale/RationaleGenericDAGRewriter/>Generic DAG Rewriter Infrastructure Rationale</a></li><li><a href=/docs/Rationale/RationaleLinalgDialect/>Linalg Dialect Rationale: The Case For Compiler-Friendly Custom Operations</a></li><li><a href=/docs/Rationale/Rationale/>MLIR Rationale</a></li><li><a href=/docs/Rationale/MLIRForGraphAlgorithms/>MLIR: Incremental Application to Graph Algorithms in ML Frameworks</a></li><li><a href=/docs/Rationale/RationaleSimplifiedPolyhedralForm/>MLIR: The case for a simplified polyhedral form</a></li><li><a href=/docs/Rationale/SideEffectsAndSpeculation/>Side Effects & Speculation</a></li><li><a href=/docs/Rationale/UsageOfConst/>Usage of 'const' in MLIR, for core IR types</a></li></ul></li><li><a href=/docs/ShapeInference/>Shape Inference</a></li><li><a href=/docs/SPIRVToLLVMDialectConversion/>SPIR-V Dialect to LLVM Dialect conversion manual</a></li><li><a href=/docs/SymbolsAndSymbolTables/>Symbols and Symbol Tables</a></li><li><a href=/docs/DeclarativeRewrites/>Table-driven Declarative Rewrite Rule (DRR)</a></li><li><a href=/docs/Traits/>Traits</a></li><li class=has-sub-menu><a href=/docs/Tutorials/>Tutorials<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Tutorials/CreatingADialect/>Creating a Dialect</a></li><li><a href=/docs/Tutorials/QuickstartRewrites/>Quickstart tutorial to adding MLIR graph rewrite</a></li><li class=has-sub-menu><a href=/docs/Tutorials/Toy/>Toy Tutorial<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=/docs/Tutorials/Toy/Ch-1/>Chapter 1: Toy Language and AST</a></li><li><a href=/docs/Tutorials/Toy/Ch-2/>Chapter 2: Emitting Basic MLIR</a></li><li><a href=/docs/Tutorials/Toy/Ch-3/>Chapter 3: High-level Language-Specific Analysis and Transformation</a></li><li><a href=/docs/Tutorials/Toy/Ch-4/>Chapter 4: Enabling Generic Transformation with Interfaces</a></li><li><a href=/docs/Tutorials/Toy/Ch-5/>Chapter 5: Partial Lowering to Lower-Level Dialects for Optimization</a></li><li><a href=/docs/Tutorials/Toy/Ch-6/>Chapter 6: Lowering to LLVM and CodeGeneration</a></li><li><a href=/docs/Tutorials/Toy/Ch-7/>Chapter 7: Adding a Composite Type to Toy</a></li></ul></li><li><a href=/docs/Tutorials/UnderstandingTheIRStructure/>Understanding the IR Structure</a></li><li><a href=/docs/Tutorials/DataFlowAnalysis/>Writing DataFlow Analyses in MLIR</a></li></ul></li></ul></li></ul></nav><div class=sidebar-footer></div></div></div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20><span class="fa-layers fa-fw"><i class="fas fa-circle"></i><i class="fas fa-arrow-circle-up"></i></span></a></div></body></html>

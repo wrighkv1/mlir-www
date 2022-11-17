@@ -1,0 +1,5 @@
+<map id="mlir::lsp::CompletionList" name="mlir::lsp::CompletionList">
+<area shape="rect" id="node1" title="Represents a collection of completion items to be presented in the editor." alt="" coords="5,109,187,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="11,13,61,39"/>
+<area shape="rect" id="node3" title=" " alt="" coords="86,5,229,47"/>
+</map>

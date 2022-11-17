@@ -1,0 +1,52 @@
+<map id="lib/Dialect/SparseTensor/Transforms/SparseTensorConversion.cpp" name="lib/Dialect/SparseTensor/Transforms/SparseTensorConversion.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="3099,5,3387,47"/>
+<area shape="rect" id="node2" href="$CodegenUtils_8h.html" title=" " alt="" coords="899,191,1020,218"/>
+<area shape="rect" id="node16" href="$Enums_8h.html" title=" " alt="" coords="5,363,193,404"/>
+<area shape="rect" id="node18" href="$mlir_2Dialect_2SparseTensor_2IR_2SparseTensor_8h.html" title=" " alt="" coords="493,273,681,315"/>
+<area shape="rect" id="node21" href="$BufferizableOpInterface_8h.html" title=" " alt="" coords="5063,363,5272,404"/>
+<area shape="rect" id="node26" href="$Bufferization_8h.html" title=" " alt="" coords="3151,273,3336,315"/>
+<area shape="rect" id="node31" href="$Dialect_2Linalg_2Utils_2Utils_8h.html" title=" " alt="" coords="3439,95,3581,136"/>
+<area shape="rect" id="node35" href="$mlir_2Dialect_2SCF_2IR_2SCF_8h.html" title=" " alt="" coords="3739,273,3883,315"/>
+<area shape="rect" id="node44" href="$MemRef_8h.html" title=" " alt="" coords="1731,273,1889,315"/>
+<area shape="rect" id="node48" href="$Dialect_2SparseTensor_2Transforms_2Passes_8h.html" title=" " alt="" coords="4553,95,4741,136"/>
+<area shape="rect" id="node49" href="$DialectConversion_8h.html" title=" " alt="" coords="4518,191,4777,218"/>
+<area shape="rect" id="node50" href="$mlir_2Dialect_2Tensor_2IR_2Tensor_8h.html" title=" " alt="" coords="2193,273,2337,315"/>
+<area shape="rect" id="node3" href="$Arith_8h.html" title=" " alt="" coords="1237,273,1370,315"/>
+<area shape="rect" id="node7" href="$Builders_8h.html" title=" " alt="" coords="3121,541,3256,568"/>
+<area shape="rect" id="node11" href="$Complex_8h.html" title=" " alt="" coords="879,273,1039,315"/>
+<area shape="rect" id="node12" href="$FuncOps_8h.html" title=" " alt="" coords="706,273,855,315"/>
+<area shape="rect" id="node15" href="$LLVMDialect_8h.html" title=" " alt="" coords="1063,273,1213,315"/>
+<area shape="rect" id="node19" href="$ReshapeOpsUtils_8h.html" title=" " alt="" coords="2953,363,3102,404"/>
+<area shape="rect" id="node4" href="$IR_2Dialect_8h.html" title=" " alt="" coords="717,370,844,397"/>
+<area shape="rect" id="node5" href="$CastInterfaces_8h.html" title=" " alt="" coords="1697,370,1923,397"/>
+<area shape="rect" id="node6" href="$InferTypeOpInterface_8h.html" title=" " alt="" coords="869,363,1050,404"/>
+<area shape="rect" id="node10" href="$SideEffectInterfaces_8h.html" title=" " alt="" coords="1074,363,1261,404"/>
+<area shape="rect" id="node8" href="$mlir_2IR_2BuiltinTypes_8h.html" title=" " alt="" coords="1986,459,2146,486"/>
+<area shape="rect" id="node9" href="$mlir_2Support_2LLVM_8h.html" title=" " alt="" coords="2951,459,3103,486"/>
+<area shape="rect" id="node13" href="$CallInterfaces_8h.html" title=" " alt="" coords="471,370,693,397"/>
+<area shape="rect" id="node14" href="$ControlFlowInterfaces_8h.html" title=" " alt="" coords="1948,363,2147,404"/>
+<area shape="rect" id="node17" title=" " alt="" coords="58,459,141,486"/>
+<area shape="rect" id="node20" href="$PatternMatch_8h.html" title=" " alt="" coords="4860,459,5027,486"/>
+<area shape="rect" id="node22" href="$IR_2Operation_8h.html" title=" " alt="" coords="5308,459,5453,486"/>
+<area shape="rect" id="node23" title=" " alt="" coords="5477,459,5636,486"/>
+<area shape="rect" id="node24" title=" " alt="" coords="5661,452,5866,493"/>
+<area shape="rect" id="node25" title=" " alt="" coords="5051,452,5283,493"/>
+<area shape="rect" id="node27" href="$AllocationOpInterface_8h.html" title=" " alt="" coords="3403,452,3599,493"/>
+<area shape="rect" id="node28" href="$CopyOpInterface_8h.html" title=" " alt="" coords="2483,370,2726,397"/>
+<area shape="rect" id="node29" title=" " alt="" coords="3126,363,3358,404"/>
+<area shape="rect" id="node30" title=" " alt="" coords="3587,363,3774,404"/>
+<area shape="rect" id="node32" href="$DependenceAnalysis_8h.html" title=" " alt="" coords="3284,184,3517,225"/>
+<area shape="rect" id="node33" href="$mlir_2Dialect_2Linalg_2IR_2Linalg_8h.html" title=" " alt="" coords="2455,273,2597,315"/>
+<area shape="rect" id="node42" title=" " alt="" coords="4820,281,4987,307"/>
+<area shape="rect" id="node43" title=" " alt="" coords="3542,191,3699,218"/>
+<area shape="rect" id="node34" href="$ViewLikeInterface_8h.html" title=" " alt="" coords="2750,363,2929,404"/>
+<area shape="rect" id="node36" href="$DeviceMappingInterface_8h.html" title=" " alt="" coords="3950,363,4147,404"/>
+<area shape="rect" id="node37" href="$RegionKindInterface_8h.html" title=" " alt="" coords="4171,370,4385,397"/>
+<area shape="rect" id="node38" href="$LoopLikeInterface_8h.html" title=" " alt="" coords="4409,363,4587,404"/>
+<area shape="rect" id="node39" href="$ParallelCombiningOpInterface_8h.html" title=" " alt="" coords="3383,363,3563,404"/>
+<area shape="rect" id="node40" title=" " alt="" coords="4611,363,4769,404"/>
+<area shape="rect" id="node41" title=" " alt="" coords="4793,363,4937,404"/>
+<area shape="rect" id="node45" href="$ShapedOpInterfaces_8h.html" title=" " alt="" coords="2171,363,2358,404"/>
+<area shape="rect" id="node46" title=" " alt="" coords="1285,363,1489,404"/>
+<area shape="rect" id="node47" title=" " alt="" coords="1513,363,1672,404"/>
+</map>

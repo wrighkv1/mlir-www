@@ -1,0 +1,9 @@
+<map id="include/mlir/Target/SPIRV/Serialization.h" name="include/mlir/Target/SPIRV/Serialization.h">
+<area shape="rect" id="node1" title=" " alt="" coords="317,5,479,47"/>
+<area shape="rect" id="node2" href="$ConvertGPULaunchFuncToVulkanLaunchFunc_8cpp.html" title=" " alt="" coords="5,95,289,151"/>
+<area shape="rect" id="node3" href="$Serialization_8cpp.html" title=" " alt="" coords="177,199,387,240"/>
+<area shape="rect" id="node4" href="$Serializer_8h.html" title=" " alt="" coords="365,102,575,143"/>
+<area shape="rect" id="node7" href="$SPIRV_2TranslateRegistration_8cpp.html" title=" " alt="" coords="599,102,786,143"/>
+<area shape="rect" id="node5" href="$SerializeOps_8cpp.html" title=" " alt="" coords="411,199,620,240"/>
+<area shape="rect" id="node6" href="$Serializer_8cpp.html" title=" " alt="" coords="644,199,853,240"/>
+</map>

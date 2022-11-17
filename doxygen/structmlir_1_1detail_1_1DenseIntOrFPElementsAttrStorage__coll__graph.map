@@ -1,0 +1,11 @@
+<map id="mlir::detail::DenseIntOrFPElementsAttrStorage" name="mlir::detail::DenseIntOrFPElementsAttrStorage">
+<area shape="rect" id="node1" title="An attribute representing a reference to a dense vector or tensor object." alt="" coords="815,141,989,183"/>
+<area shape="rect" id="node2" href="$structmlir_1_1detail_1_1DenseElementsAttributeStorage.html" title="An attribute representing a reference to a dense vector or tensor object." alt="" coords="485,67,688,108"/>
+<area shape="rect" id="node3" href="$classmlir_1_1AttributeStorage.html" title="Base storage class appearing in an attribute." alt="" coords="212,13,375,39"/>
+<area shape="rect" id="node4" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="5,5,163,47"/>
+<area shape="rect" id="node5" title=" " alt="" coords="243,63,343,90"/>
+<area shape="rect" id="node6" title=" " alt="" coords="268,114,319,141"/>
+<area shape="rect" id="node7" href="$classllvm_1_1ArrayRef.html" title=" " alt="" coords="499,154,674,181"/>
+<area shape="rect" id="node8" href="$classllvm_1_1ArrayRef.html" title=" " alt="" coords="216,165,371,191"/>
+<area shape="rect" id="node9" title=" " alt="" coords="507,209,666,235"/>
+</map>

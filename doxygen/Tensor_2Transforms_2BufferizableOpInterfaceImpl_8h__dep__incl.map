@@ -1,0 +1,7 @@
+<map id="include/mlir/Dialect/Tensor/Transforms/BufferizableOpInterfaceImpl.h" name="include/mlir/Dialect/Tensor/Transforms/BufferizableOpInterfaceImpl.h">
+<area shape="rect" id="node1" title=" " alt="" coords="222,5,449,61"/>
+<area shape="rect" id="node2" href="$InitAllDialects_8h.html" title=" " alt="" coords="5,124,212,151"/>
+<area shape="rect" id="node4" href="$Tensor_2Transforms_2BufferizableOpInterfaceImpl_8cpp.html" title=" " alt="" coords="236,109,435,165"/>
+<area shape="rect" id="node5" href="$Tensor_2Transforms_2Bufferize_8cpp.html" title=" " alt="" coords="459,117,646,158"/>
+<area shape="rect" id="node3" href="$CAPI_2RegisterEverything_2RegisterEverything_8cpp.html" title=" " alt="" coords="9,213,209,255"/>
+</map>

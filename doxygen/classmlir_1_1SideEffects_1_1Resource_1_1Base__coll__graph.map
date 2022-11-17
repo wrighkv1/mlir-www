@@ -1,0 +1,4 @@
+<map id="mlir::SideEffects::Resource::Base&lt; DerivedResource, BaseResource &gt;" name="mlir::SideEffects::Resource::Base&lt; DerivedResource, BaseResource &gt;">
+<area shape="rect" id="node1" title="This base class is used for derived effects that are non&#45;parametric." alt="" coords="5,95,257,151"/>
+<area shape="rect" id="node2" href="$classmlir_1_1SideEffects_1_1Resource.html" title="This class represents a specific resource that an effect applies to." alt="" coords="63,5,199,47"/>
+</map>

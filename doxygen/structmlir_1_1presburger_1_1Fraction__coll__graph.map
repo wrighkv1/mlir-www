@@ -1,0 +1,6 @@
+<map id="mlir::presburger::Fraction" name="mlir::presburger::Fraction">
+<area shape="rect" id="node1" title="A class to represent fractions." alt="" coords="16,213,203,240"/>
+<area shape="rect" id="node2" href="$classmlir_1_1presburger_1_1MPInt.html" title="This class provides support for multi&#45;precision arithmetic." alt="" coords="24,109,195,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,13,72,39"/>
+<area shape="rect" id="node4" href="$classmlir_1_1presburger_1_1detail_1_1SlowMPInt.html" title="A simple class providing multi&#45;precision arithmetic." alt="" coords="96,5,267,47"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="mlir::DefaultTimingManager" name="mlir::DefaultTimingManager">
+<area shape="rect" id="node1" title="Facilities for time measurement and report printing to an output stream." alt="" coords="5,185,212,212"/>
+<area shape="rect" id="node2" href="$classmlir_1_1TimingManager.html" title="This class represents facilities to measure execution time." alt="" coords="29,109,188,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="20,5,197,47"/>
+</map>

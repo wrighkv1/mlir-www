@@ -1,0 +1,52 @@
+<map id="lib/Transforms/SymbolDCE.cpp" name="lib/Transforms/SymbolDCE.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="2749,5,2970,32"/>
+<area shape="rect" id="node2" href="$Transforms_2Passes_8h.html" title=" " alt="" coords="2767,80,2951,107"/>
+<area shape="rect" id="node32" title=" " alt="" coords="2923,244,3129,271"/>
+<area shape="rect" id="node37" href="$SymbolTable_8h.html" title=" " alt="" coords="461,80,625,107"/>
+<area shape="rect" id="node3" href="$include_2mlir_2Pass_2Pass_8h.html" title=" " alt="" coords="1484,162,1611,189"/>
+<area shape="rect" id="node31" href="$LocationSnapshot_8h.html" title=" " alt="" coords="2461,155,2644,196"/>
+<area shape="rect" id="node33" href="$ViewOpGraph_8h.html" title=" " alt="" coords="2669,162,2898,189"/>
+<area shape="rect" id="node35" title=" " alt="" coords="2973,162,3135,189"/>
+<area shape="rect" id="node36" title=" " alt="" coords="3159,162,3218,189"/>
+<area shape="rect" id="node4" href="$AnalysisManager_8h.html" title=" " alt="" coords="2027,244,2235,271"/>
+<area shape="rect" id="node22" href="$PassRegistry_8h.html" title=" " alt="" coords="1553,319,1731,345"/>
+<area shape="rect" id="node24" href="$LogicalResult_8h.html" title=" " alt="" coords="1850,468,2055,495"/>
+<area shape="rect" id="node29" title=" " alt="" coords="203,393,387,420"/>
+<area shape="rect" id="node30" title=" " alt="" coords="1327,244,1477,271"/>
+<area shape="rect" id="node5" href="$IR_2Operation_8h.html" title=" " alt="" coords="648,319,793,345"/>
+<area shape="rect" id="node12" href="$PassInstrumentation_8h.html" title=" " alt="" coords="2179,393,2409,420"/>
+<area shape="rect" id="node13" href="$mlir_2Support_2LLVM_8h.html" title=" " alt="" coords="2115,550,2267,577"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1632,550,1823,577"/>
+<area shape="rect" id="node19" title=" " alt="" coords="2145,319,2312,345"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1756,319,1923,345"/>
+<area shape="rect" id="node21" title=" " alt="" coords="1947,319,2121,345"/>
+<area shape="rect" id="node6" href="$Block_8h.html" title=" " alt="" coords="1286,393,1403,420"/>
+<area shape="rect" id="node7" href="$OperationSupport_8h.html" title=" " alt="" coords="622,393,817,420"/>
+<area shape="rect" id="node11" title=" " alt="" coords="463,393,597,420"/>
+<area shape="rect" id="node8" href="$IR_2Types_8h.html" title=" " alt="" coords="415,468,533,495"/>
+<area shape="rect" id="node9" title=" " alt="" coords="383,543,565,584"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1478,468,1555,495"/>
+<area shape="rect" id="node17" href="$TypeID_8h.html" title=" " alt="" coords="1603,468,1766,495"/>
+<area shape="rect" id="node14" title=" " alt="" coords="2037,632,2169,659"/>
+<area shape="rect" id="node15" title=" " alt="" coords="2194,632,2365,659"/>
+<area shape="rect" id="node16" title=" " alt="" coords="1479,632,1541,659"/>
+<area shape="rect" id="node23" href="$PassOptions_8h.html" title=" " alt="" coords="1927,393,2103,420"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1317,468,1404,495"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1785,393,1845,420"/>
+<area shape="rect" id="node26" title=" " alt="" coords="2354,468,2511,495"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1876,550,2029,577"/>
+<area shape="rect" id="node34" title=" " alt="" coords="2692,244,2899,271"/>
+<area shape="rect" id="node38" href="$IR_2Attributes_8h.html" title=" " alt="" coords="5,244,151,271"/>
+<area shape="rect" id="node42" href="$OpDefinition_8h.html" title=" " alt="" coords="369,162,531,189"/>
+<area shape="rect" id="node48" title=" " alt="" coords="556,162,715,189"/>
+<area shape="rect" id="node49" title=" " alt="" coords="739,162,903,189"/>
+<area shape="rect" id="node50" title=" " alt="" coords="75,162,294,189"/>
+<area shape="rect" id="node39" href="$AttributeSupport_8h.html" title=" " alt="" coords="436,319,624,345"/>
+<area shape="rect" id="node40" href="$MLIRContext_8h.html" title=" " alt="" coords="841,393,1005,420"/>
+<area shape="rect" id="node41" href="$StorageUniquerSupport_8h.html" title=" " alt="" coords="1030,393,1262,420"/>
+<area shape="rect" id="node43" href="$IR_2Dialect_8h.html" title=" " alt="" coords="1123,244,1249,271"/>
+<area shape="rect" id="node47" title=" " alt="" coords="268,244,360,271"/>
+<area shape="rect" id="node44" href="$DialectRegistry_8h.html" title=" " alt="" coords="1249,319,1427,345"/>
+<area shape="rect" id="node45" title=" " alt="" coords="1558,393,1609,420"/>
+<area shape="rect" id="node46" title=" " alt="" coords="1479,393,1533,420"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="mlir::PassWrapper&lt; PassT, BaseT &gt;" name="mlir::PassWrapper&lt; PassT, BaseT &gt;">
+<area shape="rect" id="node1" title="This class provides a CRTP wrapper around a base pass class to define several necessary utility metho..." alt="" coords="117,54,268,95"/>
+<area shape="rect" id="node3" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="561,5,721,61"/>
+<area shape="rect" id="node5" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="525,85,756,141"/>
+<area shape="rect" id="node2" href="$classBaseT.html" title=" " alt="" coords="5,61,68,88"/>
+<area shape="rect" id="node4" href="$classmlir_1_1detail_1_1OpToOpPassAdaptor.html" title="An adaptor pass used to run operation passes over nested operations." alt="" coords="807,13,987,54"/>
+<area shape="rect" id="node6" href="$classmlir_1_1sparse__tensor_1_1BufferizeDenseOpsPass.html" title="A pass that bufferizes only dense tensor ops and ignores all sparse tensor ops." alt="" coords="805,93,988,134"/>
+</map>

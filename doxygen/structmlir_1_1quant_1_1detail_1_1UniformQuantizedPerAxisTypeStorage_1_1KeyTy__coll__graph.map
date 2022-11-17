@@ -1,0 +1,12 @@
+<map id="mlir::quant::detail::UniformQuantizedPerAxisTypeStorage::KeyTy" name="mlir::quant::detail::UniformQuantizedPerAxisTypeStorage::KeyTy">
+<area shape="rect" id="node1" title=" " alt="" coords="872,129,1100,185"/>
+<area shape="rect" id="node2" href="$classmlir_1_1Type.html" title="Instances of the Type class are uniqued, have an immutable identifier and an optional mutable compone..." alt="" coords="547,13,633,40"/>
+<area shape="rect" id="node3" href="$classmlir_1_1TypeStorage.html" title="Base storage class appearing in a Type." alt="" coords="221,13,357,40"/>
+<area shape="rect" id="node4" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="5,6,163,47"/>
+<area shape="rect" id="node5" title=" " alt="" coords="557,71,623,97"/>
+<area shape="rect" id="node6" title=" " alt="" coords="557,121,623,148"/>
+<area shape="rect" id="node7" href="$classllvm_1_1ArrayRef.html" title=" " alt="" coords="495,172,685,199"/>
+<area shape="rect" id="node8" href="$classllvm_1_1ArrayRef.html" title=" " alt="" coords="212,197,367,224"/>
+<area shape="rect" id="node9" href="$classllvm_1_1ArrayRef.html" title=" " alt="" coords="495,223,685,249"/>
+<area shape="rect" id="node10" title=" " alt="" coords="549,273,631,300"/>
+</map>

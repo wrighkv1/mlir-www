@@ -1,0 +1,11 @@
+<map id="mlir::FlatAffineRelation" name="mlir::FlatAffineRelation">
+<area shape="rect" id="node1" title="A FlatAffineRelation represents a set of ordered pairs (domain &#45;&gt; range) where &quot;domain&quot; and &quot;range&quot; a..." alt="" coords="1487,55,1660,81"/>
+<area shape="rect" id="node2" href="$classmlir_1_1FlatAffineValueConstraints.html" title="FlatAffineValueConstraints represents an extension of IntegerPolyhedron where each non&#45;local variable..." alt="" coords="1208,87,1437,113"/>
+<area shape="rect" id="node3" href="$classmlir_1_1presburger_1_1IntegerPolyhedron.html" title="An IntegerPolyhedron represents the set of points from a PresburgerSpace that satisfy a list of affin..." alt="" coords="932,153,1112,194"/>
+<area shape="rect" id="node4" href="$classmlir_1_1presburger_1_1IntegerRelation.html" title="An IntegerRelation represents the set of points from a PresburgerSpace that satisfy a list of affine ..." alt="" coords="551,147,731,189"/>
+<area shape="rect" id="node5" href="$classmlir_1_1presburger_1_1Matrix.html" title="This is a class to represent a resizable matrix." alt="" coords="235,80,411,107"/>
+<area shape="rect" id="node6" href="$classmlir_1_1presburger_1_1PresburgerSpace.html" title="PresburgerSpace is the space of all possible values of a tuple of integer valued variables/variables." alt="" coords="221,131,425,173"/>
+<area shape="rect" id="node7" title=" " alt="" coords="5,139,87,165"/>
+<area shape="rect" id="node8" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="943,72,1101,128"/>
+<area shape="rect" id="node9" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="567,79,715,121"/>
+</map>

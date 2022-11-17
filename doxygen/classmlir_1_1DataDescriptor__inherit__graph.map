@@ -1,0 +1,4 @@
+<map id="mlir::DataDescriptor" name="mlir::DataDescriptor">
+<area shape="rect" id="node1" title="Helper class to produce LLVM dialect operations inserting elements to a Data descriptor." alt="" coords="5,80,160,107"/>
+<area shape="rect" id="node2" href="$classmlir_1_1StructBuilder.html" title="Helper class to produce LLVM dialect operations extracting or inserting values to a struct." alt="" coords="13,5,153,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="mlir::sparse_tensor::BufferizeDenseOpsPass" name="mlir::sparse_tensor::BufferizeDenseOpsPass">
+<area shape="rect" id="node1" title="A pass that bufferizes only dense tensor ops and ignores all sparse tensor ops." alt="" coords="75,305,258,347"/>
+<area shape="rect" id="node2" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="51,200,282,256"/>
+<area shape="rect" id="node3" href="$classmlir_1_1OperationPass.html" title="Pass to transform an operation of a specific type." alt="" coords="5,81,155,123"/>
+<area shape="rect" id="node4" href="$classmlir_1_1Pass.html" title="The abstract base pass class." alt="" coords="37,5,123,32"/>
+<area shape="rect" id="node5" href="$classmlir_1_1PassWrapper.html" title="This class provides a CRTP wrapper around a base pass class to define several necessary utility metho..." alt="" coords="179,81,330,123"/>
+<area shape="rect" id="node6" href="$classBaseT.html" title=" " alt="" coords="223,5,286,32"/>
+</map>

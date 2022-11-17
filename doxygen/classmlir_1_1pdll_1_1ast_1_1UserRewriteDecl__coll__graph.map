@@ -1,0 +1,9 @@
+<map id="mlir::pdll::ast::UserRewriteDecl" name="mlir::pdll::ast::UserRewriteDecl">
+<area shape="rect" id="node1" title="This decl represents a user defined rewrite." alt="" coords="843,97,1068,124"/>
+<area shape="rect" id="node2" href="$classmlir_1_1pdll_1_1ast_1_1Node_1_1NodeBase.html" title=" " alt="" coords="569,19,793,75"/>
+<area shape="rect" id="node3" href="$classmlir_1_1pdll_1_1ast_1_1Decl.html" title="This class represents the base Decl node." alt="" coords="224,5,369,32"/>
+<area shape="rect" id="node4" href="$classmlir_1_1pdll_1_1ast_1_1Node.html" title="This class represents a base AST node." alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node5" href="$classmlir_1_1pdll_1_1ast_1_1Node_1_1NodeBase.html" title="This CRTP class provides several utilies when defining new AST nodes." alt="" coords="205,57,388,98"/>
+<area shape="rect" id="node6" href="$classBaseT.html" title=" " alt="" coords="49,64,112,91"/>
+<area shape="rect" id="node7" title=" " alt="" coords="578,99,785,155"/>
+</map>

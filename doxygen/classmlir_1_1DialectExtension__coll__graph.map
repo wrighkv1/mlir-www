@@ -1,0 +1,4 @@
+<map id="mlir::DialectExtension&lt; DerivedT, DialectsT &gt;" name="mlir::DialectExtension&lt; DerivedT, DialectsT &gt;">
+<area shape="rect" id="node1" title="This class represents a dialect extension anchored on the given set of dialects." alt="" coords="15,80,195,121"/>
+<area shape="rect" id="node2" href="$classmlir_1_1DialectExtensionBase.html" title="This class represents an opaque dialect extension." alt="" coords="5,5,204,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="mlir::scf::PipeliningOption" name="mlir::scf::PipeliningOption">
+<area shape="rect" id="node1" title="Options to dictate how loops should be pipelined." alt="" coords="361,130,551,157"/>
+<area shape="rect" id="node2" title=" " alt="" coords="24,5,193,76"/>
+<area shape="rect" id="node3" title=" " alt="" coords="83,101,134,127"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,152,212,193"/>
+<area shape="rect" id="node5" title=" " alt="" coords="28,218,189,274"/>
+</map>

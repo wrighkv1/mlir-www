@@ -1,0 +1,9 @@
+<map id="mlir::pdll::ast::detail::OperationTypeStorage" name="mlir::pdll::ast::detail::OperationTypeStorage">
+<area shape="rect" id="node1" title=" " alt="" coords="1228,58,1403,99"/>
+<area shape="rect" id="node2" href="$structmlir_1_1pdll_1_1ast_1_1detail_1_1TypeStorageBase.html" title=" " alt="" coords="936,43,1179,114"/>
+<area shape="rect" id="node3" href="$structmlir_1_1pdll_1_1ast_1_1Type_1_1Storage.html" title=" " alt="" coords="259,70,405,111"/>
+<area shape="rect" id="node6" href="$structmlir_1_1pdll_1_1ast_1_1detail_1_1TypeStorageBase.html" title="A utility CRTP base class that defines many of the necessary utilities for defining a PDLL AST Type." alt="" coords="481,7,708,63"/>
+<area shape="rect" id="node4" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="5,41,163,82"/>
+<area shape="rect" id="node5" href="$classmlir_1_1TypeID.html" title="This class provides an efficient unique identifier for a specific C++ type." alt="" coords="34,107,134,133"/>
+<area shape="rect" id="node7" title=" " alt="" coords="307,9,357,36"/>
+</map>

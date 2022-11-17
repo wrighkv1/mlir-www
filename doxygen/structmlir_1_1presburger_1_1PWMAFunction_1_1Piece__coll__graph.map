@@ -1,0 +1,10 @@
+<map id="mlir::presburger::PWMAFunction::Piece" name="mlir::presburger::PWMAFunction::Piece">
+<area shape="rect" id="node1" title=" " alt="" coords="1236,35,1467,76"/>
+<area shape="rect" id="node2" href="$classmlir_1_1presburger_1_1MultiAffineFunction.html" title="This class represents a multi&#45;affine function with the domain as Z^d, where d is the number of domain..." alt="" coords="919,5,1125,47"/>
+<area shape="rect" id="node3" href="$classmlir_1_1presburger_1_1PresburgerSet.html" title=" " alt="" coords="909,71,1135,98"/>
+<area shape="rect" id="node4" href="$classmlir_1_1presburger_1_1PresburgerRelation.html" title="A PresburgerRelation represents a union of IntegerRelations that live in the same PresburgerSpace wit..." alt="" coords="656,64,860,105"/>
+<area shape="rect" id="node5" href="$classmlir_1_1presburger_1_1PresburgerSpace.html" title="PresburgerSpace is the space of all possible values of a tuple of integer valued variables/variables." alt="" coords="341,27,545,68"/>
+<area shape="rect" id="node6" title=" " alt="" coords="39,34,120,61"/>
+<area shape="rect" id="node7" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="351,93,535,149"/>
+<area shape="rect" id="node8" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="5,100,153,141"/>
+</map>

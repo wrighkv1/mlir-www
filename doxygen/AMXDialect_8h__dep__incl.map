@@ -1,0 +1,9 @@
+<map id="include/mlir/Dialect/AMX/AMXDialect.h" name="include/mlir/Dialect/AMX/AMXDialect.h">
+<area shape="rect" id="node1" title=" " alt="" coords="478,5,627,47"/>
+<area shape="rect" id="node2" href="$InitAllDialects_8h.html" title=" " alt="" coords="5,102,212,129"/>
+<area shape="rect" id="node4" href="$ConvertVectorToLLVMPass_8cpp.html" title=" " alt="" coords="236,95,459,136"/>
+<area shape="rect" id="node5" href="$AMXDialect_8cpp.html" title=" " alt="" coords="483,95,622,136"/>
+<area shape="rect" id="node6" href="$AMX_2Transforms_2LegalizeForLLVMExport_8cpp.html" title=" " alt="" coords="646,95,849,136"/>
+<area shape="rect" id="node7" href="$AMXToLLVMIRTranslation_8cpp.html" title=" " alt="" coords="873,95,1121,136"/>
+<area shape="rect" id="node3" href="$CAPI_2RegisterEverything_2RegisterEverything_8cpp.html" title=" " alt="" coords="9,184,209,225"/>
+</map>

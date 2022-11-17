@@ -1,0 +1,4 @@
+<map id="mlir::OpTrait::detail::MultiRegionTraitBase&lt; ConcreteType, TraitType &gt;" name="mlir::OpTrait::detail::MultiRegionTraitBase&lt; ConcreteType, TraitType &gt;">
+<area shape="rect" id="node1" title="Utility trait base that provides accessors for derived traits that have multiple regions." alt="" coords="5,95,212,151"/>
+<area shape="rect" id="node2" href="$classmlir_1_1OpTrait_1_1TraitBase.html" title="Helper class for implementing traits." alt="" coords="5,5,212,47"/>
+</map>

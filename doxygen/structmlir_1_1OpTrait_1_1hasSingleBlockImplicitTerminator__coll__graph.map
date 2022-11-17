@@ -1,0 +1,4 @@
+<map id="mlir::OpTrait::hasSingleBlockImplicitTerminator&lt; Op, hasTerminator &gt;" name="mlir::OpTrait::hasSingleBlockImplicitTerminator&lt; Op, hasTerminator &gt;">
+<area shape="rect" id="node1" title="Support to check if an operation has the SingleBlockImplicitTerminator trait." alt="" coords="5,95,183,151"/>
+<area shape="rect" id="node2" title=" " alt="" coords="69,5,119,32"/>
+</map>

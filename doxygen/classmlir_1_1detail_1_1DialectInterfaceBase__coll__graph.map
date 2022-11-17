@@ -1,0 +1,4 @@
+<map id="mlir::detail::DialectInterfaceBase&lt; ConcreteType, BaseT &gt;" name="mlir::detail::DialectInterfaceBase&lt; ConcreteType, BaseT &gt;">
+<area shape="rect" id="node1" title="The base class used for all derived interface types." alt="" coords="5,80,225,121"/>
+<area shape="rect" id="node2" href="$classBaseT.html" title=" " alt="" coords="84,5,147,32"/>
+</map>

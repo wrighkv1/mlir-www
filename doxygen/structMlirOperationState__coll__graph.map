@@ -1,0 +1,16 @@
+<map id="MlirOperationState" name="MlirOperationState">
+<area shape="rect" id="node1" title="An auxiliary class for constructing operations." alt="" coords="600,281,745,308"/>
+<area shape="rect" id="node2" href="$structMlirNamedAttribute.html" title="Named MLIR attribute." alt="" coords="220,31,371,57"/>
+<area shape="rect" id="node3" title=" " alt="" coords="6,5,110,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,56,111,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="244,81,347,108"/>
+<area shape="rect" id="node6" title=" " alt="" coords="248,132,343,159"/>
+<area shape="rect" id="node7" title=" " alt="" coords="244,183,347,209"/>
+<area shape="rect" id="node8" title=" " alt="" coords="261,276,330,303"/>
+<area shape="rect" id="node9" title=" " alt="" coords="270,327,321,353"/>
+<area shape="rect" id="node10" title=" " alt="" coords="251,377,339,404"/>
+<area shape="rect" id="node11" title=" " alt="" coords="248,428,343,455"/>
+<area shape="rect" id="node12" href="$structMlirStringRef.html" title="A pointer to a sized fragment of a string, not necessarily null&#45;terminated." alt="" coords="242,479,349,505"/>
+<area shape="rect" id="node13" title=" " alt="" coords="28,453,88,480"/>
+<area shape="rect" id="node14" title=" " alt="" coords="8,504,108,531"/>
+</map>

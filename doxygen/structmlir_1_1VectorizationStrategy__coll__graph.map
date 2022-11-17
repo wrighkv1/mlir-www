@@ -1,0 +1,8 @@
+<map id="mlir::VectorizationStrategy" name="mlir::VectorizationStrategy">
+<area shape="rect" id="node1" title="Holds parameters to perform n&#45;D vectorization on a single loop nest." alt="" coords="884,78,1080,105"/>
+<area shape="rect" id="node2" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="490,5,677,47"/>
+<area shape="rect" id="node3" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="5,39,216,80"/>
+<area shape="rect" id="node4" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="445,71,721,112"/>
+<area shape="rect" id="node5" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="509,136,657,177"/>
+<area shape="rect" id="node6" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="37,136,185,177"/>
+</map>

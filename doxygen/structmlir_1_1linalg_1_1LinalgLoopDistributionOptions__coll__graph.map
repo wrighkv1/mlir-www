@@ -1,0 +1,4 @@
+<map id="mlir::linalg::LinalgLoopDistributionOptions" name="mlir::linalg::LinalgLoopDistributionOptions">
+<area shape="rect" id="node1" title="Options that allow distribution of loops generated in Linalg transforms to processors while generatin..." alt="" coords="352,20,523,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,247,76"/>
+</map>

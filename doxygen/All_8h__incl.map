@@ -1,0 +1,12 @@
+<map id="include/mlir/Target/LLVMIR/Dialect/All.h" name="include/mlir/Target/LLVMIR/Dialect/All.h">
+<area shape="rect" id="node1" title=" " alt="" coords="1306,5,1462,47"/>
+<area shape="rect" id="node2" href="$AMXToLLVMIRTranslation_8h.html" title=" " alt="" coords="5,102,288,143"/>
+<area shape="rect" id="node3" href="$ArmNeonToLLVMIRTranslation_8h.html" title=" " alt="" coords="312,95,528,151"/>
+<area shape="rect" id="node4" href="$ArmSVEToLLVMIRTranslation_8h.html" title=" " alt="" coords="553,102,879,143"/>
+<area shape="rect" id="node5" href="$LLVMToLLVMIRTranslation_8h.html" title=" " alt="" coords="904,102,1208,143"/>
+<area shape="rect" id="node6" href="$NVVMToLLVMIRTranslation_8h.html" title=" " alt="" coords="1233,102,1535,143"/>
+<area shape="rect" id="node7" href="$OpenACCToLLVMIRTranslation_8h.html" title=" " alt="" coords="1560,95,1776,151"/>
+<area shape="rect" id="node8" href="$OpenMPToLLVMIRTranslation_8h.html" title=" " alt="" coords="1800,102,2131,143"/>
+<area shape="rect" id="node9" href="$ROCDLToLLVMIRTranslation_8h.html" title=" " alt="" coords="2155,102,2467,143"/>
+<area shape="rect" id="node10" href="$X86VectorToLLVMIRTranslation_8h.html" title=" " alt="" coords="2491,95,2703,151"/>
+</map>

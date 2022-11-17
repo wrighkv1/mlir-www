@@ -1,0 +1,11 @@
+<map id="mlir::dataflow::IntegerValueRangeLattice" name="mlir::dataflow::IntegerValueRangeLattice">
+<area shape="rect" id="node1" title="This lattice element represents the integer value range of an SSA value." alt="" coords="107,575,308,616"/>
+<area shape="rect" id="node2" href="$classmlir_1_1dataflow_1_1Lattice.html" title=" " alt="" coords="120,484,295,525"/>
+<area shape="rect" id="node3" href="$classmlir_1_1dataflow_1_1AbstractSparseLattice.html" title="This class represents an abstract lattice." alt="" coords="115,289,289,331"/>
+<area shape="rect" id="node9" href="$classmlir_1_1dataflow_1_1Lattice.html" title="This class represents a lattice holding a specific value of type ValueT." alt="" coords="223,380,386,421"/>
+<area shape="rect" id="node4" href="$classmlir_1_1AnalysisState.html" title="Base class for generic analysis states." alt="" coords="129,213,275,240"/>
+<area shape="rect" id="node5" href="$classllvm_1_1SetVector.html" title=" " alt="" coords="5,109,204,151"/>
+<area shape="rect" id="node6" href="$classllvm_1_1SetVector.html" title=" " alt="" coords="15,5,163,47"/>
+<area shape="rect" id="node7" href="$structmlir_1_1ProgramPoint.html" title="Fundamental IR components are supported as first&#45;class program points." alt="" coords="237,117,381,143"/>
+<area shape="rect" id="node8" href="$classllvm_1_1PointerUnion.html" title=" " alt="" coords="247,5,389,47"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="include/mlir/Dialect/Quant/QuantTypes.h" name="include/mlir/Dialect/Quant/QuantTypes.h">
+<area shape="rect" id="node1" title=" " alt="" coords="1059,5,1216,47"/>
+<area shape="rect" id="node2" href="$FakeQuantSupport_8h.html" title=" " alt="" coords="501,95,699,136"/>
+<area shape="rect" id="node10" href="$FakeQuantSupport_8cpp.html" title=" " alt="" coords="379,184,549,225"/>
+<area shape="rect" id="node11" href="$UniformSupport_8h.html" title=" " alt="" coords="724,95,908,136"/>
+<area shape="rect" id="node13" href="$Quant_8cpp.html" title=" " alt="" coords="932,102,1124,129"/>
+<area shape="rect" id="node14" href="$QuantDialectBytecode_8cpp.html" title=" " alt="" coords="1149,95,1347,136"/>
+<area shape="rect" id="node15" href="$QuantOps_8cpp.html" title=" " alt="" coords="1371,95,1519,136"/>
+<area shape="rect" id="node16" href="$QuantTypes_8cpp.html" title=" " alt="" coords="1543,95,1691,136"/>
+<area shape="rect" id="node17" href="$Dialect_2Quant_2IR_2TypeParser_8cpp.html" title=" " alt="" coords="1715,95,1863,136"/>
+<area shape="rect" id="node3" href="$QuantUtils_8h.html" title=" " alt="" coords="574,184,749,225"/>
+<area shape="rect" id="node4" href="$TosaToLinalgNamedPass_8cpp.html" title=" " alt="" coords="5,273,216,315"/>
+<area shape="rect" id="node5" href="$TosaToLinalgPass_8cpp.html" title=" " alt="" coords="241,273,442,315"/>
+<area shape="rect" id="node6" href="$TosaCanonicalizations_8cpp.html" title=" " alt="" coords="467,273,664,315"/>
+<area shape="rect" id="node7" href="$TosaOps_8cpp.html" title=" " alt="" coords="688,273,827,315"/>
+<area shape="rect" id="node8" href="$TosaMakeBroadcastable_8cpp.html" title=" " alt="" coords="851,273,1061,315"/>
+<area shape="rect" id="node9" href="$QuantUtils_8cpp.html" title=" " alt="" coords="1085,273,1240,315"/>
+<area shape="rect" id="node12" href="$UniformSupport_8cpp.html" title=" " alt="" coords="773,184,939,225"/>
+</map>

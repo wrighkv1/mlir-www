@@ -1,0 +1,5 @@
+<map id="mlir::detail::ParallelDiagnosticHandlerImpl::ThreadDiagnostic" name="mlir::detail::ParallelDiagnosticHandlerImpl::ThreadDiagnostic">
+<area shape="rect" id="node1" title=" " alt="" coords="5,95,229,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="29,5,89,32"/>
+<area shape="rect" id="node3" href="$classmlir_1_1Diagnostic.html" title="This class contains all of the information necessary to report a diagnostic to the DiagnosticEngine." alt="" coords="113,5,239,32"/>
+</map>

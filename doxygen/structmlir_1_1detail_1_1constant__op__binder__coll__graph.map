@@ -1,0 +1,4 @@
+<map id="mlir::detail::constant_op_binder&lt; AttrT &gt;" name="mlir::detail::constant_op_binder&lt; AttrT &gt;">
+<area shape="rect" id="node1" title="The matcher that matches operations that have the ConstantLike trait, and binds the folded attribute ..." alt="" coords="5,95,163,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="51,5,117,32"/>
+</map>

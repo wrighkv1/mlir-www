@@ -1,0 +1,8 @@
+<map id="mlir::linalg::SplitReductionResult" name="mlir::linalg::SplitReductionResult">
+<area shape="rect" id="node1" title="Apply transformation to split the single linalg op reduction into a parallel and reduction dimension." alt="" coords="623,58,817,99"/>
+<area shape="rect" id="node2" title=" " alt="" coords="316,5,375,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="306,65,385,92"/>
+<area shape="rect" id="node4" href="$classmlir_1_1Operation.html" title="Operation is a basic unit of execution within MLIR." alt="" coords="285,116,405,143"/>
+<area shape="rect" id="node5" title=" " alt="" coords="16,69,225,110"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,134,236,205"/>
+</map>

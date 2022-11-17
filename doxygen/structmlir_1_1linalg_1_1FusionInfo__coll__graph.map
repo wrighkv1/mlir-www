@@ -1,0 +1,4 @@
+<map id="mlir::linalg::FusionInfo" name="mlir::linalg::FusionInfo">
+<area shape="rect" id="node1" title="A struct containing the Linalg producer before and after fusion." alt="" coords="5,109,172,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="49,5,128,32"/>
+</map>

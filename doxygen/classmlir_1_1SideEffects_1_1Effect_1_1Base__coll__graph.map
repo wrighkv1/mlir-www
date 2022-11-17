@@ -1,0 +1,4 @@
+<map id="mlir::SideEffects::Effect::Base&lt; DerivedEffect, BaseEffect &gt;" name="mlir::SideEffects::Effect::Base&lt; DerivedEffect, BaseEffect &gt;">
+<area shape="rect" id="node1" title="This base class is used for derived effects that are non&#45;parametric." alt="" coords="5,95,212,151"/>
+<area shape="rect" id="node2" href="$classmlir_1_1SideEffects_1_1Effect.html" title="This class represents a base class for a specific effect type." alt="" coords="41,5,177,47"/>
+</map>

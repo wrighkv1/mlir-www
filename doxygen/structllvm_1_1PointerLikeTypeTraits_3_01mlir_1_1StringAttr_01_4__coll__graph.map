@@ -1,0 +1,5 @@
+<map id="llvm::PointerLikeTypeTraits&lt; mlir::StringAttr &gt;" name="llvm::PointerLikeTypeTraits&lt; mlir::StringAttr &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,185,201,227"/>
+<area shape="rect" id="node2" href="$structllvm_1_1PointerLikeTypeTraits_3_01mlir_1_1Attribute_01_4.html" title="Allow LLVM to steal the low bits of Attributes." alt="" coords="5,95,201,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="30,5,177,32"/>
+</map>

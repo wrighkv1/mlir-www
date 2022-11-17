@@ -1,0 +1,51 @@
+<map id="BaseT" name="BaseT">
+<area shape="rect" id="node1" title=" " alt="" coords="5,1793,68,1820"/>
+<area shape="rect" id="node2" href="$classmlir_1_1PassWrapper.html" title="This class provides a CRTP wrapper around a base pass class to define several necessary utility metho..." alt="" coords="152,93,303,134"/>
+<area shape="rect" id="node5" href="$classmlir_1_1detail_1_1AsmParserImpl.html" title="This class provides the implementation of the generic parser methods within AsmParser." alt="" coords="128,410,327,451"/>
+<area shape="rect" id="node6" href="$classmlir_1_1detail_1_1DialectInterfaceBase.html" title="The base class used for all derived interface types." alt="" coords="117,475,337,517"/>
+<area shape="rect" id="node15" href="$classmlir_1_1detail_1_1StorageUserBase.html" title="Utility class for implementing users of storage classes uniqued by a StorageUniquer." alt="" coords="123,1779,332,1835"/>
+<area shape="rect" id="node39" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title="Base class for all predicates, used to allow efficient pointer comparison." alt="" coords="123,3085,331,3141"/>
+<area shape="rect" id="node48" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase_3_01ConcreteT_00_01BaseT_00_01void_00_01Kind_01_4.html" title="Base storage for simple predicates that only unique with the kind." alt="" coords="123,3165,331,3221"/>
+<area shape="rect" id="node49" href="$classmlir_1_1pdll_1_1ast_1_1Node_1_1NodeBase.html" title="This CRTP class provides several utilies when defining new AST nodes." alt="" coords="136,3246,319,3287"/>
+<area shape="rect" id="node3" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="709,5,869,61"/>
+<area shape="rect" id="node4" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="673,85,904,141"/>
+<area shape="rect" id="node7" href="$classmlir_1_1BytecodeDialectInterface.html" title=" " alt="" coords="678,166,899,207"/>
+<area shape="rect" id="node8" href="$classmlir_1_1DataLayoutDialectInterface.html" title="An interface to be implemented by dialects that can have identifiers in the data layout specification..." alt="" coords="671,231,906,273"/>
+<area shape="rect" id="node9" href="$classmlir_1_1DialectFoldInterface.html" title="Define a fold interface to allow for dialects to control specific aspects of the folding behavior for..." alt="" coords="695,297,882,338"/>
+<area shape="rect" id="node10" href="$classmlir_1_1DialectInlinerInterface.html" title="This is the interface that must be implemented by the dialects of operations to be inlined." alt="" coords="688,362,889,403"/>
+<area shape="rect" id="node11" href="$classmlir_1_1DialectReductionPatternInterface.html" title="This is used to report the reduction patterns for a Dialect." alt="" coords="663,428,915,484"/>
+<area shape="rect" id="node12" href="$classmlir_1_1LLVMTranslationDialectInterface.html" title="Base class for dialect interfaces providing translation to LLVM IR." alt="" coords="665,508,912,564"/>
+<area shape="rect" id="node13" href="$classmlir_1_1OpAsmDialectInterface.html" title=" " alt="" coords="685,589,892,630"/>
+<area shape="rect" id="node14" href="$classmlir_1_1ResourceBlobManagerDialectInterface.html" title="This class implements a dialect interface that provides common functionality for interacting with a r..." alt="" coords="673,655,904,711"/>
+<area shape="rect" id="node16" href="$classmlir_1_1DataLayoutEntryAttr.html" title="A data layout entry attribute is a key&#45;value pair where the key is a type or an identifier and the va..." alt="" coords="639,735,938,806"/>
+<area shape="rect" id="node17" href="$classmlir_1_1DataLayoutSpecAttr.html" title="A data layout specification is a list of entries that specify (partial) data layout information." alt="" coords="668,830,909,901"/>
+<area shape="rect" id="node18" href="$classmlir_1_1DynamicAttr.html" title="A dynamic attribute instance." alt="" coords="675,925,902,995"/>
+<area shape="rect" id="node19" href="$classmlir_1_1DynamicType.html" title="A dynamic type instance." alt="" coords="682,1019,895,1090"/>
+<area shape="rect" id="node20" href="$classmlir_1_1LLVM_1_1LLVMStructType.html" title="LLVM dialect structure type representing a collection of different&#45;typed elements manipulated togethe..." alt="" coords="673,1114,905,1214"/>
+<area shape="rect" id="node21" href="$classmlir_1_1gpu_1_1AsyncTokenType.html" title=" " alt="" coords="691,1239,886,1295"/>
+<area shape="rect" id="node22" href="$classmlir_1_1gpu_1_1MMAMatrixType.html" title="MMAMatrix represents a matrix held by a subgroup for matrix&#45;matrix multiply accumulate operations." alt="" coords="691,1319,887,1375"/>
+<area shape="rect" id="node23" href="$classmlir_1_1quant_1_1AnyQuantizedType.html" title="A quantized type that maps storage to/from expressed types in an unspecified way." alt="" coords="685,1399,893,1470"/>
+<area shape="rect" id="node24" href="$classmlir_1_1quant_1_1CalibratedQuantizedType.html" title="A quantized type that infers its range from given min/max values." alt="" coords="635,1494,943,1565"/>
+<area shape="rect" id="node25" href="$classmlir_1_1quant_1_1UniformQuantizedPerAxisType.html" title="Represents per&#45;axis (also known as per&#45;channel quantization)." alt="" coords="642,1589,935,1659"/>
+<area shape="rect" id="node26" href="$classmlir_1_1quant_1_1UniformQuantizedType.html" title="Represents a family of uniform, quantized types." alt="" coords="641,1683,936,1754"/>
+<area shape="rect" id="node27" href="$classmlir_1_1spirv_1_1ArrayType.html" title=" " alt="" coords="681,1779,896,1835"/>
+<area shape="rect" id="node28" href="$classmlir_1_1spirv_1_1CooperativeMatrixNVType.html" title=" " alt="" coords="664,1859,913,1930"/>
+<area shape="rect" id="node29" href="$classmlir_1_1spirv_1_1ImageType.html" title=" " alt="" coords="685,1955,892,2011"/>
+<area shape="rect" id="node30" href="$classmlir_1_1spirv_1_1InterfaceVarABIAttr.html" title="An attribute that specifies the information regarding the interface variable: descriptor set,..." alt="" coords="641,2035,936,2106"/>
+<area shape="rect" id="node31" href="$classmlir_1_1spirv_1_1JointMatrixINTELType.html" title=" " alt="" coords="649,2130,929,2201"/>
+<area shape="rect" id="node32" href="$classmlir_1_1spirv_1_1MatrixType.html" title=" " alt="" coords="678,2225,899,2281"/>
+<area shape="rect" id="node33" href="$classmlir_1_1spirv_1_1PointerType.html" title=" " alt="" coords="683,2305,895,2361"/>
+<area shape="rect" id="node34" href="$classmlir_1_1spirv_1_1RuntimeArrayType.html" title=" " alt="" coords="670,2386,907,2457"/>
+<area shape="rect" id="node35" href="$classmlir_1_1spirv_1_1SampledImageType.html" title=" " alt="" coords="666,2481,911,2551"/>
+<area shape="rect" id="node36" href="$classmlir_1_1spirv_1_1StructType.html" title="SPIR&#45;V struct type." alt="" coords="680,2575,897,2646"/>
+<area shape="rect" id="node37" href="$classmlir_1_1spirv_1_1TargetEnvAttr.html" title="An attribute that specifies the target version, allowed extensions and capabilities,..." alt="" coords="660,2671,917,2727"/>
+<area shape="rect" id="node38" href="$classmlir_1_1spirv_1_1VerCapExtAttr.html" title="An attribute that specifies the SPIR&#45;V (version, capabilities, extensions) triple." alt="" coords="659,2751,919,2807"/>
+<area shape="rect" id="node40" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="669,2830,908,2930"/>
+<area shape="rect" id="node41" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="669,2954,908,3054"/>
+<area shape="rect" id="node42" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="683,3078,894,3149"/>
+<area shape="rect" id="node43" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="680,3173,897,3243"/>
+<area shape="rect" id="node44" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="649,3267,928,3338"/>
+<area shape="rect" id="node45" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="655,3362,923,3433"/>
+<area shape="rect" id="node46" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="663,3457,914,3527"/>
+<area shape="rect" id="node47" href="$classmlir_1_1pdl__to__pdl__interp_1_1PredicateBase.html" title=" " alt="" coords="677,3551,900,3622"/>
+</map>

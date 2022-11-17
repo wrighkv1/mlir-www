@@ -1,0 +1,11 @@
+<map id="mlir::detail::ParallelDiagnosticHandlerImpl" name="mlir::detail::ParallelDiagnosticHandlerImpl">
+<area shape="rect" id="node1" title=" " alt="" coords="759,149,977,190"/>
+<area shape="rect" id="node2" title=" " alt="" coords="397,5,600,32"/>
+<area shape="rect" id="node3" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="407,57,591,98"/>
+<area shape="rect" id="node4" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="5,57,216,98"/>
+<area shape="rect" id="node5" title=" " alt="" coords="461,123,536,149"/>
+<area shape="rect" id="node6" title=" " alt="" coords="399,173,598,229"/>
+<area shape="rect" id="node7" href="$classllvm_1_1sys_1_1SmartMutex.html" title=" " alt="" coords="414,254,583,295"/>
+<area shape="rect" id="node8" href="$classllvm_1_1sys_1_1SmartMutex.html" title=" " alt="" coords="26,254,195,295"/>
+<area shape="rect" id="node9" href="$classmlir_1_1MLIRContext.html" title="MLIRContext is the top&#45;level object for a collection of MLIR operations." alt="" coords="429,320,568,347"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="mlir::TypeInterface&lt; ConcreteType, Traits &gt;" name="mlir::TypeInterface&lt; ConcreteType, Traits &gt;">
+<area shape="rect" id="node1" title="This class represents the base of a type interface." alt="" coords="1057,39,1240,80"/>
+<area shape="rect" id="node2" href="$classmlir_1_1detail_1_1Interface.html" title=" " alt="" coords="841,24,1008,95"/>
+<area shape="rect" id="node3" href="$classmlir_1_1Type.html" title="Instances of the Type class are uniqued, have an immutable identifier and an optional mutable compone..." alt="" coords="493,13,580,39"/>
+<area shape="rect" id="node4" href="$classmlir_1_1TypeStorage.html" title="Base storage class appearing in a Type." alt="" coords="212,13,348,39"/>
+<area shape="rect" id="node5" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="5,5,163,47"/>
+<area shape="rect" id="node6" href="$classmlir_1_1detail_1_1Interface.html" title="This class represents an abstract interface." alt="" coords="429,63,644,119"/>
+<area shape="rect" id="node7" href="$classBaseType.html" title=" " alt="" coords="238,78,322,105"/>
+</map>

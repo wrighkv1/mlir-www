@@ -1,0 +1,52 @@
+<map id="lib/IR/Region.cpp" name="lib/IR/Region.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="703,5,833,32"/>
+<area shape="rect" id="node2" href="$IR_2Region_8h.html" title=" " alt="" coords="651,155,778,181"/>
+<area shape="rect" id="node26" href="$BlockAndValueMapping_8h.html" title=" " alt="" coords="496,80,731,107"/>
+<area shape="rect" id="node27" href="$IR_2Operation_8h.html" title=" " alt="" coords="859,80,1005,107"/>
+<area shape="rect" id="node3" href="$Block_8h.html" title=" " alt="" coords="560,229,677,256"/>
+<area shape="rect" id="node4" href="$BlockSupport_8h.html" title=" " alt="" coords="843,304,1010,331"/>
+<area shape="rect" id="node16" href="$Visitors_8h.html" title=" " alt="" coords="131,707,261,733"/>
+<area shape="rect" id="node5" href="$Value_8h.html" title=" " alt="" coords="1136,379,1253,405"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1921,379,2103,405"/>
+<area shape="rect" id="node24" title=" " alt="" coords="752,379,875,405"/>
+<area shape="rect" id="node25" title=" " alt="" coords="899,379,1061,405"/>
+<area shape="rect" id="node6" href="$IR_2Types_8h.html" title=" " alt="" coords="1831,707,1950,733"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1103,781,1284,823"/>
+<area shape="rect" id="node12" href="$UseDefLists_8h.html" title=" " alt="" coords="855,453,1014,480"/>
+<area shape="rect" id="node17" href="$mlir_2Support_2LLVM_8h.html" title=" " alt="" coords="223,871,375,897"/>
+<area shape="rect" id="node7" href="$TypeSupport_8h.html" title=" " alt="" coords="2109,789,2270,815"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1625,789,1780,815"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1804,789,1996,815"/>
+<area shape="rect" id="node8" title=" " alt="" coords="2329,871,2463,897"/>
+<area shape="rect" id="node13" href="$Location_8h.html" title=" " alt="" coords="704,535,840,562"/>
+<area shape="rect" id="node14" href="$IR_2Attributes_8h.html" title=" " alt="" coords="985,707,1130,733"/>
+<area shape="rect" id="node15" href="$SubElementInterfaces_8h.html" title=" " alt="" coords="660,625,884,651"/>
+<area shape="rect" id="node22" title=" " alt="" coords="269,625,534,651"/>
+<area shape="rect" id="node20" title=" " alt="" coords="387,707,658,733"/>
+<area shape="rect" id="node21" title=" " alt="" coords="683,707,960,733"/>
+<area shape="rect" id="node18" href="$LogicalResult_8h.html" title=" " alt="" coords="5,789,211,815"/>
+<area shape="rect" id="node19" title=" " alt="" coords="639,789,801,815"/>
+<area shape="rect" id="node28" href="$mlir_2IR_2BuiltinAttributes_8h.html" title=" " alt="" coords="1543,379,1729,405"/>
+<area shape="rect" id="node39" href="$mlir_2IR_2Diagnostics_8h.html" title=" " alt="" coords="853,155,1011,181"/>
+<area shape="rect" id="node41" href="$OperationSupport_8h.html" title=" " alt="" coords="1376,155,1571,181"/>
+<area shape="rect" id="node29" href="$BuiltinAttributeInterfaces_8h.html" title=" " alt="" coords="1501,528,1669,569"/>
+<area shape="rect" id="node34" title=" " alt="" coords="2025,625,2103,651"/>
+<area shape="rect" id="node36" title=" " alt="" coords="1562,453,1710,480"/>
+<area shape="rect" id="node37" title=" " alt="" coords="1837,453,1998,480"/>
+<area shape="rect" id="node38" title=" " alt="" coords="1328,453,1539,480"/>
+<area shape="rect" id="node30" href="$mlir_2IR_2AffineMap_8h.html" title=" " alt="" coords="1623,707,1769,733"/>
+<area shape="rect" id="node31" href="$BuiltinTypeInterfaces_8h.html" title=" " alt="" coords="1781,625,2000,651"/>
+<area shape="rect" id="node32" title=" " alt="" coords="1111,625,1233,651"/>
+<area shape="rect" id="node33" title=" " alt="" coords="1257,625,1463,651"/>
+<area shape="rect" id="node35" title=" " alt="" coords="1488,617,1656,659"/>
+<area shape="rect" id="node40" title=" " alt="" coords="889,229,975,256"/>
+<area shape="rect" id="node42" href="$TypeRange_8h.html" title=" " alt="" coords="1936,229,2088,256"/>
+<area shape="rect" id="node44" href="$InterfaceSupport_8h.html" title=" " alt="" coords="2331,625,2557,651"/>
+<area shape="rect" id="node48" title=" " alt="" coords="1379,229,1568,256"/>
+<area shape="rect" id="node49" title=" " alt="" coords="1593,229,1810,256"/>
+<area shape="rect" id="node50" title=" " alt="" coords="1835,229,1912,256"/>
+<area shape="rect" id="node43" href="$ValueRange_8h.html" title=" " alt="" coords="1778,304,1937,331"/>
+<area shape="rect" id="node45" href="$TypeID_8h.html" title=" " alt="" coords="2025,707,2188,733"/>
+<area shape="rect" id="node46" title=" " alt="" coords="2298,789,2489,815"/>
+<area shape="rect" id="node47" title=" " alt="" coords="2239,707,2406,733"/>
+</map>

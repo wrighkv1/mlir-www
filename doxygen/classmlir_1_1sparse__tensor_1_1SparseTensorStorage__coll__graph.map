@@ -1,0 +1,4 @@
+<map id="mlir::sparse_tensor::SparseTensorStorage&lt; P, I, V &gt;" name="mlir::sparse_tensor::SparseTensorStorage&lt; P, I, V &gt;">
+<area shape="rect" id="node1" title="A memory&#45;resident sparse tensor using a storage scheme based on per&#45;dimension sparse/dense annotation..." alt="" coords="21,95,188,151"/>
+<area shape="rect" id="node2" href="$classmlir_1_1sparse__tensor_1_1SparseTensorStorageBase.html" title="Abstract base class for SparseTensorStorage&lt;P,I,V&gt;." alt="" coords="5,5,204,47"/>
+</map>

@@ -1,0 +1,43 @@
+<map id="mlir::MLIRContextImpl" name="mlir::MLIRContextImpl">
+<area shape="rect" id="node1" title="This is the implementation of the MLIRContext class, using the pImpl idiom." alt="" coords="1476,1020,1644,1047"/>
+<area shape="rect" id="node2" title=" " alt="" coords="1037,36,1139,63"/>
+<area shape="rect" id="node3" href="$classmlir_1_1DiagnosticEngine.html" title="This class is the main interface for diagnostics." alt="" coords="1003,87,1173,113"/>
+<area shape="rect" id="node4" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="979,137,1197,193"/>
+<area shape="rect" id="node5" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="456,255,667,297"/>
+<area shape="rect" id="node24" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="961,218,1215,259"/>
+<area shape="rect" id="node29" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="985,284,1191,340"/>
+<area shape="rect" id="node34" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="975,365,1201,406"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1023,431,1153,457"/>
+<area shape="rect" id="node7" href="$classmlir_1_1StorageUniquer.html" title="A utility class to get or create instances of &quot;storage classes&quot;." alt="" coords="1009,481,1167,508"/>
+<area shape="rect" id="node8" title=" " alt="" coords="998,532,1178,559"/>
+<area shape="rect" id="node9" title=" " alt="" coords="1037,583,1139,609"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1037,633,1139,660"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1035,684,1141,711"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1033,735,1143,761"/>
+<area shape="rect" id="node13" title=" " alt="" coords="987,786,1189,827"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1037,852,1139,879"/>
+<area shape="rect" id="node15" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="991,903,1185,959"/>
+<area shape="rect" id="node16" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="487,910,635,951"/>
+<area shape="rect" id="node17" title=" " alt="" coords="985,983,1191,1025"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1045,1049,1131,1076"/>
+<area shape="rect" id="node19" title=" " alt="" coords="1046,1100,1130,1127"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1031,1151,1145,1177"/>
+<area shape="rect" id="node21" href="$classmlir_1_1DebugActionManager.html" title="This class represents manages debug actions, and orchestrates the communication between action querie..." alt="" coords="990,1201,1186,1228"/>
+<area shape="rect" id="node22" href="$classllvm_1_1sys_1_1SmartMutex.html" title=" " alt="" coords="1003,1253,1173,1294"/>
+<area shape="rect" id="node23" href="$classllvm_1_1sys_1_1SmartMutex.html" title=" " alt="" coords="477,1253,646,1294"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1063,1319,1113,1345"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1033,1369,1143,1396"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1015,1420,1161,1447"/>
+<area shape="rect" id="node28" title=" " alt="" coords="1031,1471,1145,1497"/>
+<area shape="rect" id="node30" title=" " alt="" coords="1035,1521,1141,1548"/>
+<area shape="rect" id="node31" title=" " alt="" coords="1051,1572,1125,1599"/>
+<area shape="rect" id="node32" href="$classmlir_1_1DialectRegistry.html" title="The DialectRegistry maps a dialect namespace to a constructor for the matching dialect." alt="" coords="1010,1623,1166,1649"/>
+<area shape="rect" id="node33" title=" " alt="" coords="1039,1712,1137,1739"/>
+<area shape="rect" id="node35" title=" " alt="" coords="1020,1763,1156,1789"/>
+<area shape="rect" id="node36" title=" " alt="" coords="994,1814,1182,1855"/>
+<area shape="rect" id="node37" href="$classmlir_1_1BoolAttr.html" title="Special case of IntegerAttr to represent boolean integers, i.e., signless i1 integers." alt="" coords="1033,1880,1143,1907"/>
+<area shape="rect" id="node38" href="$classmlir_1_1Attribute.html" title="Attributes are known&#45;constant values of operations." alt="" coords="505,1880,618,1907"/>
+<area shape="rect" id="node39" href="$classmlir_1_1AttributeStorage.html" title="Base storage class appearing in an attribute." alt="" coords="212,1880,375,1907"/>
+<area shape="rect" id="node40" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="5,1873,163,1914"/>
+<area shape="rect" id="node41" title=" " alt="" coords="1044,1931,1132,1957"/>
+</map>

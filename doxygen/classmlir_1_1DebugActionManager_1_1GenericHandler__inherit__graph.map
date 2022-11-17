@@ -1,0 +1,5 @@
+<map id="mlir::DebugActionManager::GenericHandler" name="mlir::DebugActionManager::GenericHandler">
+<area shape="rect" id="node1" title="This class represents a generic action handler." alt="" coords="5,95,201,136"/>
+<area shape="rect" id="node3" href="$classmlir_1_1DebugCounter.html" title="This class implements a debug action handler that attaches a counter value to debug actions and enabl..." alt="" coords="29,184,178,211"/>
+<area shape="rect" id="node2" href="$classmlir_1_1DebugActionManager_1_1HandlerBase.html" title="This class represents the base class of a debug action handler." alt="" coords="5,5,201,47"/>
+</map>

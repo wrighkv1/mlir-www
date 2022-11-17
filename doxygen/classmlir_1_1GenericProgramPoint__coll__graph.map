@@ -1,0 +1,4 @@
+<map id="mlir::GenericProgramPoint" name="mlir::GenericProgramPoint">
+<area shape="rect" id="node1" title="Abstract class for generic program points." alt="" coords="5,95,200,121"/>
+<area shape="rect" id="node2" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="24,5,181,47"/>
+</map>

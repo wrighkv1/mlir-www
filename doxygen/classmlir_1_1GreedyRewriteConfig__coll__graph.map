@@ -1,0 +1,5 @@
+<map id="mlir::GreedyRewriteConfig" name="mlir::GreedyRewriteConfig">
+<area shape="rect" id="node1" title="This class allows control over how the GreedyPatternRewriteDriver works." alt="" coords="16,109,211,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="163,5,213,32"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="mlir::quant::detail::UniformQuantizedTypeStorage" name="mlir::quant::detail::UniformQuantizedTypeStorage">
+<area shape="rect" id="node1" title=" " alt="" coords="88,393,317,435"/>
+<area shape="rect" id="node2" href="$structmlir_1_1quant_1_1detail_1_1QuantizedTypeStorage.html" title=" " alt="" coords="115,289,291,331"/>
+<area shape="rect" id="node3" href="$classmlir_1_1TypeStorage.html" title="Base storage class appearing in a Type." alt="" coords="240,96,376,123"/>
+<area shape="rect" id="node5" href="$classmlir_1_1Type.html" title="Instances of the Type class are uniqued, have an immutable identifier and an optional mutable compone..." alt="" coords="171,185,258,212"/>
+<area shape="rect" id="node4" href="$classmlir_1_1StorageUniquer_1_1BaseStorage.html" title="This class acts as the base storage that all storage classes must derived from." alt="" coords="229,5,387,47"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,185,72,212"/>
+<area shape="rect" id="node7" title=" " alt="" coords="282,185,363,212"/>
+<area shape="rect" id="node8" title=" " alt="" coords="315,297,381,323"/>
+</map>

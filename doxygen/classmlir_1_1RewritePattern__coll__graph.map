@@ -1,0 +1,4 @@
+<map id="mlir::RewritePattern" name="mlir::RewritePattern">
+<area shape="rect" id="node1" title="RewritePattern is the common base class for all DAG to DAG replacements." alt="" coords="5,80,157,107"/>
+<area shape="rect" id="node2" href="$classmlir_1_1Pattern.html" title="This class contains all of the data related to a pattern, but does not contain any methods or logic f..." alt="" coords="30,5,133,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="MlirDialectRegistrationHooks" name="MlirDialectRegistrationHooks">
+<area shape="rect" id="node1" title="Structure of dialect registration hooks." alt="" coords="581,78,795,105"/>
+<area shape="rect" id="node2" title=" " alt="" coords="199,5,396,47"/>
+<area shape="rect" id="node3" title=" " alt="" coords="202,71,393,112"/>
+<area shape="rect" id="node4" href="$structMlirStringRef.html" title="A pointer to a sized fragment of a string, not necessarily null&#45;terminated." alt="" coords="244,137,351,163"/>
+<area shape="rect" id="node5" title=" " alt="" coords="25,111,85,138"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,162,105,189"/>
+</map>

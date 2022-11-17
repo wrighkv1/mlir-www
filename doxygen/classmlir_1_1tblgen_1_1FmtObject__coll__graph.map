@@ -1,0 +1,8 @@
+<map id="mlir::tblgen::FmtObject&lt; Tuple &gt;" name="mlir::tblgen::FmtObject&lt; Tuple &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="584,100,757,141"/>
+<area shape="rect" id="node2" href="$classmlir_1_1tblgen_1_1FmtObjectBase.html" title=" " alt="" coords="329,107,535,134"/>
+<area shape="rect" id="node3" title=" " alt="" coords="18,5,175,47"/>
+<area shape="rect" id="node4" title=" " alt="" coords="18,71,175,112"/>
+<area shape="rect" id="node5" href="$classmlir_1_1tblgen_1_1FmtContext.html" title="Format context containing substitutions for special placeholders." alt="" coords="5,137,188,163"/>
+<area shape="rect" id="node6" title=" " alt="" coords="55,187,138,214"/>
+</map>

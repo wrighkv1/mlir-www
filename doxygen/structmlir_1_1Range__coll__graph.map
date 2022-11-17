@@ -1,0 +1,5 @@
+<map id="mlir::Range" name="mlir::Range">
+<area shape="rect" id="node1" title="Represents a range (offset, size, and stride) where each element of the triple may be dynamic or stat..." alt="" coords="28,215,125,241"/>
+<area shape="rect" id="node2" href="$classmlir_1_1OpFoldResult.html" title="This class represents a single result from folding an operation." alt="" coords="5,96,148,123"/>
+<area shape="rect" id="node3" href="$classllvm_1_1PointerUnion.html" title=" " alt="" coords="5,5,148,47"/>
+</map>

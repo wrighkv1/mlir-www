@@ -1,0 +1,4 @@
+<map id="llvm::PointerLikeTypeTraits&lt; mlir::TypeID &gt;" name="llvm::PointerLikeTypeTraits&lt; mlir::TypeID &gt;">
+<area shape="rect" id="node1" title="We align TypeID::Storage by 8, so allow LLVM to steal the low bits." alt="" coords="5,95,201,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="30,5,177,32"/>
+</map>

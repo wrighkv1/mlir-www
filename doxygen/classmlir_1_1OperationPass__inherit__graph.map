@@ -1,0 +1,11 @@
+<map id="mlir::OperationPass&lt; OpT &gt;" name="mlir::OperationPass&lt; OpT &gt;">
+<area shape="rect" id="node1" title="Pass to transform an operation of a specific type." alt="" coords="140,150,289,191"/>
+<area shape="rect" id="node3" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="534,5,694,61"/>
+<area shape="rect" id="node5" href="$classmlir_1_1PassWrapper.html" title=" " alt="" coords="499,85,729,141"/>
+<area shape="rect" id="node7" href="$classmlir_1_1InterfacePass.html" title="Pass to transform an operation that implements the given interface." alt="" coords="543,166,685,207"/>
+<area shape="rect" id="node8" href="$classmlir_1_1OperationPass.html" title=" " alt="" coords="525,231,703,273"/>
+<area shape="rect" id="node2" href="$classmlir_1_1Pass.html" title="The abstract base pass class." alt="" coords="5,157,91,184"/>
+<area shape="rect" id="node4" href="$classmlir_1_1detail_1_1OpToOpPassAdaptor.html" title="An adaptor pass used to run operation passes over nested operations." alt="" coords="797,13,977,54"/>
+<area shape="rect" id="node6" href="$classmlir_1_1sparse__tensor_1_1BufferizeDenseOpsPass.html" title="A pass that bufferizes only dense tensor ops and ignores all sparse tensor ops." alt="" coords="795,93,978,134"/>
+<area shape="rect" id="node9" href="$classmlir_1_1gpu_1_1SerializeToBlobPass.html" title="Base pass class to serialize kernel functions through LLVM into user&#45;specified IR and add the resulti..." alt="" coords="779,239,995,265"/>
+</map>

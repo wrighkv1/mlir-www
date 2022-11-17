@@ -1,0 +1,6 @@
+<map id="mlir::LoopNestStats" name="mlir::LoopNestStats">
+<area shape="rect" id="node1" title="LoopNestStats aggregates various per&#45;loop statistics (eg." alt="" coords="729,49,880,75"/>
+<area shape="rect" id="node2" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="404,5,585,47"/>
+<area shape="rect" id="node3" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="5,45,216,87"/>
+<area shape="rect" id="node4" href="$classllvm_1_1DenseMap.html" title=" " alt="" coords="397,71,592,141"/>
+</map>

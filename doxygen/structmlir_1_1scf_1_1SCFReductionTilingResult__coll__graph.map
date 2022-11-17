@@ -1,0 +1,8 @@
+<map id="mlir::scf::SCFReductionTilingResult" name="mlir::scf::SCFReductionTilingResult">
+<area shape="rect" id="node1" title="Transformation information returned after reduction tiling." alt="" coords="679,43,887,84"/>
+<area shape="rect" id="node2" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="383,5,531,47"/>
+<area shape="rect" id="node3" href="$classllvm_1_1SmallVector.html" title=" " alt="" coords="47,5,195,47"/>
+<area shape="rect" id="node4" href="$classmlir_1_1Operation.html" title="Operation is a basic unit of execution within MLIR." alt="" coords="397,87,517,114"/>
+<area shape="rect" id="node5" title=" " alt="" coords="16,75,225,116"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,140,236,211"/>
+</map>

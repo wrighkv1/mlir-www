@@ -1,0 +1,5 @@
+<map id="mlir::presburger::MPInt" name="mlir::presburger::MPInt">
+<area shape="rect" id="node1" title="This class provides support for multi&#45;precision arithmetic." alt="" coords="24,109,195,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,72,39"/>
+<area shape="rect" id="node3" href="$classmlir_1_1presburger_1_1detail_1_1SlowMPInt.html" title="A simple class providing multi&#45;precision arithmetic." alt="" coords="96,5,267,47"/>
+</map>

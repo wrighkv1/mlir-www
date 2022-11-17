@@ -1,0 +1,8 @@
+<map id="mlir::lsp::InlayHintsParams" name="mlir::lsp::InlayHintsParams">
+<area shape="rect" id="node1" title="A parameter literal used in inlay hint requests." alt="" coords="125,303,323,329"/>
+<area shape="rect" id="node2" href="$structmlir_1_1lsp_1_1TextDocumentIdentifier.html" title=" " alt="" coords="5,213,240,240"/>
+<area shape="rect" id="node3" href="$classmlir_1_1lsp_1_1URIForFile.html" title="URI in &quot;file&quot; scheme for a file." alt="" coords="48,109,197,136"/>
+<area shape="rect" id="node4" href="$structmlir_1_1lsp_1_1Range.html" title=" " alt="" coords="263,213,387,240"/>
+<area shape="rect" id="node5" href="$structmlir_1_1lsp_1_1Position.html" title=" " alt="" coords="258,109,393,136"/>
+<area shape="rect" id="node6" title=" " alt="" coords="306,5,345,32"/>
+</map>

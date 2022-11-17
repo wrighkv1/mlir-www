@@ -1,0 +1,7 @@
+<map id="mlir::linalg::ForeachThreadReductionTilingResult" name="mlir::linalg::ForeachThreadReductionTilingResult">
+<area shape="rect" id="node1" title="Transformation information returned after reduction tiling." alt="" coords="569,35,765,77"/>
+<area shape="rect" id="node2" title=" " alt="" coords="285,5,421,32"/>
+<area shape="rect" id="node3" href="$classmlir_1_1Operation.html" title="Operation is a basic unit of execution within MLIR." alt="" coords="293,80,413,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="16,33,225,74"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,98,236,169"/>
+</map>

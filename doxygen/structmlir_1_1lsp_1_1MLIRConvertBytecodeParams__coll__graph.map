@@ -1,0 +1,4 @@
+<map id="mlir::lsp::MLIRConvertBytecodeParams" name="mlir::lsp::MLIRConvertBytecodeParams">
+<area shape="rect" id="node1" title="This class represents the parameters used when converting between MLIR&#39;s bytecode and textual format." alt="" coords="5,95,232,136"/>
+<area shape="rect" id="node2" href="$classmlir_1_1lsp_1_1URIForFile.html" title="URI in &quot;file&quot; scheme for a file." alt="" coords="44,5,193,32"/>
+</map>

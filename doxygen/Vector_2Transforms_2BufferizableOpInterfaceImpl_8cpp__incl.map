@@ -1,0 +1,52 @@
+<map id="lib/Dialect/Vector/Transforms/BufferizableOpInterfaceImpl.cpp" name="lib/Dialect/Vector/Transforms/BufferizableOpInterfaceImpl.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="841,5,1040,61"/>
+<area shape="rect" id="node2" href="$Vector_2Transforms_2BufferizableOpInterfaceImpl_8h.html" title=" " alt="" coords="5,109,204,165"/>
+<area shape="rect" id="node3" href="$BufferizableOpInterface_8h.html" title=" " alt="" coords="753,213,963,255"/>
+<area shape="rect" id="node4" href="$IR_2Operation_8h.html" title=" " alt="" coords="509,645,655,672"/>
+<area shape="rect" id="node19" href="$IR_2Dialect_8h.html" title=" " alt="" coords="3092,645,3219,672"/>
+<area shape="rect" id="node32" href="$DstBufferizableOpInterfaceImpl_8h.html" title=" " alt="" coords="895,117,1155,158"/>
+<area shape="rect" id="node37" href="$VectorOps_8h.html" title=" " alt="" coords="1928,213,2071,255"/>
+<area shape="rect" id="node10" href="$mlir_2Support_2LLVM_8h.html" title=" " alt="" coords="2214,869,2366,896"/>
+<area shape="rect" id="node16" href="$PatternMatch_8h.html" title=" " alt="" coords="1049,310,1216,337"/>
+<area shape="rect" id="node29" title=" " alt="" coords="329,310,488,337"/>
+<area shape="rect" id="node30" title=" " alt="" coords="513,303,718,344"/>
+<area shape="rect" id="node31" title=" " alt="" coords="742,303,974,344"/>
+<area shape="rect" id="node5" href="$Block_8h.html" title=" " alt="" coords="357,795,474,821"/>
+<area shape="rect" id="node6" href="$mlir_2IR_2BuiltinAttributes_8h.html" title=" " alt="" coords="1498,795,1685,821"/>
+<area shape="rect" id="node7" href="$mlir_2IR_2Diagnostics_8h.html" title=" " alt="" coords="503,720,661,747"/>
+<area shape="rect" id="node8" href="$OperationSupport_8h.html" title=" " alt="" coords="1427,720,1622,747"/>
+<area shape="rect" id="node14" href="$IR_2Region_8h.html" title=" " alt="" coords="352,720,479,747"/>
+<area shape="rect" id="node15" title=" " alt="" coords="685,720,820,747"/>
+<area shape="rect" id="node9" href="$Value_8h.html" title=" " alt="" coords="1357,795,1474,821"/>
+<area shape="rect" id="node11" title=" " alt="" coords="2048,944,2180,971"/>
+<area shape="rect" id="node12" title=" " alt="" coords="2205,944,2375,971"/>
+<area shape="rect" id="node13" title=" " alt="" coords="2400,944,2463,971"/>
+<area shape="rect" id="node17" href="$Builders_8h.html" title=" " alt="" coords="1749,489,1884,515"/>
+<area shape="rect" id="node25" title=" " alt="" coords="2375,795,2565,821"/>
+<area shape="rect" id="node26" href="$BuiltinOps_8h.html" title=" " alt="" coords="1115,399,1263,426"/>
+<area shape="rect" id="node28" title=" " alt="" coords="845,399,1039,426"/>
+<area shape="rect" id="node18" href="$OpDefinition_8h.html" title=" " alt="" coords="1882,571,2045,597"/>
+<area shape="rect" id="node20" href="$DialectRegistry_8h.html" title=" " alt="" coords="3071,720,3250,747"/>
+<area shape="rect" id="node22" title=" " alt="" coords="3161,795,3211,821"/>
+<area shape="rect" id="node23" title=" " alt="" coords="3285,795,3340,821"/>
+<area shape="rect" id="node24" href="$TypeID_8h.html" title=" " alt="" coords="2885,720,3047,747"/>
+<area shape="rect" id="node21" title=" " alt="" coords="2635,795,2809,821"/>
+<area shape="rect" id="node27" href="$SideEffectInterfaces_8h.html" title=" " alt="" coords="1114,481,1301,523"/>
+<area shape="rect" id="node33" href="$DestinationStyleOpInterface_8h.html" title=" " alt="" coords="1440,392,1636,433"/>
+<area shape="rect" id="node34" href="$BlockAndValueMapping_8h.html" title=" " alt="" coords="861,571,1095,597"/>
+<area shape="rect" id="node35" href="$mlir_2IR_2BuiltinTypes_8h.html" title=" " alt="" coords="2327,489,2487,515"/>
+<area shape="rect" id="node36" title=" " alt="" coords="1427,481,1623,523"/>
+<area shape="rect" id="node38" href="$MaskableOpInterface_8h.html" title=" " alt="" coords="2617,303,2862,344"/>
+<area shape="rect" id="node39" href="$MaskingOpInterface_8h.html" title=" " alt="" coords="2087,392,2325,433"/>
+<area shape="rect" id="node40" href="$mlir_2IR_2AffineMap_8h.html" title=" " alt="" coords="2613,489,2759,515"/>
+<area shape="rect" id="node41" href="$IR_2Attributes_8h.html" title=" " alt="" coords="2924,489,3069,515"/>
+<area shape="rect" id="node42" href="$ControlFlowInterfaces_8h.html" title=" " alt="" coords="1864,392,2063,433"/>
+<area shape="rect" id="node43" href="$InferTypeOpInterface_8h.html" title=" " alt="" coords="2798,392,2979,433"/>
+<area shape="rect" id="node44" href="$VectorInterfaces_8h.html" title=" " alt="" coords="2535,399,2773,426"/>
+<area shape="rect" id="node45" href="$ViewLikeInterface_8h.html" title=" " alt="" coords="1661,392,1839,433"/>
+<area shape="rect" id="node46" title=" " alt="" coords="1596,310,1773,337"/>
+<area shape="rect" id="node47" title=" " alt="" coords="1797,303,1985,344"/>
+<area shape="rect" id="node48" title=" " alt="" coords="2009,303,2208,344"/>
+<area shape="rect" id="node49" title=" " alt="" coords="2233,303,2377,344"/>
+<area shape="rect" id="node50" title=" " alt="" coords="2401,303,2592,344"/>
+</map>
